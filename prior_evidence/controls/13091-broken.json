@@ -1,0 +1,18 @@
+{
+  "exit_code": 1,
+  "summary": "4 failed, 94 passed, 5 warnings in 2.55s",
+  "seconds": 9.66,
+  "command": [
+    "$WORKSPACE\\work\\real-debug-env39\\Scripts\\python.exe",
+    "-c",
+    "import sys; sys._running_pytest = True; import pytest; sys.exit(pytest.main(sys.argv[1:]))",
+    "-p",
+    "pytest_timeout",
+    "--timeout=60",
+    "-q",
+    "--tb=short",
+    "--disable-warnings",
+    "sympy/core/tests/test_basic.py",
+    "sympy/core/tests/test_numbers.py"
+  ]
+}

@@ -1,0 +1,23 @@
+.........................................x...........x......x.......F... [ 44%]
+..................x.......F................x.....................x...... [ 88%]
+...................                                                      [100%]
+================================== FAILURES ===================================
+___________________________________ test_Eq ___________________________________
+sympy\sets\tests\test_sets.py:1254: in test_Eq
+    assert Eq(ProductSet({1}, {2}), Interval(1, 2)) is S.false
+E   assert Eq(ProductSet(FiniteSet(1), FiniteSet(2)), Interval(1, 2)) is False
+E    +  where Eq(ProductSet(FiniteSet(1), FiniteSet(2)), Interval(1, 2)) = Eq(ProductSet(FiniteSet(1), FiniteSet(2)), Interval(1, 2))
+E    +    where ProductSet(FiniteSet(1), FiniteSet(2)) = ProductSet({1}, {2})
+E    +    and   Interval(1, 2) = Interval(1, 2)
+E    +  and   False = S.false
+______________________________ test_issue_19378 _______________________________
+sympy\sets\tests\test_sets.py:1604: in test_issue_19378
+    assert b.is_subset(c) is True
+E   assert None is True
+E    +  where None = <bound method Set.is_subset of ProductSet(FiniteSet(1, 2), FiniteSet(1, 2))>(FiniteSet((1, 1), (1, 2), (2, 1), (2, 2)))
+E    +    where <bound method Set.is_subset of ProductSet(FiniteSet(1, 2), FiniteSet(1, 2))> = ProductSet(FiniteSet(1, 2), FiniteSet(1, 2)).is_subset
+                               DO *NOT* COMMIT!                               
+=========================== short test summary info ===========================
+FAILED sympy/sets/tests/test_sets.py::test_Eq - assert Eq(ProductSet(FiniteSe...
+FAILED sympy/sets/tests/test_sets.py::test_issue_19378 - assert None is True
+2 failed, 155 passed, 6 xfailed, 3 warnings in 10.03s

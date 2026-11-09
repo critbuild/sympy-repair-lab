@@ -1,0 +1,11 @@
+Fixed failed conversions in `Basic`, `Expr`, and numeric comparisons to return `NotImplemented`, allowing reflected dispatch. `__ne__` now propagates it correctly. Regression tests cover all six operators, symbolic/undecidable cases, conversion, and singleton behavior. No old expectations changed.
+
+Using the supplied interpreter, environment, and pytest flags:
+
+- Requested command: **99 passed, 1 xfailed**.
+- Full core suite: one unrelated parser failure, reproduced with original production files.
+- Core suite with `-k 'not test_evaluate_false'`: **1429 passed, 60 skipped, 42 xfailed, 2 deselected**. The second matching test passed separately.
+
+The pre-existing failure is `test_sympify.py::test_evaluate_false`: `ValueError: Name node can't be used with 'False' constant`.
+
+`git diff --check` passed.

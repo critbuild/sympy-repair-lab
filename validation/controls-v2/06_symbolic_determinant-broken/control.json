@@ -1,0 +1,61 @@
+{
+  "case": "06_symbolic_determinant",
+  "complete_pass": false,
+  "required_pass": false,
+  "preservation_pass": true,
+  "oracle_execution": {
+    "exit_code": 1,
+    "seconds": 5.72,
+    "command": [
+      "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+      "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+      "06_symbolic_determinant"
+    ],
+    "summary": ""
+  },
+  "regression": {
+    "exit_code": 0,
+    "seconds": 35.19,
+    "command": [
+      "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+      "-c",
+      "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+      "-p",
+      "pytest_timeout",
+      "--timeout=60",
+      "-q",
+      "--tb=short",
+      "--disable-warnings",
+      "sympy/matrices/tests/test_matrices.py"
+    ],
+    "summary": "152 passed, 1 skipped, 4 xfailed, 7 warnings in 33.06s"
+  },
+  "failed_checks": [
+    {
+      "name": "rank_two_size_5",
+      "group": "required",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "name": "rank_two_size_6",
+      "group": "required",
+      "expected": true,
+      "exception": "TypeError: Invalid NaN comparison",
+      "passed": false
+    },
+    {
+      "name": "rank_two_size_7",
+      "group": "required",
+      "expected": true,
+      "exception": "TypeError: Invalid NaN comparison",
+      "passed": false
+    }
+  ],
+  "check_count": 8,
+  "passed_checks": 5,
+  "reference": false,
+  "expected_complete_pass": false,
+  "control_matches": true
+}

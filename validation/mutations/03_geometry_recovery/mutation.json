@@ -1,0 +1,153 @@
+{
+  "case": "03_geometry_recovery",
+  "complete_pass": false,
+  "required_pass": true,
+  "preservation_pass": false,
+  "oracle_execution": {
+    "exit_code": 1,
+    "seconds": 3.64,
+    "command": [
+      "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+      "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+      "03_geometry_recovery"
+    ],
+    "summary": ""
+  },
+  "regression": null,
+  "failed_checks": [
+    {
+      "name": "Basic_reflected_equality",
+      "group": "preservation",
+      "expected": [
+        true,
+        true
+      ],
+      "actual": [
+        false,
+        true
+      ],
+      "passed": false
+    },
+    {
+      "name": "Basic_reflected_inequality",
+      "group": "preservation",
+      "expected": [
+        false,
+        false
+      ],
+      "actual": [
+        true,
+        false
+      ],
+      "passed": false
+    },
+    {
+      "name": "Symbol_reflected_equality",
+      "group": "preservation",
+      "expected": [
+        true,
+        true
+      ],
+      "actual": [
+        false,
+        true
+      ],
+      "passed": false
+    },
+    {
+      "name": "Symbol_reflected_inequality",
+      "group": "preservation",
+      "expected": [
+        false,
+        false
+      ],
+      "actual": [
+        true,
+        false
+      ],
+      "passed": false
+    },
+    {
+      "name": "Integer_reflected_equality",
+      "group": "preservation",
+      "expected": [
+        true,
+        true
+      ],
+      "actual": [
+        false,
+        true
+      ],
+      "passed": false
+    },
+    {
+      "name": "Integer_reflected_inequality",
+      "group": "preservation",
+      "expected": [
+        false,
+        false
+      ],
+      "actual": [
+        true,
+        false
+      ],
+      "passed": false
+    },
+    {
+      "name": "Rational_reflected_equality",
+      "group": "preservation",
+      "expected": [
+        true,
+        true
+      ],
+      "actual": [
+        false,
+        true
+      ],
+      "passed": false
+    },
+    {
+      "name": "Rational_reflected_inequality",
+      "group": "preservation",
+      "expected": [
+        false,
+        false
+      ],
+      "actual": [
+        true,
+        false
+      ],
+      "passed": false
+    },
+    {
+      "name": "Float_reflected_equality",
+      "group": "preservation",
+      "expected": [
+        true,
+        true
+      ],
+      "actual": [
+        false,
+        true
+      ],
+      "passed": false
+    },
+    {
+      "name": "Float_reflected_inequality",
+      "group": "preservation",
+      "expected": [
+        false,
+        false
+      ],
+      "actual": [
+        true,
+        false
+      ],
+      "passed": false
+    }
+  ],
+  "check_count": 31,
+  "passed_checks": 21,
+  "description": "Rollback geometry seed to original source, losing the required foreign-object compatibility.",
+  "mutation_rejected": true
+}

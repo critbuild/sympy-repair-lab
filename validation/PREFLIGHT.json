@@ -1,0 +1,124 @@
+{
+  "sealed_utc": "2026-11-08T22:37:37.164200+00:00",
+  "references_accepted": 7,
+  "broken_baselines_rejected": 7,
+  "mutations_rejected": 7,
+  "controls": [
+    {
+      "path": "validation/controls-v2/01_foreign_equality-broken/control.json",
+      "expected_pass": false,
+      "observed_pass": false
+    },
+    {
+      "path": "validation/controls-v2/01_foreign_equality-reference/control.json",
+      "expected_pass": true,
+      "observed_pass": true
+    },
+    {
+      "path": "validation/controls-v3/02_precise_ordering-broken/control.json",
+      "expected_pass": false,
+      "observed_pass": false
+    },
+    {
+      "path": "validation/controls-v3/02_precise_ordering-reference/control.json",
+      "expected_pass": true,
+      "observed_pass": true
+    },
+    {
+      "path": "validation/controls-v2/03_geometry_recovery-broken/control.json",
+      "expected_pass": false,
+      "observed_pass": false
+    },
+    {
+      "path": "validation/controls-v2/03_geometry_recovery-reference/control.json",
+      "expected_pass": true,
+      "observed_pass": true
+    },
+    {
+      "path": "validation/controls-v2/04_zero_polynomial-broken/control.json",
+      "expected_pass": false,
+      "observed_pass": false
+    },
+    {
+      "path": "validation/controls-v2/04_zero_polynomial-reference/control.json",
+      "expected_pass": true,
+      "observed_pass": true
+    },
+    {
+      "path": "validation/controls-v2/05_set_equivalence-broken/control.json",
+      "expected_pass": false,
+      "observed_pass": false
+    },
+    {
+      "path": "validation/controls-v2/05_set_equivalence-reference/control.json",
+      "expected_pass": true,
+      "observed_pass": true
+    },
+    {
+      "path": "validation/controls-v2/06_symbolic_determinant-broken/control.json",
+      "expected_pass": false,
+      "observed_pass": false
+    },
+    {
+      "path": "validation/controls-v2/06_symbolic_determinant-reference/control.json",
+      "expected_pass": true,
+      "observed_pass": true
+    },
+    {
+      "path": "validation/controls-v4/07_algebraic_factorization-broken/control.json",
+      "expected_pass": false,
+      "observed_pass": false
+    },
+    {
+      "path": "validation/controls-v4/07_algebraic_factorization-reference/control.json",
+      "expected_pass": true,
+      "observed_pass": true
+    }
+  ],
+  "input_asset_hashes": {
+    "assets/02-ordering-reference.patch": "b84b84e7d47d9559b683c21003a19825c726c090e5d58211d47c90826b6957da",
+    "assets/13091-baseline.zip": "b6f55daaabfdef0e8e85fccbd1c2a9d5aeb41b46d9892ebe71225b5d6cdefede",
+    "assets/13091-reference.patch": "8e7c1c0d19cf5a7196900c0819b839051b2ed43a8fc797a7ba2103587e60d635",
+    "assets/13091-tests.patch": "c2538c896b3b100b37a19c12a586bef01370f77e8a9d17290f02cd5536390aec",
+    "assets/13877-baseline.zip": "2cd53a60c8a314336346be72ce17cab4001baf7640ddf548d167090a516a0df3",
+    "assets/13877-reference.patch": "dde1037513c519560a0a2dca777d048dd4d1a3eaf07303decb77e93746760011",
+    "assets/13877-tests.patch": "798780674c8e33823a50a49b6c7b29b0f6b9d1730e18ee6c5d44f545e0459dc2",
+    "assets/19040-baseline.zip": "9f3e6368acfcfbf358754e62a800d8d14e36efbe48676b775504aee099023a97",
+    "assets/19040-reference.patch": "3a7f145f79e8da83930e4d87530f8da0db412b4ef593369d8eef6dd8eb251a5d",
+    "assets/19040-tests.patch": "62df948126e31e2f5037dcc202097e1f2604f185837cb17c200fe2e0fe929cfc",
+    "assets/20428-baseline.zip": "d371acb4a786a804347f8a2a1208619d0dd37fb097b9fbf77f31570ee3e71292",
+    "assets/20428-reference.patch": "74f57d1bc964021b7c7b6d021cda61d071e7237caf7c5164873b727997e005e9",
+    "assets/20428-tests.patch": "41326d65ac52d286c17a2cb3a3d397b810b959228c279120c7cc3caff4fd2fe7",
+    "assets/20438-baseline.zip": "a3b70f1ba21c8b58d6835c23cfe9c3e41ed2b9b93835662a1ecad3d1090d47bf",
+    "assets/20438-reference.patch": "a877856d45e00af4f24956d9a7b6b4d92cb3412c23a16f64f1058684a10ca380",
+    "assets/20438-tests.patch": "97c79cc32a35302e026cfc95b82337445cc151cca470ba0e72867b461a5bcb56",
+    "assets/geometry-reference.patch": "45762e052271db937bae4c2f9b642193fce01a9281ecebb733db1c4d08e11bf2",
+    "assets/geometry-seed/sympy/core/basic.py": "11e5242d0366702fc83054c71ea3f05f118fd0bac67d4fd390f8c22c1281c038",
+    "assets/geometry-seed/sympy/core/expr.py": "8b20d51a6ea004d40165b9df9ae9ec0c6ebd444d66b9d9970259f6cf6ac7b9d2",
+    "assets/geometry-seed/sympy/core/numbers.py": "23013f8bf9a0dccdfbfdce6da0a5f5ce517982421f3f3e8e113c53cb70401a60",
+    "assets/SymPy-LICENSE.txt": "e6d5cc1bce88c52ec90cb34802a1b9fca23d01caee535431395aca3ba743123a",
+    "assets/zero-polynomial-incident.py": "d0996a22b851e314433e422763d59b541b9704aa59603cc300f5379716084b36",
+    "tasks/01_foreign_equality/prompt.txt": "7eadd479400504911072c724539387f6735a582cc86998993be05cacd15be7b4",
+    "tasks/01_foreign_equality/task.json": "451071aadc88db8811c2d6d7df06a9d239e8bed8aaf28781e26d36edcf6e85b4",
+    "tasks/02_precise_ordering/prompt.txt": "a2e2f897f035880a62e190211908d2080fedd5f3d3c0bebeffe082af31c94bad",
+    "tasks/02_precise_ordering/task.json": "5f2c165bbc97480e9c47334242385766241844cec3f8ef7476d3b1c3f42c6377",
+    "tasks/03_geometry_recovery/prompt.txt": "02e9767f3e287f5c1a764d974d112acfe407f7a6a9ad8e49f1439f6466ced4ed",
+    "tasks/03_geometry_recovery/task.json": "6511d16b126d66daacd528ec6b2a3cb7beeb64767050cb80a2f17b30fecf8663",
+    "tasks/04_zero_polynomial/prompt.txt": "7ee9bf2fee8918dc1c5e5d2ea8ad610df2595b7c5dc6369b5d572aa065250b83",
+    "tasks/04_zero_polynomial/task.json": "4b644bf2f5ce816a3f8676223d16db31fe1c1c7e481f0e4b00ad0902c3d6fbab",
+    "tasks/05_set_equivalence/prompt.txt": "7a3b86783106664646d63421b681dcf430bc762b1b8fdee8c8b71f7f5dd83d1e",
+    "tasks/05_set_equivalence/task.json": "9e7dd3847426428b4587b882e9205ccba0e34f82bba0468bc7e7fe93bfa36448",
+    "tasks/06_symbolic_determinant/prompt.txt": "217398da5fb35c90d51d1221989ddca2ed08990c0c435d64f99757151792f4d8",
+    "tasks/06_symbolic_determinant/task.json": "53652b46f56c2c72ca0be0424c8dd39815de360596d1c0548491f11cc5d5a368",
+    "tasks/07_algebraic_factorization/prompt.txt": "e7299991aebb9f4cbeac1b1b4fdacb80078d99bdc6401f2f2d1ed6c302f0168e",
+    "tasks/07_algebraic_factorization/task.json": "eccbb3df27ce65d07c2e9ee06c20df4c1b016ff4ffd52f928caf7491ae1a480b"
+  },
+  "pretrial_corrections": [
+    "Python 3.9 write_text newline incompatibility removed before calls.",
+    "The determinant draft value 109 was corrected to independently verified 115.",
+    "The factorization task excludes multivariate repeated factors after the upstream patch hung on that broader input; univariate multiplicity remains a preservation check.",
+    "Case02 reference adds exact-difference sign reasoning: upstream reflection fixes alone do not provide correct near-pi order. Exact rational bounds validate expected order.",
+    "Factor-output structure check prevents accepting an unfactored input despite a correct algebraic identity."
+  ],
+  "no_model_calls_before_final_preflight": true
+}

@@ -1,0 +1,180 @@
+--- a/sympy/core/numbers.py
++++ b/sympy/core/numbers.py
+@@ -1258,7 +1258,7 @@
+         try:
+             other = _sympify(other)
+         except SympifyError:
+-            return False    # sympy != other  -->  not ==
++            return NotImplemented
+         if isinstance(other, NumberSymbol):
+             if other.is_irrational:
+                 return False
+@@ -1276,7 +1276,7 @@
+         return False    # Float != non-Number
+ 
+     def __ne__(self, other):
+-        return not self.__eq__(other)
++        return not self == other
+ 
+     def __gt__(self, other):
+         try:
+@@ -1284,7 +1284,7 @@
+         except SympifyError:
+             raise TypeError("Invalid comparison %s > %s" % (self, other))
+         if isinstance(other, NumberSymbol):
+-            return other.__le__(self)
++            return other.__lt__(self)
+         if other.is_comparable:
+             other = other.evalf()
+         if isinstance(other, Number) and other is not S.NaN:
+@@ -1298,7 +1298,7 @@
+         except SympifyError:
+             raise TypeError("Invalid comparison %s >= %s" % (self, other))
+         if isinstance(other, NumberSymbol):
+-            return other.__lt__(self)
++            return other.__le__(self)
+         if other.is_comparable:
+             other = other.evalf()
+         if isinstance(other, Number) and other is not S.NaN:
+@@ -1312,7 +1312,7 @@
+         except SympifyError:
+             raise TypeError("Invalid comparison %s < %s" % (self, other))
+         if isinstance(other, NumberSymbol):
+-            return other.__ge__(self)
++            return other.__gt__(self)
+         if other.is_real and other.is_number:
+             other = other.evalf()
+         if isinstance(other, Number) and other is not S.NaN:
+@@ -1326,7 +1326,7 @@
+         except SympifyError:
+             raise TypeError("Invalid comparison %s <= %s" % (self, other))
+         if isinstance(other, NumberSymbol):
+-            return other.__gt__(self)
++            return other.__ge__(self)
+         if other.is_real and other.is_number:
+             other = other.evalf()
+         if isinstance(other, Number) and other is not S.NaN:
+@@ -1719,7 +1719,7 @@
+         try:
+             other = _sympify(other)
+         except SympifyError:
+-            return False    # sympy != other  -->  not ==
++            return NotImplemented
+         if isinstance(other, NumberSymbol):
+             if other.is_irrational:
+                 return False
+@@ -1734,7 +1734,7 @@
+         return False
+ 
+     def __ne__(self, other):
+-        return not self.__eq__(other)
++        return not self == other
+ 
+     def __gt__(self, other):
+         try:
+@@ -1742,7 +1742,7 @@
+         except SympifyError:
+             raise TypeError("Invalid comparison %s > %s" % (self, other))
+         if isinstance(other, NumberSymbol):
+-            return other.__le__(self)
++            return other.__lt__(self)
+         expr = self
+         if isinstance(other, Number):
+             if isinstance(other, Rational):
+@@ -1760,7 +1760,7 @@
+         except SympifyError:
+             raise TypeError("Invalid comparison %s >= %s" % (self, other))
+         if isinstance(other, NumberSymbol):
+-            return other.__lt__(self)
++            return other.__le__(self)
+         expr = self
+         if isinstance(other, Number):
+             if isinstance(other, Rational):
+@@ -1778,7 +1778,7 @@
+         except SympifyError:
+             raise TypeError("Invalid comparison %s < %s" % (self, other))
+         if isinstance(other, NumberSymbol):
+-            return other.__ge__(self)
++            return other.__gt__(self)
+         expr = self
+         if isinstance(other, Number):
+             if isinstance(other, Rational):
+@@ -1797,7 +1797,7 @@
+             raise TypeError("Invalid comparison %s <= %s" % (self, other))
+         expr = self
+         if isinstance(other, NumberSymbol):
+-            return other.__gt__(self)
++            return other.__ge__(self)
+         elif isinstance(other, Number):
+             if isinstance(other, Rational):
+                 return _sympify(bool(self.p*other.q <= self.q*other.p))
+@@ -2112,7 +2112,7 @@
+         return Rational.__eq__(self, other)
+ 
+     def __ne__(self, other):
+-        return not self.__eq__(other)
++        return not self == other
+ 
+     def __gt__(self, other):
+         try:
+@@ -3339,7 +3339,7 @@
+         try:
+             other = _sympify(other)
+         except SympifyError:
+-            return False    # sympy != other  -->  not ==
++            return NotImplemented
+         if self is other:
+             return True
+         if isinstance(other, Number) and self.is_irrational:
+@@ -3348,13 +3348,17 @@
+         return False    # NumberSymbol != non-(Number|self)
+ 
+     def __ne__(self, other):
+-        return not self.__eq__(other)
++        return not self == other
+ 
+     def __lt__(self, other):
+         try:
+             other = _sympify(other)
+         except SympifyError:
+             raise TypeError("Invalid comparison %s < %s" % (self, other))
++        if other.is_number and other.is_real:
++            sign = (self - other).is_negative
++            if sign is not None:
++                return _sympify(sign)
+         if self is other:
+             return S.false
+         if isinstance(other, Number):
+@@ -3376,6 +3380,10 @@
+             other = _sympify(other)
+         except SympifyError:
+             raise TypeError("Invalid comparison %s <= %s" % (self, other))
++        if other.is_number and other.is_real:
++            sign = (self - other).is_nonpositive
++            if sign is not None:
++                return _sympify(sign)
+         if self is other:
+             return S.true
+         if other.is_real and other.is_number:
+@@ -3389,6 +3397,10 @@
+             other = _sympify(other)
+         except SympifyError:
+             raise TypeError("Invalid comparison %s > %s" % (self, other))
++        if other.is_number and other.is_real:
++            sign = (self - other).is_positive
++            if sign is not None:
++                return _sympify(sign)
+         r = _sympify((-self) < (-other))
+         if r in (S.true, S.false):
+             return r
+@@ -3400,6 +3412,10 @@
+             other = _sympify(other)
+         except SympifyError:
+             raise TypeError("Invalid comparison %s >= %s" % (self, other))
++        if other.is_number and other.is_real:
++            sign = (self - other).is_nonnegative
++            if sign is not None:
++                return _sympify(sign)
+         r = _sympify((-self) <= (-other))
+         if r in (S.true, S.false):
+             return r

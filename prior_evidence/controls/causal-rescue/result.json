@@ -1,0 +1,22 @@
+{
+  "description": "Evaluator-authored causal control applied after the model completed; not a model result. Changes only the GeometryEntity inequality implementation.",
+  "geometry_passed": true,
+  "issue_specific": {
+    "exit_code": 0,
+    "summary": "2 passed, 5 warnings in 1.11s",
+    "seconds": 3.2,
+    "command": [
+      "$WORKSPACE\\work\\real-debug-env39\\Scripts\\python.exe",
+      "-c",
+      "import sys; sys._running_pytest = True; import pytest, py; py.test = pytest; sys.modules[\"py.test\"] = pytest; sys.exit(pytest.main(sys.argv[1:]))",
+      "-p",
+      "pytest_timeout",
+      "--timeout=60",
+      "-q",
+      "--tb=short",
+      "--disable-warnings",
+      "sympy/core/tests/test_basic.py::test_equality",
+      "sympy/core/tests/test_numbers.py::test_comparisons_with_unknown_type"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+Fixed scalar delegation to preserve strict versus inclusive operators. `NumberSymbol` comparisons with Rational/Float now compare the original operands through their difference, without changing global precision.
+
+The reproducer now prints `False False True True`. Added regressions for both operand orders, close boundaries, exact equality, infinities, and symbolic relations. No existing expectations changed.
+
+Ran with the supplied environment variables:
+
+```powershell
+& '.\.venv\Scripts\python.exe' run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/core/tests/test_numbers.py sympy/core/tests/test_relational.py sympy/core/tests/test_expr.py
+```
+
+Result: **211 passed, 5 xfailed**. `git diff --check` also passed.

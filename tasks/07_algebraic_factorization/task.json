@@ -1,0 +1,17 @@
+{
+  "id": "07_algebraic_factorization",
+  "title": "Preserve factors over a complex extension",
+  "base": "19040",
+  "base_commit": "b9179e80d2daa1bb6cba1ffe35ca9e6612e115c9",
+  "prompt": "A polynomial factorization pipeline loses part of its input when factoring over a complex extension:\n    from sympy import symbols, expand, factor, I\n    x, y = symbols('x y')\n    expression = expand((x - 1)*(y - 1))\n    print(factor(expression, extension=[I]))  # currently x - 1\nThe result must retain both factors and expand back to the input. Repair square-free multivariate inputs, including complex linear factors and non-unit coefficients. Preserve existing univariate repeated-factor handling and normal rational factorization. Multivariate inputs with repeated factors are outside this task's scope. Returning the input unfactored is not a solution. Add regression coverage.",
+  "tests": [
+    "sympy/polys/tests/test_polytools.py"
+  ],
+  "provenance": "Adapted from issue #18895 / SWE-bench sympy__sympy-19040. New identity, multiplicity, and factor-structure checks supplement the upstream test.",
+  "sources": [
+    "https://github.com/sympy/sympy/issues/18895"
+  ],
+  "seed": null,
+  "reference": "19040-reference.patch",
+  "frozen_test_patch": "19040-tests.patch"
+}

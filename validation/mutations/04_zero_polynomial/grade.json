@@ -1,0 +1,42 @@
+{
+  "case": "04_zero_polynomial",
+  "complete_pass": false,
+  "required_pass": true,
+  "preservation_pass": false,
+  "oracle_execution": {
+    "exit_code": 1,
+    "seconds": 10.14,
+    "command": [
+      "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+      "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+      "04_zero_polynomial"
+    ],
+    "summary": ""
+  },
+  "regression": null,
+  "failed_checks": [
+    {
+      "name": "nonzero_identity",
+      "group": "preservation",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "name": "unknown_identity",
+      "group": "preservation",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "name": "rational_identity",
+      "group": "preservation",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    }
+  ],
+  "check_count": 8,
+  "passed_checks": 5
+}

@@ -1,0 +1,67 @@
+[
+  {
+    "command": "\"C:\\\\Program Files\\\\PowerShell\\\\7\\\\pwsh.exe\" -Command '$env:PYTHONDONTWRITEBYTECODE='\"'1'; \"'$env:PYTEST_DISABLE_PLUGIN_AUTOLOAD='\"'1'; \"'$env:PYTHONHASHSEED='\"'0'; \"'$env:PYTHONIOENCODING='\"'utf-8'; @'\nimport sympy\nclass Foo:\n    def __eq__(self, other):\n        if isinstance(other, sympy.Basic):\n            return sympy.Integer(1) == other\n        return NotImplemented\nf = Foo()\nfor s in [sympy.Basic(), sympy.Symbol('x'), sympy.Integer(1), sympy.Float(1)]:\n    print(repr(s), 's == f:', s == f, 'f == s:', f == s, 'direct eq:', s.__eq__(f), 'direct ne:', s.__ne__(f))\n'@ | .\\\\.venv\\\\Scripts\\\\python.exe -; rg --files -g AGENTS.md -g '*comparisons*'; git status --short\"",
+    "exit_code": 0,
+    "output_length": 1760
+  },
+  {
+    "command": "\"C:\\\\Program Files\\\\PowerShell\\\\7\\\\pwsh.exe\" -Command \"rg -n 'def __(eq|ne|lt|le|gt|ge)__|_sympifyit.*(False|True)|SympifyError' sympy/core/basic.py sympy/core/numbers.py sympy/core/expr.py; Get-Content sympy/core/basic.py | Select-Object -Skip 280 -First 115; rg -n 'NotImplemented|__eq__|__ne__|comparison|equal' sympy/core/tests/test_basic.py sympy/core/tests/test_numbers.py\"",
+    "exit_code": 0,
+    "output_length": 9538
+  },
+  {
+    "command": "\"C:\\\\Program Files\\\\PowerShell\\\\7\\\\pwsh.exe\" -Command '$f=Get-Content sympy/core/numbers.py; foreach ($r in @(@(680,48),@(1240,100),@(1710,100),@(2095,65),@(2825,65),@(3048,58),@(3210,23),@(3330,90))) { $f | Select-Object -Skip $r[0] -First $r[1] }; Get-Content sympy/core/tests/test_basic.py -TotalCount 90; Get-Content sympy/core/tests/test_numbers.py -TotalCount 65; Get-Content sympy/core/expr.py | Select-Object -Skip 240 -First 95; Get-Content sympy/core/decorators.py -TotalCount 115'",
+    "exit_code": 0,
+    "output_length": 31378
+  },
+  {
+    "command": "\"C:\\\\Program Files\\\\PowerShell\\\\7\\\\pwsh.exe\" -Command \"Get-Content sympy/core/numbers.py | Select-Object -Skip 3208 -First 30; rg -n 'def __(eq|ne)__|return not .*__eq__' sympy/core; rg -n 'float\\\\(.inf|float\\\\(\\\"inf|oo ==|oo \"'!=|nan ==|nan !=|__lt__|__gt__'\"' sympy/core/tests/test_numbers.py; Get-Content doc/src/python-comparisons.rst -TotalCount 100; rg --files -g AGENTS.md -g '\"'! .venv'\"' -g '*expr*' sympy/core/tests\"",
+    "exit_code": 0,
+    "output_length": 10514
+  },
+  {
+    "command": "\"C:\\\\Program Files\\\\PowerShell\\\\7\\\\pwsh.exe\" -Command \"Get-Content sympy/core/containers.py | Select-Object -Skip 85 -First 22; Get-Content sympy/core/function.py | Select-Object -Skip 1588 -First 28; rg -n -A 8 'def __eq__|def __ne__' sympy/core/function.py; Get-Content sympy/core/numbers.py -TotalCount 35; rg -n '== None|\"'!= None|comp.*str|str.*comp|\"1\"|class .*'\"' sympy/core/tests/test_numbers.py | Select-Object -Last 30\"",
+    "exit_code": 0,
+    "output_length": 4824
+  },
+  {
+    "command": "\"C:\\\\Program Files\\\\PowerShell\\\\7\\\\pwsh.exe\" -Command \"@'\nfrom pathlib import Path\nimport re\nfor name in ['basic', 'expr', 'numbers']:\n    path = Path('sympy/core/%s.py' % name)\n    text = path.read_text()\n    text = re.sub(r'(except SympifyError:\\\\n\\\\s+)return False    # sympy \"'!= other[''^'\"\\\\n]*', r'\\\\1return NotImplemented', text)\n    text = re.sub(r'(except SympifyError:\\\\n\\\\s+)raise TypeError\\\\(\\\"Invalid comparison %s [<>=]+ %s\\\" % \\\\(self, other\\\\)\\\\)', r'\\\\1return NotImplemented', text)\n    text = text.replace('        return not self.__eq__(other)', '        result = self.__eq__(other)\\\\n        if result is NotImplemented:\\\\n            return NotImplemented\\\\n        return not result')\n    if name == 'numbers':\n        for singleton in ['Infinity', 'NegativeInfinity', 'NaN']:\n            old = '        return other is S.%s' % singleton\n            new = ('        # Keep structural identity semantics for convertible objects.\\\\n'\n                   '        try:\\\\n'\n                   '            _sympify(other)\\\\n'\n                   '        except SympifyError:\\\\n'\n                   '            return NotImplemented\\\\n' + old)\n            text = text.replace(old + '\\\\n', new + '\\\\n')\n            text = text.replace('        return other is not S.%s' % singleton,\n                                '        result = self.__eq__(other)\\\\n        if result is NotImplemented:\\\\n            return NotImplemented\\\\n        return not result')\n    path.write_text(text)\n'@ | .\\\\.venv\\\\Scripts\\\\python.exe -; git diff --stat\"",
+    "exit_code": 0,
+    "output_length": 264
+  },
+  {
+    "command": "\"C:\\\\Program Files\\\\PowerShell\\\\7\\\\pwsh.exe\" -Command \"@'\nfrom pathlib import Path\nimport subprocess\nfor name in ['basic', 'expr', 'numbers']:\n    p = Path('sympy/core/%s.py' % name)\n    old = subprocess.check_output(['git', 'show', 'HEAD:' + p.as_posix()])\n    print(name, 'original CRLF', old.count(b'\\\\r\\\\n'), 'LF', old.count(b'\\\\n'))\n    p.write_bytes(p.read_bytes().replace(b'\\\\r\\\\n', b'\\\\n'))\n'@ | .\\\\.venv\\\\Scripts\\\\python.exe -; git diff --stat\"",
+    "exit_code": 0,
+    "output_length": 294
+  },
+  {
+    "command": "\"C:\\\\Program Files\\\\PowerShell\\\\7\\\\pwsh.exe\" -Command \"@'\nfrom pathlib import Path\np = Path('sympy/core/tests/test_basic.py')\ns = p.read_text()\npos = s.index('\\\\ndef test_matches_basic():')\ns = s[:pos] + '''\ndef test_equality_unknown_type():\n    class EqualToBasic(object):\n        def __eq__(self, other):\n            return isinstance(other, Basic)\n\n        def __ne__(self, other):\n            return not isinstance(other, Basic)\n\n    basic = Basic()\n    other = EqualToBasic()\n    assert basic.__eq__(other) is NotImplemented\n    assert basic.__ne__(other) is NotImplemented\n    assert basic == other\n    assert other == basic\n    assert not (basic \"'!= other)\n    assert not (other != basic)\n\n    unknown = object()\n    assert basic.__eq__(unknown) is NotImplemented\n    assert basic.__ne__(unknown) is NotImplemented\n    assert not (basic == unknown)\n    assert basic != unknown\n    assert basic.__eq__(0) is False\n    assert basic.__ne__(0) is True\n\n\n'\"''' + s[pos:]\np.write_bytes(s.encode())\np = Path('sympy/core/tests/test_numbers.py')\ns = p.read_text()\ns += '''\n\ndef test_comparison_unknown_type():\n    import operator\n\n    class Reflected(object):\n        def __eq__(self, other):\n            return 'eq'\n\n        def __ne__(self, other):\n            return 'ne'\n\n        def __lt__(self, other):\n            return 'lt'\n\n        def __le__(self, other):\n            return 'le'\n\n        def __gt__(self, other):\n            return 'gt'\n\n        def __ge__(self, other):\n            return 'ge'\n\n    other = Reflected()\n    unknown = object()\n    values = [S.Zero, S.One, S.NegativeOne, Integer(2), S.Half,\n              Rational(2, 3), Float('1.25'), oo, -oo, nan, zoo,\n              pi, E, GoldenRatio, EulerGamma, Catalan, I,\n              Symbol('x'), Symbol('x') + 1]\n    for value in values:\n        for name, reflected in [('eq', 'eq'), ('ne', 'ne'),\n                                ('lt', 'gt'), ('le', 'ge'),\n                                ('gt', 'lt'), ('ge', 'le')]:\n            method = getattr(value, '__%s__' % name)\n            op = getattr(operator, name)\n            assert method(other) is NotImplemented\n            assert method(unknown) is NotImplemented\n            assert op(value, other) == reflected\n            assert op(other, value) == name\n            if name == 'eq':\n                assert op(value, unknown) is False\n            elif name == 'ne':\n                assert op(value, unknown) is True\n            else:\n                raises(TypeError, lambda: op(value, unknown))\n                raises(TypeError, lambda: op(unknown, value))\n\n\ndef test_comparison_sympifiable_and_symbolic():\n    class Convertible(object):\n        def _sympy_(self):\n            return Integer(2)\n\n    other = Convertible()\n    for value in [Integer(2), Rational(2), Float(2)]:\n        assert value == other\n        assert not (value \"'!= other)\n        assert (value <= other) is S.true\n        assert (value >= other) is S.true\n        assert (value < other) is S.false\n        assert (value > other) is S.false\n\n    x = Symbol('\"'x')\n    for value in [Integer(2), Rational(2, 3), Float(2), pi, oo, -oo]:\n        assert value.__eq__(x) is False\n        assert value.__ne__(x) is True\n        for name, relation in [('__lt__', Lt), ('__le__', Le),\n                               ('__gt__', Gt), ('__ge__', Ge)]:\n            assert getattr(value, name)(x) == relation(value, x, evaluate=False)\n\n    # The singleton numbers retain structural (not converted) equality.\n    for value, native in [(oo, float('inf')), (-oo, float('-inf')),\n                          (nan, float('nan'))]:\n        assert value == value\n        assert not (value \"'!= value)\n        assert value.__eq__(native) is False\n        assert value.__ne__(native) is True\n    for value in [nan, zoo, I]:\n        raises(TypeError, lambda: value < 1)\n        raises(TypeError, lambda: value >= 1)\n'\"'''\np.write_bytes(s.encode())\n'@ | .\\\\.venv\\\\Scripts\\\\python.exe -\n\"'$env:PYTHONDONTWRITEBYTECODE='\"'1'; \"'$env:PYTEST_DISABLE_PLUGIN_AUTOLOAD='\"'1'; \"'$env:PYTHONHASHSEED='\"'0'; \"'$env:PYTHONIOENCODING='\"'utf-8'; & .\\\\.venv\\\\Scripts\\\\python.exe run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/core/tests/test_basic.py sympy/core/tests/test_numbers.py\"",
+    "exit_code": 0,
+    "output_length": 205
+  },
+  {
+    "command": "\"C:\\\\Program Files\\\\PowerShell\\\\7\\\\pwsh.exe\" -Command 'git diff --check; git diff -- sympy/core/basic.py sympy/core/expr.py sympy/core/numbers.py'",
+    "exit_code": 0,
+    "output_length": 16123
+  },
+  {
+    "command": "\"C:\\\\Program Files\\\\PowerShell\\\\7\\\\pwsh.exe\" -Command 'git diff -- sympy/core/tests/test_basic.py sympy/core/tests/test_numbers.py; Get-Content sympy/core/sympify.py | Select-Object -Skip 245 -First 125'",
+    "exit_code": 0,
+    "output_length": 8672
+  },
+  {
+    "command": "\"C:\\\\Program Files\\\\PowerShell\\\\7\\\\pwsh.exe\" -Command '$env:PYTHONDONTWRITEBYTECODE='\"'1'; \"'$env:PYTEST_DISABLE_PLUGIN_AUTOLOAD='\"'1'; \"'$env:PYTHONHASHSEED='\"'0'; \"'$env:PYTHONIOENCODING='\"'utf-8'; & .\\\\.venv\\\\Scripts\\\\python.exe run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/core/tests\"",
+    "exit_code": 1,
+    "output_length": 2681
+  },
+  {
+    "command": "\"C:\\\\Program Files\\\\PowerShell\\\\7\\\\pwsh.exe\" -Command '$env:PYTHONDONTWRITEBYTECODE='\"'1'; \"'$env:PYTEST_DISABLE_PLUGIN_AUTOLOAD='\"'1'; \"'$env:PYTHONHASHSEED='\"'0'; \"'$env:PYTHONIOENCODING='\"'utf-8'; @'\nfrom pathlib import Path\nimport subprocess\nimport sys\npaths = [Path('sympy/core/%s.py' % name) for name in ['basic', 'expr', 'numbers']]\nchanged = {p: p.read_bytes() for p in paths}\ntry:\n    for p in paths:\n        p.write_bytes(subprocess.check_output(['git', 'show', 'HEAD:' + p.as_posix()]))\n    result = subprocess.call([sys.executable, 'run_pytest.py', '-p', 'pytest_timeout', '--timeout=60', '-q', '--tb=short', '--disable-warnings', 'sympy/core/tests/test_sympify.py::test_evaluate_false'])\n    print('Unmodified production files test exit code:', result)\nfinally:\n    for p in paths:\n        p.write_bytes(changed[p])\n'@ | .\\\\.venv\\\\Scripts\\\\python.exe -\"",
+    "exit_code": 0,
+    "output_length": 988
+  },
+  {
+    "command": "\"C:\\\\Program Files\\\\PowerShell\\\\7\\\\pwsh.exe\" -Command '$env:PYTHONDONTWRITEBYTECODE='\"'1'; \"'$env:PYTEST_DISABLE_PLUGIN_AUTOLOAD='\"'1'; \"'$env:PYTHONHASHSEED='\"'0'; \"'$env:PYTHONIOENCODING='\"'utf-8'; & .\\\\.venv\\\\Scripts\\\\python.exe run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/core/tests/test_basic.py sympy/core/tests/test_numbers.py; git diff --check; git status --short\"",
+    "exit_code": 0,
+    "output_length": 345
+  }
+]

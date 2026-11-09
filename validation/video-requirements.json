@@ -1,0 +1,45 @@
+{
+  "checked_utc": "2026-11-09T03:07:13.651710+00:00",
+  "video_sha256": "50674fd28486b547c81ea985037013e86aecfefdda258f439b72e4bb2333ed7b",
+  "encoded_duration_seconds": 273.05,
+  "under_five_minutes": true,
+  "audio_present": true,
+  "full_decode_passed": true,
+  "coverage": [
+    {
+      "requirement": "Problem targeted and why it matters",
+      "slides": [
+        1,
+        2,
+        3
+      ],
+      "evidence": "Reported integration bug, shared comparison regression, dropped edge, and practical maintenance/merge risk."
+    },
+    {
+      "requirement": "How the evaluation works and how it is graded",
+      "slides": [
+        4,
+        5,
+        8
+      ],
+      "evidence": "Seven scoped tasks, actual coding tools, separate-checkout grading, and an explicit rule requiring requested behavior, preservation checks, and regression tests all to pass."
+    },
+    {
+      "requirement": "Results including where and why frontier models fail",
+      "slides": [
+        3,
+        6,
+        7
+      ],
+      "evidence": "18/21 complete repairs per model; 6/6 equality regressions; 6/6 successful recoveries; NotImplemented mechanism; grader correction and scope limits."
+    }
+  ],
+  "delivery": {
+    "video_outside_zip": true,
+    "intended_host": "Google Drive",
+    "public_url": null,
+    "access_without_login_verified": false,
+    "same_url_in_readme_and_form_verified": false
+  },
+  "sharing_reference": "https://support.google.com/drive/answer/7166529?hl=en"
+}

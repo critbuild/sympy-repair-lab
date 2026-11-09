@@ -1,0 +1,66 @@
+{
+  "case": "03_geometry_recovery",
+  "model": "gpt-6.1-sol",
+  "repeat": 3,
+  "reasoning_effort": "medium",
+  "label": "primary",
+  "category": "complete_repair",
+  "complete_pass": true,
+  "cli_exit_code": 0,
+  "agent_seconds": 132.05,
+  "thread_ids": [
+    "01a1bd7d-6143-72f2-9788-aa710f29b07f"
+  ],
+  "command_count": 10,
+  "changed_files": [
+    "sympy/geometry/entity.py",
+    "sympy/geometry/tests/test_entity.py"
+  ],
+  "usage": [
+    {
+      "input_tokens": 290420,
+      "cached_input_tokens": 272256,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 3221,
+      "reasoning_output_tokens": 395
+    }
+  ],
+  "checks": {
+    "case": "03_geometry_recovery",
+    "complete_pass": true,
+    "required_pass": true,
+    "preservation_pass": true,
+    "oracle_execution": {
+      "exit_code": 0,
+      "seconds": 2.47,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "03_geometry_recovery"
+      ],
+      "summary": ""
+    },
+    "regression": {
+      "exit_code": 0,
+      "seconds": 40.72,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "-c",
+        "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+        "-p",
+        "pytest_timeout",
+        "--timeout=60",
+        "-q",
+        "--tb=short",
+        "--disable-warnings",
+        "sympy/core/tests/test_basic.py",
+        "sympy/core/tests/test_numbers.py",
+        "sympy/geometry/tests"
+      ],
+      "summary": "165 passed, 1 xfailed, 12 warnings in 39.40s"
+    },
+    "failed_checks": [],
+    "check_count": 31,
+    "passed_checks": 31
+  }
+}

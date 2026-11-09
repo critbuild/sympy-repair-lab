@@ -1,0 +1,16 @@
+A Python integration wraps symbolic values in its own class. SymPy currently blocks reflected equality: wrapper == value can be True while value == wrapper is False.
+
+Reproducer:
+    from sympy import Basic, Symbol, Integer, Rational, Float
+    class Box:
+        def __eq__(self, other):
+            if isinstance(other, Basic):
+                return True
+            return NotImplemented
+        def __ne__(self, other):
+            return not self == other
+    box = Box()
+    value = Integer(3)
+    print(box == value, value == box)  # desired: True, True
+
+Repair equality and inequality interoperability for Basic, symbols, and scalar numeric objects when the other operand cannot be sympified. Let Python try the reflected comparison. Unsupported plain objects should still compare unequal, and existing comparisons and downstream APIs must retain their behavior. Add useful regression coverage.

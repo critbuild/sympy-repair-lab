@@ -1,0 +1,58 @@
+{
+  "case": "07_algebraic_factorization",
+  "complete_pass": false,
+  "required_pass": false,
+  "preservation_pass": false,
+  "oracle_execution": {
+    "exit_code": 1,
+    "seconds": 4.67,
+    "command": [
+      "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+      "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+      "07_algebraic_factorization"
+    ],
+    "summary": ""
+  },
+  "regression": null,
+  "failed_checks": [
+    {
+      "name": "reported_factored_output",
+      "group": "required",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "name": "complex_factored_output",
+      "group": "required",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "name": "coefficient_factored_output",
+      "group": "required",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "name": "rational_factorization",
+      "group": "preservation",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "name": "univariate_multiplicity",
+      "group": "preservation",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    }
+  ],
+  "check_count": 12,
+  "passed_checks": 7,
+  "description": "Return the input without factoring; algebraic identity alone would pass.",
+  "mutation_rejected": true
+}

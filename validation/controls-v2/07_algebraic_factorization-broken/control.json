@@ -1,0 +1,82 @@
+{
+  "case": "07_algebraic_factorization",
+  "complete_pass": false,
+  "required_pass": false,
+  "preservation_pass": true,
+  "oracle_execution": {
+    "exit_code": 1,
+    "seconds": 5.27,
+    "command": [
+      "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+      "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+      "07_algebraic_factorization"
+    ],
+    "summary": ""
+  },
+  "regression": {
+    "exit_code": 1,
+    "seconds": 11.05,
+    "command": [
+      "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+      "-c",
+      "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+      "-p",
+      "pytest_timeout",
+      "--timeout=60",
+      "-q",
+      "--tb=short",
+      "--disable-warnings",
+      "sympy/polys/tests/test_polytools.py"
+    ],
+    "summary": "1 failed, 149 passed, 1 warning in 8.34s"
+  },
+  "failed_checks": [
+    {
+      "name": "reported_identity",
+      "group": "required",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "name": "reported_factor_structure",
+      "group": "required",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "name": "complex_identity",
+      "group": "required",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "name": "complex_factor_structure",
+      "group": "required",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "name": "coefficient_identity",
+      "group": "required",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "name": "coefficient_factor_structure",
+      "group": "required",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    }
+  ],
+  "check_count": 9,
+  "passed_checks": 3,
+  "reference": false,
+  "expected_complete_pass": false,
+  "control_matches": true
+}

@@ -1,0 +1,127 @@
+[
+  {
+    "id": "01_foreign_equality",
+    "title": "Foreign equality compatibility",
+    "base": "13091",
+    "base_commit": "d1320814eda6549996190618a21eaf212cfd4d1e",
+    "prompt": "A Python integration wraps symbolic values in its own class. SymPy currently blocks reflected equality: wrapper == value can be True while value == wrapper is False.\n\nReproducer:\n    from sympy import Basic, Symbol, Integer, Rational, Float\n    class Box:\n        def __eq__(self, other):\n            if isinstance(other, Basic):\n                return True\n            return NotImplemented\n        def __ne__(self, other):\n            return not self == other\n    box = Box()\n    value = Integer(3)\n    print(box == value, value == box)  # desired: True, True\n\nRepair equality and inequality interoperability for Basic, symbols, and scalar numeric objects when the other operand cannot be sympified. Let Python try the reflected comparison. Unsupported plain objects should still compare unequal, and existing comparisons and downstream APIs must retain their behavior. Add useful regression coverage.",
+    "tests": [
+      "sympy/core/tests/test_basic.py",
+      "sympy/core/tests/test_numbers.py"
+    ],
+    "provenance": "Adapted from public SymPy issue #13078 / SWE-bench sympy__sympy-13091. The consumer preservation oracle is newly authored.",
+    "sources": [
+      "https://github.com/sympy/sympy/issues/13078"
+    ],
+    "seed": null,
+    "reference": "13091-reference.patch",
+    "frozen_test_patch": null
+  },
+  {
+    "id": "02_precise_ordering",
+    "title": "Rational and irrational ordering",
+    "base": "13091",
+    "base_commit": "d1320814eda6549996190618a21eaf212cfd4d1e",
+    "prompt": "A numeric boundary check obtains contradictory orderings near pi:\n    from sympy import Rational, pi\n    r = Rational('905502432259640373/288230376151711744')\n    print(r < pi, r == pi, pi < r, r > pi)\nThe final two comparisons disagree even though they express the same relation. Repair the comparisons so strict and inclusive orderings are consistent when scalar Rational/Float values meet NumberSymbol constants. The exact rational above is greater than pi. Preserve ordinary comparisons, infinity behavior, and undecidable symbolic relations. Do not solve this by rounding inputs or increasing a global precision setting. Add regression tests that exercise both operand orders and boundary strictness.",
+    "tests": [
+      "sympy/core/tests/test_numbers.py"
+    ],
+    "provenance": "Adapted from public SymPy issue #13081, separately fixed in PR #13091. This is a different task from foreign equality, on the same baseline. The reference supplements upstream reflection fixes with evaluator-authored exact-difference sign checks; the upstream patch alone does not establish correct near-boundary order.",
+    "sources": [
+      "https://github.com/sympy/sympy/issues/13081"
+    ],
+    "seed": null,
+    "reference": "02-ordering-reference.patch",
+    "frozen_test_patch": null
+  },
+  {
+    "id": "03_geometry_recovery",
+    "title": "Recover a geometry pipeline after an API fix",
+    "base": "13091",
+    "base_commit": "d1320814eda6549996190618a21eaf212cfd4d1e",
+    "prompt": "This checkout includes a recent interoperability patch: comparisons with unknown Python objects now defer to their reflected methods. A geometry consumer started dropping its first edge afterwards.\n\n    from sympy import Point, Segment\n    edges = [Segment(Point(0, 0), Point(1, 1)),\n             Segment(Point(1, 1), Point(2, 0))]\n    previous = None\n    kept = []\n    for edge in edges:\n        if edge != previous:\n            kept.append(edge)\n        previous = edge\n    print(len(kept))  # expected 2, currently 1\n\nFind and repair the library regression. The caller is valid and must continue to work without being rewritten. Keep the recent foreign-object equality support; reverting that compatibility fix is not a solution. Preserve ordinary equality and inequality for lines, rays, segments, and other geometric objects. Add regression coverage for the regression and for genuine equal/different objects.",
+    "tests": [
+      "sympy/core/tests/test_basic.py",
+      "sympy/core/tests/test_numbers.py",
+      "sympy/geometry/tests"
+    ],
+    "provenance": "New repair task seeded with the exact production files generated in the earlier gpt-6-astra discovery session. Consumer scenario and preservation checks are authored; correlated with case01.",
+    "sources": [
+      "https://github.com/sympy/sympy/pull/13091"
+    ],
+    "seed": "geometry-seed",
+    "reference": "geometry-reference.patch",
+    "frozen_test_patch": null
+  },
+  {
+    "id": "04_zero_polynomial",
+    "title": "Normalize a cleared zero polynomial",
+    "base": "20428",
+    "base_commit": "c0e85160406f9bf2bcaa2992138587668a1cd0bc",
+    "prompt": "A symbolic-algebra pipeline clears denominators before extracting common terms. The supplied reproducer in incident.py constructs a constant polynomial that algebraically cancels to zero. After clear_denoms(), its expression prints as 0, but is_zero is False and terms_gcd() raises IndexError.\n\nRepair the normalization failure so the cleared polynomial behaves as a canonical zero polynomial and downstream terms_gcd() and primitive() work. Preserve nonzero coefficients, unresolved symbolic coefficients, and the clear_denoms identity (denominator * original equals cleared result). The required behavior concerns the result of clear_denoms; recognizing the original unsimplified polynomial as zero at construction time is not required. Add regression coverage without hardcoding the supplied expression.",
+    "tests": [
+      "sympy/polys/tests/test_polytools.py",
+      "sympy/polys/tests/test_densearith.py",
+      "sympy/polys/tests/test_densetools.py"
+    ],
+    "provenance": "Adapted from issue #20427 / SWE-bench sympy__sympy-20428. Scope explicitly excludes the stronger construction-time assertion found in the historical benchmark.",
+    "sources": [
+      "https://github.com/sympy/sympy/issues/20427"
+    ],
+    "seed": null,
+    "reference": "20428-reference.patch",
+    "frozen_test_patch": null
+  },
+  {
+    "id": "05_set_equivalence",
+    "title": "Equivalent configuration sets",
+    "base": "20438",
+    "base_commit": "33b47e4bd60e2302e42616141e76285038b724d6",
+    "prompt": "A configuration validator represents combinations either as a Cartesian product or as an explicit list of tuples. Equivalent representations should agree:\n    from sympy import FiniteSet, ProductSet, Eq\n    a = FiniteSet(1, 2)\n    product = ProductSet(a, a)\n    listed = FiniteSet((1, 1), (1, 2), (2, 1), (2, 2))\n    print(product.is_subset(listed))  # desired True; currently None\n    print(Eq(product, listed).simplify())  # desired True; currently crashes\n\nRepair subset and equality reasoning for these finite representations, including the reverse operand order and demonstrably unequal sets. Simplifying a set equality must not crash or force a truth value when symbolic membership is undecidable. Preserve normal set operations. An old test may expect an undecided result for a product of tuples versus a real interval; a justified transition to a provably False result is allowed. Add regression coverage.",
+    "tests": [
+      "sympy/sets/tests/test_sets.py",
+      "sympy/core/tests/test_relational.py"
+    ],
+    "provenance": "Adapted from issue #19378 / SWE-bench sympy__sympy-20438. A configuration-validation interpretation and explicit symbolic-preservation checks are authored.",
+    "sources": [
+      "https://github.com/sympy/sympy/issues/19378"
+    ],
+    "seed": null,
+    "reference": "20438-reference.patch",
+    "frozen_test_patch": "20438-tests.patch"
+  },
+  {
+    "id": "06_symbolic_determinant",
+    "title": "Singular symbolic matrices",
+    "base": "13877",
+    "base_commit": "1659712001810f5fc563a443949f8e3bb38af4bd",
+    "prompt": "A symbolic linear-algebra workflow evaluates determinants of matrices with entries M[j,i] = i + a*j:\n    from sympy import Matrix, symbols\n    a = symbols('a')\n    matrix = lambda n: Matrix([[i + a*j for i in range(n)] for j in range(n)])\n    print(matrix(5).det())  # currently nan; expected 0\n    print(matrix(6).det())  # currently raises; expected 0\n\nFor n >= 3 the rows span at most two vectors, so the determinant is identically zero. Repair the default determinant algorithm's handling of these symbolic zero pivots. Preserve correct results for nonsingular matrices and existing determinant methods. Do not special-case the displayed matrix family or replace all determinants with zero. Add regression coverage.",
+    "tests": [
+      "sympy/matrices/tests/test_matrices.py"
+    ],
+    "provenance": "Adapted from issue #13835 / SWE-bench sympy__sympy-13877. Rank reasoning supplies an independent expected result.",
+    "sources": [
+      "https://github.com/sympy/sympy/pull/13877"
+    ],
+    "seed": null,
+    "reference": "13877-reference.patch",
+    "frozen_test_patch": null
+  },
+  {
+    "id": "07_algebraic_factorization",
+    "title": "Preserve factors over a complex extension",
+    "base": "19040",
+    "base_commit": "b9179e80d2daa1bb6cba1ffe35ca9e6612e115c9",
+    "prompt": "A polynomial factorization pipeline loses part of its input when factoring over a complex extension:\n    from sympy import symbols, expand, factor, I\n    x, y = symbols('x y')\n    expression = expand((x - 1)*(y - 1))\n    print(factor(expression, extension=[I]))  # currently x - 1\nThe result must retain both factors and expand back to the input. Repair square-free multivariate inputs, including complex linear factors and non-unit coefficients. Preserve existing univariate repeated-factor handling and normal rational factorization. Multivariate inputs with repeated factors are outside this task's scope. Returning the input unfactored is not a solution. Add regression coverage.",
+    "tests": [
+      "sympy/polys/tests/test_polytools.py"
+    ],
+    "provenance": "Adapted from issue #18895 / SWE-bench sympy__sympy-19040. New identity, multiplicity, and factor-structure checks supplement the upstream test.",
+    "sources": [
+      "https://github.com/sympy/sympy/issues/18895"
+    ],
+    "seed": null,
+    "reference": "19040-reference.patch",
+    "frozen_test_patch": "19040-tests.patch"
+  }
+]

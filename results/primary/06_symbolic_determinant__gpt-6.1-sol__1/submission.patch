@@ -1,0 +1,79 @@
+diff --git a/sympy/matrices/matrices.py b/sympy/matrices/matrices.py
+index 97cde62..735d191 100644
+--- a/sympy/matrices/matrices.py
++++ b/sympy/matrices/matrices.py
+@@ -174,14 +174,6 @@ def _eval_det_bareiss(self):
+         http://www.eecis.udel.edu/~saunders/papers/sffge/it5.ps.
+         """
+ 
+-        # XXX included as a workaround for issue #12362.  Should use `_find_reasonable_pivot` instead
+-        def _find_pivot(l):
+-            for pos,val in enumerate(l):
+-                if val:
+-                    return (pos, val, None, None)
+-            return (None, None, None, None)
+-
+-
+         # Recursively implemented Bareiss' algorithm as per Deanna Richelle Leggett's
+         # thesis http://www.math.usm.edu/perry/Research/Thesis_DRL.pdf
+         def bareiss(mat, cumm=1):
+@@ -191,8 +183,7 @@ def bareiss(mat, cumm=1):
+                 return mat[0, 0]
+ 
+             # find a pivot and extract the remaining matrix
+-            # XXX should use `_find_reasonable_pivot`.  Blocked by issue #12362
+-            pivot_pos, pivot_val, _, _ = _find_pivot(mat[:, 0])
++            pivot_pos, pivot_val, _, _ = _find_reasonable_pivot(mat[:, 0])
+             if pivot_pos == None:
+                 return S.Zero
+ 
+@@ -208,7 +199,9 @@ def bareiss(mat, cumm=1):
+             def entry(i, j):
+                 ret = (pivot_val*tmp_mat[i, j + 1] - mat[pivot_pos, j + 1]*tmp_mat[i, 0]) / cumm
+                 if not ret.is_Atom:
+-                    cancel(ret)
++                    # Keep the cancellation so symbolic zeros are exposed
++                    # before they can be used as divisors in later steps.
++                    ret = cancel(ret)
+                 return ret
+ 
+             return sign*bareiss(self._new(mat.rows - 1, mat.cols - 1, entry), pivot_val)
+diff --git a/sympy/matrices/tests/test_matrices.py b/sympy/matrices/tests/test_matrices.py
+index f4bc60c..95a21f7 100644
+--- a/sympy/matrices/tests/test_matrices.py
++++ b/sympy/matrices/tests/test_matrices.py
+@@ -403,6 +403,34 @@ def test_determinant():
+     assert M.det(method="berkowitz") == z**2 - x*y
+ 
+ 
++def test_determinant_symbolic_zero_pivots():
++    # Elimination produces expressions that are zero only after cancellation.
++    for n in range(4, 8):
++        M = Matrix(n, n, lambda j, i: i + a*j)
++        assert M.det() == 0
++        assert M.det(method="bareiss") == 0
++
++    # A zero pivot can also require non-polynomial simplification.  Skip it
++    # when a later row supplies a valid (but symbolically unknown) pivot.
++    zero = sin(x)**2 + cos(x)**2 - 1
++    for cls in classes:
++        M = cls([[zero, 1, 0, 0],
++                 [y, 0, 0, 0],
++                 [0, 0, 1, 0],
++                 [0, 0, 0, 1]])
++        original = M.copy()
++        assert M.det() == -y
++        assert M == original
++        M = cls(4, 4, lambda i, j: zero if j == 0 else i + j)
++        assert M.det() == 0
++
++    # Perturbing the rank-deficient example gives a nonzero determinant.
++    # Keep agreement with the other determinant methods.
++    M = Matrix(5, 5, lambda j, i: i + a*j) + eye(5)
++    for method in ("bareiss", "berkowitz", "lu"):
++        assert (M.det(method=method) - (11 - 40*a)).expand().cancel() == 0
++
++
+ def test_det_LU_decomposition():
+ 
+     for M in [Matrix(), Matrix([[1]])]:

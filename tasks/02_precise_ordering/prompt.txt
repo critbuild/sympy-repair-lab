@@ -1,0 +1,5 @@
+A numeric boundary check obtains contradictory orderings near pi:
+    from sympy import Rational, pi
+    r = Rational('905502432259640373/288230376151711744')
+    print(r < pi, r == pi, pi < r, r > pi)
+The final two comparisons disagree even though they express the same relation. Repair the comparisons so strict and inclusive orderings are consistent when scalar Rational/Float values meet NumberSymbol constants. The exact rational above is greater than pi. Preserve ordinary comparisons, infinity behavior, and undecidable symbolic relations. Do not solve this by rounding inputs or increasing a global precision setting. Add regression tests that exercise both operand orders and boundary strictness.

@@ -1,0 +1,47 @@
+{
+  "case": "13091",
+  "model": "gpt-6.1-sol",
+  "repeat": 1,
+  "cli_exit_code": 0,
+  "agent_seconds": 275.5,
+  "thread_ids": [
+    "01a1bc8f-6ada-7863-a563-f918d266d86e"
+  ],
+  "command_count": 20,
+  "changed_files": [
+    "sympy/core/basic.py",
+    "sympy/core/expr.py",
+    "sympy/core/numbers.py",
+    "sympy/core/tests/test_basic.py",
+    "sympy/core/tests/test_numbers.py"
+  ],
+  "usage": [
+    {
+      "input_tokens": 1109350,
+      "cached_input_tokens": 1058688,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 7312,
+      "reasoning_output_tokens": 2173
+    }
+  ],
+  "checks": {
+    "exit_code": 1,
+    "summary": "1 failed, 96 passed, 1 xfailed, 5 warnings in 2.68s",
+    "seconds": 7.34,
+    "command": [
+      "$WORKSPACE\\work\\real-debug-env39\\Scripts\\python.exe",
+      "-c",
+      "import sys; sys._running_pytest = True; import pytest, py; py.test = pytest; sys.modules[\"py.test\"] = pytest; sys.exit(pytest.main(sys.argv[1:]))",
+      "-p",
+      "pytest_timeout",
+      "--timeout=60",
+      "-q",
+      "--tb=short",
+      "--disable-warnings",
+      "sympy/core/tests/test_basic.py",
+      "sympy/core/tests/test_numbers.py"
+    ],
+    "grader_root": "$WORKSPACE\\work\\real-repo-debug-sessions\\grade-13091-b44b5104"
+  },
+  "category": "failure_requires_semantic_review"
+}

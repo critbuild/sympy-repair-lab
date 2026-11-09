@@ -1,0 +1,11 @@
+........................................................................ [ 73%]
+......x..................F                                               [100%]
+================================== FAILURES ===================================
+________________________ test_NumberSymbol_comparison _________________________
+sympy\core\tests\test_numbers.py:1731: in test_NumberSymbol_comparison
+    assert (rpi > pi) == (pi < rpi)
+E   assert (905502432259640373/288230376151711744 > pi) == (pi < 905502432259640373/288230376151711744)
+                               DO *NOT* COMMIT!                               
+=========================== short test summary info ===========================
+FAILED sympy/core/tests/test_numbers.py::test_NumberSymbol_comparison - asser...
+1 failed, 96 passed, 1 xfailed, 5 warnings in 2.11s

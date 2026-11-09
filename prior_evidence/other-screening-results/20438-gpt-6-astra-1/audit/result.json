@@ -1,0 +1,88 @@
+{
+  "semantic": {
+    "case": "20438",
+    "passed": true,
+    "checks": [
+      {
+        "name": "reported_product_subset_enumeration",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      },
+      {
+        "name": "reported_enumeration_subset_product",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      },
+      {
+        "name": "reported_set_equality_simplifies",
+        "expected": "True",
+        "actual": "True",
+        "passed": true
+      },
+      {
+        "name": "reverse_set_equality_simplifies",
+        "expected": "True",
+        "actual": "True",
+        "passed": true
+      },
+      {
+        "name": "missing_tuple_is_not_subset",
+        "expected": false,
+        "actual": false,
+        "passed": true
+      },
+      {
+        "name": "product_has_wrong_dimension_for_scalar_set",
+        "expected": false,
+        "actual": false,
+        "passed": true
+      },
+      {
+        "name": "symbolic_equality_remains_undecided",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      },
+      {
+        "name": "disjoint_nonempty_set_equality",
+        "expected": "False",
+        "actual": "False",
+        "passed": true
+      },
+      {
+        "name": "different_coordinate_cardinality",
+        "expected": false,
+        "actual": false,
+        "passed": true
+      },
+      {
+        "name": "product_tuple_vs_real_interval",
+        "expected": "False",
+        "actual": "False",
+        "passed": true
+      }
+    ],
+    "exit_code": 0
+  },
+  "extra": {
+    "exit_code": 0,
+    "summary": "252 passed, 7 xfailed, 1 xpassed, 5 warnings in 12.64s",
+    "seconds": 14.64,
+    "command": [
+      "$WORKSPACE\\work\\real-debug-env39\\Scripts\\python.exe",
+      "-c",
+      "import sys; sys._running_pytest = True; import pytest; sys.exit(pytest.main(sys.argv[1:]))",
+      "-p",
+      "pytest_timeout",
+      "--timeout=60",
+      "-q",
+      "--tb=short",
+      "--disable-warnings",
+      "sympy/sets/tests",
+      "sympy/core/tests/test_relational.py"
+    ]
+  },
+  "interpretation": "Direct issue and preservation checks."
+}

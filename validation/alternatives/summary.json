@@ -1,0 +1,80 @@
+{
+  "accepted": 2,
+  "geometry": {
+    "case": "03_geometry_recovery",
+    "complete_pass": true,
+    "required_pass": true,
+    "preservation_pass": true,
+    "oracle_execution": {
+      "exit_code": 0,
+      "seconds": 4.17,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "03_geometry_recovery"
+      ],
+      "summary": ""
+    },
+    "regression": {
+      "exit_code": 0,
+      "seconds": 71.42,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "-c",
+        "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+        "-p",
+        "pytest_timeout",
+        "--timeout=60",
+        "-q",
+        "--tb=short",
+        "--disable-warnings",
+        "sympy/core/tests/test_basic.py",
+        "sympy/core/tests/test_numbers.py",
+        "sympy/geometry/tests"
+      ],
+      "summary": "165 passed, 1 xfailed, 12 warnings in 69.20s (0:01:09)"
+    },
+    "failed_checks": [],
+    "check_count": 31,
+    "passed_checks": 31
+  },
+  "zero": {
+    "case": "04_zero_polynomial",
+    "complete_pass": true,
+    "required_pass": true,
+    "preservation_pass": true,
+    "oracle_execution": {
+      "exit_code": 0,
+      "seconds": 11.05,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "04_zero_polynomial"
+      ],
+      "summary": ""
+    },
+    "regression": {
+      "exit_code": 0,
+      "seconds": 13.58,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "-c",
+        "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+        "-p",
+        "pytest_timeout",
+        "--timeout=60",
+        "-q",
+        "--tb=short",
+        "--disable-warnings",
+        "sympy/polys/tests/test_polytools.py",
+        "sympy/polys/tests/test_densearith.py",
+        "sympy/polys/tests/test_densetools.py"
+      ],
+      "summary": "240 passed, 1 warning in 11.13s"
+    },
+    "failed_checks": [],
+    "check_count": 8,
+    "passed_checks": 8
+  },
+  "note": "Different correct implementations are accepted; the zero repair is a real earlier model patch that failed the stronger historical benchmark assertion."
+}

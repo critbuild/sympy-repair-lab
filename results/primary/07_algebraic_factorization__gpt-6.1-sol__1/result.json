@@ -1,0 +1,65 @@
+{
+  "case": "07_algebraic_factorization",
+  "model": "gpt-6.1-sol",
+  "repeat": 1,
+  "reasoning_effort": "medium",
+  "label": "primary",
+  "category": "complete_repair",
+  "complete_pass": true,
+  "cli_exit_code": 0,
+  "agent_seconds": 122.64,
+  "thread_ids": [
+    "01a1bd5f-9e28-7520-8055-77a60f2e969f"
+  ],
+  "command_count": 10,
+  "changed_files": [
+    "sympy/polys/factortools.py",
+    "sympy/polys/tests/test_factortools.py",
+    "sympy/polys/tests/test_polytools.py"
+  ],
+  "usage": [
+    {
+      "input_tokens": 273852,
+      "cached_input_tokens": 251776,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 3683,
+      "reasoning_output_tokens": 856
+    }
+  ],
+  "checks": {
+    "case": "07_algebraic_factorization",
+    "complete_pass": true,
+    "required_pass": true,
+    "preservation_pass": true,
+    "oracle_execution": {
+      "exit_code": 0,
+      "seconds": 4.81,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "07_algebraic_factorization"
+      ],
+      "summary": ""
+    },
+    "regression": {
+      "exit_code": 0,
+      "seconds": 7.94,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "-c",
+        "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+        "-p",
+        "pytest_timeout",
+        "--timeout=60",
+        "-q",
+        "--tb=short",
+        "--disable-warnings",
+        "sympy/polys/tests/test_polytools.py"
+      ],
+      "summary": "150 passed, 1 warning in 5.93s"
+    },
+    "failed_checks": [],
+    "check_count": 12,
+    "passed_checks": 12
+  }
+}

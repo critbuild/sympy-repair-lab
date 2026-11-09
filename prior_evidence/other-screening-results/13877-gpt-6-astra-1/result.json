@@ -1,0 +1,43 @@
+{
+  "case": "13877",
+  "model": "gpt-6-astra",
+  "repeat": 1,
+  "cli_exit_code": 0,
+  "agent_seconds": 196.03,
+  "thread_ids": [
+    "01a1bc92-ec89-7232-88ff-043309732358"
+  ],
+  "command_count": 14,
+  "changed_files": [
+    "sympy/matrices/matrices.py",
+    "sympy/matrices/tests/test_matrices.py"
+  ],
+  "usage": [
+    {
+      "input_tokens": 276661,
+      "cached_input_tokens": 245888,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 3651,
+      "reasoning_output_tokens": 707
+    }
+  ],
+  "checks": {
+    "exit_code": 0,
+    "summary": "152 passed, 1 skipped, 4 xfailed, 9 warnings in 26.78s",
+    "seconds": 31.19,
+    "command": [
+      "$WORKSPACE\\work\\real-debug-env39\\Scripts\\python.exe",
+      "-c",
+      "import sys; sys._running_pytest = True; import pytest, py; py.test = pytest; sys.modules[\"py.test\"] = pytest; sys.exit(pytest.main(sys.argv[1:]))",
+      "-p",
+      "pytest_timeout",
+      "--timeout=60",
+      "-q",
+      "--tb=short",
+      "--disable-warnings",
+      "sympy/matrices/tests/test_matrices.py"
+    ],
+    "grader_root": "$WORKSPACE\\work\\real-repo-debug-sessions\\grade-13877-fb53d99d"
+  },
+  "category": "passed_frozen_suite"
+}

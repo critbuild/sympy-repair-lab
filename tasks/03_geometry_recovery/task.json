@@ -1,0 +1,19 @@
+{
+  "id": "03_geometry_recovery",
+  "title": "Recover a geometry pipeline after an API fix",
+  "base": "13091",
+  "base_commit": "d1320814eda6549996190618a21eaf212cfd4d1e",
+  "prompt": "This checkout includes a recent interoperability patch: comparisons with unknown Python objects now defer to their reflected methods. A geometry consumer started dropping its first edge afterwards.\n\n    from sympy import Point, Segment\n    edges = [Segment(Point(0, 0), Point(1, 1)),\n             Segment(Point(1, 1), Point(2, 0))]\n    previous = None\n    kept = []\n    for edge in edges:\n        if edge != previous:\n            kept.append(edge)\n        previous = edge\n    print(len(kept))  # expected 2, currently 1\n\nFind and repair the library regression. The caller is valid and must continue to work without being rewritten. Keep the recent foreign-object equality support; reverting that compatibility fix is not a solution. Preserve ordinary equality and inequality for lines, rays, segments, and other geometric objects. Add regression coverage for the regression and for genuine equal/different objects.",
+  "tests": [
+    "sympy/core/tests/test_basic.py",
+    "sympy/core/tests/test_numbers.py",
+    "sympy/geometry/tests"
+  ],
+  "provenance": "New repair task seeded with the exact production files generated in the earlier gpt-6-astra discovery session. Consumer scenario and preservation checks are authored; correlated with case01.",
+  "sources": [
+    "https://github.com/sympy/sympy/pull/13091"
+  ],
+  "seed": "geometry-seed",
+  "reference": "geometry-reference.patch",
+  "frozen_test_patch": null
+}

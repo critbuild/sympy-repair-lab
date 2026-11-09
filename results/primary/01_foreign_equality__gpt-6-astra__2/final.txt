@@ -1,0 +1,12 @@
+Fixed failed-sympification equality to return `NotImplemented`, and inequality to propagate it. Python now tries reflected comparisons; plain unsupported objects remain unequal. Added regression coverage without changing existing expectations.
+
+Commands run with the supplied environment settings:
+
+```powershell
+& .\.venv\Scripts\python.exe run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/core/tests/test_basic.py sympy/core/tests/test_numbers.py
+```
+**98 passed, 1 xfailed.**
+
+The same command targeting `sympy/core/tests` produced **1,429 passed, 60 skipped, 42 xfailed, 1 failed**. The parser failure (`test_evaluate_false`) also reproduced with the original code.
+
+Reran the requested files plus `sympy/physics/vector/tests`: **143 passed, 1 xfailed**. `git diff --check` passed.

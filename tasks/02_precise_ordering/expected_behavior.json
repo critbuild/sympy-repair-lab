@@ -1,0 +1,140 @@
+{
+  "case": "02_precise_ordering",
+  "derivation": "Readable export of the passing reference oracle frozen before the expanded primary run; no scoring changes.",
+  "reference_patch": "assets/02-ordering-reference.patch",
+  "reference_oracle": "validation/controls-v3/02_precise_ordering-reference/oracle.json",
+  "requirements": [
+    {
+      "name": "reported_forward",
+      "group": "required",
+      "expected": [
+        false,
+        false,
+        false,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "reported_reflected",
+      "group": "required",
+      "expected": [
+        false,
+        false,
+        false,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "below_forward",
+      "group": "required",
+      "expected": [
+        true,
+        true,
+        false,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "name": "below_reflected",
+      "group": "required",
+      "expected": [
+        true,
+        true,
+        false,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "name": "above_forward",
+      "group": "required",
+      "expected": [
+        false,
+        false,
+        false,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "above_reflected",
+      "group": "required",
+      "expected": [
+        false,
+        false,
+        false,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "float_below_forward",
+      "group": "required",
+      "expected": [
+        true,
+        true,
+        false,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "name": "float_below_reflected",
+      "group": "required",
+      "expected": [
+        true,
+        true,
+        false,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "name": "ordinary_numeric_equality",
+      "group": "preservation",
+      "expected": [
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "name": "numeric_infinities",
+      "group": "preservation",
+      "expected": [
+        true,
+        true
+      ]
+    },
+    {
+      "name": "symbolic_order_remains_undecided",
+      "group": "preservation",
+      "expected": true
+    },
+    {
+      "name": "inclusive_rational_boundary",
+      "group": "preservation",
+      "expected": [
+        false,
+        true,
+        false,
+        true
+      ]
+    }
+  ],
+  "regression_suites": [
+    "sympy/core/tests/test_numbers.py"
+  ],
+  "task_level_pass": "All required and preservation checks and relevant regression suites pass."
+}

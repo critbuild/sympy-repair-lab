@@ -1,0 +1,23 @@
+Fixed ground multiplication to strip leading zeros recursively. Coefficients that cancel during `clear_denoms()` now produce a canonical zero polynomial, allowing `is_zero`, `terms_gcd()`, and `primitive()` to work.
+
+Added regression coverage for symbolic cancellation, multivariate polynomials, both conversion modes, preserved nonzero and unresolved coefficients, and the denominator identity. No existing expectations changed.
+
+Commands run with the specified environment settings:
+
+```powershell
+& '.\.venv\Scripts\python.exe' incident.py
+```
+
+Now prints `is_zero=True`; `terms_gcd()` succeeds.
+
+```powershell
+& '.\.venv\Scripts\python.exe' run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/polys/tests/test_polytools.py sympy/polys/tests/test_densearith.py sympy/polys/tests/test_densetools.py
+```
+
+**243 passed.**
+
+```powershell
+& '.\.venv\Scripts\python.exe' run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/polys/tests/test_polyclasses.py sympy/polys/tests/test_rings.py
+```
+
+**81 passed.** `git diff --check` also passed.

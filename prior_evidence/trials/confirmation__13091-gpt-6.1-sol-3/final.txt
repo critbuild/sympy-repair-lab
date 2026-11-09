@@ -1,0 +1,10 @@
+Implemented the fix in `basic.py`, `expr.py`, and `numbers.py`.
+
+Unsupported operands previously returned `False` or raised `TypeError`, blocking reflected comparisons. They now return `NotImplemented`; `__ne__` propagates it correctly. Regression coverage checks all six operators, reflected dispatch, fallback behavior, supported conversions, and undecidable symbolic cases. No old expectations changed.
+
+Using the supplied interpreter and environment:
+
+- `run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/core/tests/test_basic.py sympy/core/tests/test_numbers.py` — **98 passed, 1 xfailed**.
+- Same options with `sympy/core/tests --deselect=sympy/core/tests/test_sympify.py::test_evaluate_false` — **1,429 passed, 60 skipped, 42 xfailed**.
+
+The excluded test fails with a Python AST error on the original source too. `git diff --check` passes.

@@ -1,0 +1,9 @@
+Fixed [GeometryEntity.__ne__](sympy/geometry/entity.py): it now preserves `NotImplemented` instead of negating it to `False`, allowing reflected comparisons to run. The caller now keeps both edges.
+
+Added coverage for the sentinel loop, equal/different geometry objects, and foreign-object comparisons. No existing expectations changed.
+
+Commands run with the supplied environment and interpreter:
+
+- `run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/geometry/tests/test_entity.py` — three new tests failed before repair; afterward, **6 passed**.
+- Same command targeting `sympy/core/tests/test_basic.py sympy/core/tests/test_numbers.py sympy/geometry/tests` — **168 passed, 1 xfailed**, 12 warnings.
+- `git diff --check` — clean.

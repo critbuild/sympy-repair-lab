@@ -1,0 +1,16 @@
+.........................................x...........x......x.......F... [ 44%]
+..................x........................x.....................x...... [ 88%]
+...................                                                      [100%]
+================================== FAILURES ===================================
+___________________________________ test_Eq ___________________________________
+sympy\sets\tests\test_sets.py:1254: in test_Eq
+    assert Eq(ProductSet({1}, {2}), Interval(1, 2)) is S.false
+E   assert Eq(ProductSet(FiniteSet(1), FiniteSet(2)), Interval(1, 2)) is False
+E    +  where Eq(ProductSet(FiniteSet(1), FiniteSet(2)), Interval(1, 2)) = Eq(ProductSet(FiniteSet(1), FiniteSet(2)), Interval(1, 2))
+E    +    where ProductSet(FiniteSet(1), FiniteSet(2)) = ProductSet({1}, {2})
+E    +    and   Interval(1, 2) = Interval(1, 2)
+E    +  and   False = S.false
+                               DO *NOT* COMMIT!                               
+=========================== short test summary info ===========================
+FAILED sympy/sets/tests/test_sets.py::test_Eq - assert Eq(ProductSet(FiniteSe...
+1 failed, 156 passed, 6 xfailed, 3 warnings in 8.32s

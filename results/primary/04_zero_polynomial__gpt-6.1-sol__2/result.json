@@ -1,0 +1,68 @@
+{
+  "case": "04_zero_polynomial",
+  "model": "gpt-6.1-sol",
+  "repeat": 2,
+  "reasoning_effort": "medium",
+  "label": "primary",
+  "category": "complete_repair",
+  "complete_pass": true,
+  "cli_exit_code": 0,
+  "agent_seconds": 196.2,
+  "thread_ids": [
+    "01a1bd6b-50e8-7b00-bc0f-3f593f4148a0"
+  ],
+  "command_count": 15,
+  "changed_files": [
+    "sympy/polys/densearith.py",
+    "sympy/polys/tests/test_densearith.py",
+    "sympy/polys/tests/test_densetools.py",
+    "sympy/polys/tests/test_polytools.py"
+  ],
+  "usage": [
+    {
+      "input_tokens": 366041,
+      "cached_input_tokens": 341376,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 4597,
+      "reasoning_output_tokens": 779
+    }
+  ],
+  "checks": {
+    "case": "04_zero_polynomial",
+    "complete_pass": true,
+    "required_pass": true,
+    "preservation_pass": true,
+    "oracle_execution": {
+      "exit_code": 0,
+      "seconds": 11.39,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "04_zero_polynomial"
+      ],
+      "summary": ""
+    },
+    "regression": {
+      "exit_code": 0,
+      "seconds": 10.48,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "-c",
+        "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+        "-p",
+        "pytest_timeout",
+        "--timeout=60",
+        "-q",
+        "--tb=short",
+        "--disable-warnings",
+        "sympy/polys/tests/test_polytools.py",
+        "sympy/polys/tests/test_densearith.py",
+        "sympy/polys/tests/test_densetools.py"
+      ],
+      "summary": "240 passed, 1 warning in 7.95s"
+    },
+    "failed_checks": [],
+    "check_count": 8,
+    "passed_checks": 8
+  }
+}

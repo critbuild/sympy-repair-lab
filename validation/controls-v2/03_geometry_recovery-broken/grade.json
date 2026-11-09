@@ -1,0 +1,150 @@
+{
+  "case": "03_geometry_recovery",
+  "complete_pass": false,
+  "required_pass": false,
+  "preservation_pass": true,
+  "oracle_execution": {
+    "exit_code": 1,
+    "seconds": 4.61,
+    "command": [
+      "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+      "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+      "03_geometry_recovery"
+    ],
+    "summary": ""
+  },
+  "regression": {
+    "exit_code": 0,
+    "seconds": 65.92,
+    "command": [
+      "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+      "-c",
+      "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+      "-p",
+      "pytest_timeout",
+      "--timeout=60",
+      "-q",
+      "--tb=short",
+      "--disable-warnings",
+      "sympy/core/tests/test_basic.py",
+      "sympy/core/tests/test_numbers.py",
+      "sympy/geometry/tests"
+    ],
+    "summary": "165 passed, 1 xfailed, 14 warnings in 63.48s (0:01:03)"
+  },
+  "failed_checks": [
+    {
+      "name": "Line_None",
+      "group": "required",
+      "expected": [
+        false,
+        true,
+        true
+      ],
+      "actual": [
+        false,
+        false,
+        false
+      ],
+      "passed": false
+    },
+    {
+      "name": "Line_unrelated",
+      "group": "required",
+      "expected": [
+        false,
+        true,
+        true
+      ],
+      "actual": [
+        false,
+        false,
+        false
+      ],
+      "passed": false
+    },
+    {
+      "name": "Ray_None",
+      "group": "required",
+      "expected": [
+        false,
+        true,
+        true
+      ],
+      "actual": [
+        false,
+        false,
+        false
+      ],
+      "passed": false
+    },
+    {
+      "name": "Ray_unrelated",
+      "group": "required",
+      "expected": [
+        false,
+        true,
+        true
+      ],
+      "actual": [
+        false,
+        false,
+        false
+      ],
+      "passed": false
+    },
+    {
+      "name": "Segment_None",
+      "group": "required",
+      "expected": [
+        false,
+        true,
+        true
+      ],
+      "actual": [
+        false,
+        false,
+        false
+      ],
+      "passed": false
+    },
+    {
+      "name": "Segment_unrelated",
+      "group": "required",
+      "expected": [
+        false,
+        true,
+        true
+      ],
+      "actual": [
+        false,
+        false,
+        false
+      ],
+      "passed": false
+    },
+    {
+      "name": "consumer_two_edges",
+      "group": "required",
+      "expected": 2,
+      "actual": 1,
+      "passed": false
+    },
+    {
+      "name": "consumer_duplicate_edges",
+      "group": "required",
+      "expected": 2,
+      "actual": 1,
+      "passed": false
+    },
+    {
+      "name": "consumer_single",
+      "group": "required",
+      "expected": 1,
+      "actual": 0,
+      "passed": false
+    }
+  ],
+  "check_count": 31,
+  "passed_checks": 22
+}

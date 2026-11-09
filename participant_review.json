@@ -1,0 +1,29 @@
+{
+  "status": "opinion_approved_detailed_review_pending",
+  "participant_name": null,
+  "domain_expertise_statement": null,
+  "review_date": null,
+  "reviewed_tasks": {
+    "01_foreign_equality": null,
+    "02_precise_ordering": null,
+    "03_geometry_recovery": null,
+    "04_zero_polynomial": null,
+    "05_set_equivalence": null,
+    "06_symbolic_determinant": null,
+    "07_algebraic_factorization": null
+  },
+  "reviewed_reference_answers_and_graders": false,
+  "reviewed_raw_failure_evidence": false,
+  "reviewed_adjudication_and_limitations": false,
+  "ran_clean_replay": false,
+  "public_video_url": null,
+  "video_access_and_audio_checked": false,
+  "participant_agreement_accepted_by_participant": false,
+  "notes": "The participant confirmed understanding of the central failure and demo/video, then explicitly approved the AI-assisted assessment for use. Software background and detailed task/reference/grader review remain unconfirmed. Public video access will be checked after a Google Drive link is supplied.",
+  "demo_and_video_understanding_confirmed": true,
+  "demonstration_confirmation_date": "2026-11-08",
+  "opinion_approved_by_participant": true,
+  "opinion_approval_date": "2026-11-08",
+  "opinion_location": "README.md#participant-assessment",
+  "intended_video_host": "Google Drive"
+}

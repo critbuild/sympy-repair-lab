@@ -1,0 +1,9 @@
+A configuration validator represents combinations either as a Cartesian product or as an explicit list of tuples. Equivalent representations should agree:
+    from sympy import FiniteSet, ProductSet, Eq
+    a = FiniteSet(1, 2)
+    product = ProductSet(a, a)
+    listed = FiniteSet((1, 1), (1, 2), (2, 1), (2, 2))
+    print(product.is_subset(listed))  # desired True; currently None
+    print(Eq(product, listed).simplify())  # desired True; currently crashes
+
+Repair subset and equality reasoning for these finite representations, including the reverse operand order and demonstrably unequal sets. Simplifying a set equality must not crash or force a truth value when symbolic membership is undecidable. Preserve normal set operations. An old test may expect an undecided result for a product of tuples versus a real interval; a justified transition to a provably False result is allowed. Add regression coverage.

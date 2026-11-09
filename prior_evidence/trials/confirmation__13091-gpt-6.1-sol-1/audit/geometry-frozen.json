@@ -1,0 +1,155 @@
+{
+  "passed": false,
+  "checks": [
+    {
+      "shape": "Line",
+      "other": "None",
+      "operation": "eq",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "shape": "Line",
+      "other": "None",
+      "operation": "ne",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "shape": "Line",
+      "other": "None",
+      "operation": "reflected_ne",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "shape": "Line",
+      "other": "unrelated_object",
+      "operation": "eq",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "shape": "Line",
+      "other": "unrelated_object",
+      "operation": "ne",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "shape": "Line",
+      "other": "unrelated_object",
+      "operation": "reflected_ne",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "shape": "Ray",
+      "other": "None",
+      "operation": "eq",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "shape": "Ray",
+      "other": "None",
+      "operation": "ne",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "shape": "Ray",
+      "other": "None",
+      "operation": "reflected_ne",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "shape": "Ray",
+      "other": "unrelated_object",
+      "operation": "eq",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "shape": "Ray",
+      "other": "unrelated_object",
+      "operation": "ne",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "shape": "Ray",
+      "other": "unrelated_object",
+      "operation": "reflected_ne",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "shape": "Segment",
+      "other": "None",
+      "operation": "eq",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "shape": "Segment",
+      "other": "None",
+      "operation": "ne",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "shape": "Segment",
+      "other": "None",
+      "operation": "reflected_ne",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "shape": "Segment",
+      "other": "unrelated_object",
+      "operation": "eq",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "shape": "Segment",
+      "other": "unrelated_object",
+      "operation": "ne",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "shape": "Segment",
+      "other": "unrelated_object",
+      "operation": "reflected_ne",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "operation": "consecutive_segment_deduplication",
+      "expected": 2,
+      "actual": 1,
+      "passed": false
+    }
+  ]
+}

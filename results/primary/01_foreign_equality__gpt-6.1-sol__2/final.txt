@@ -1,0 +1,17 @@
+Implemented reflected comparison support for Basic, symbols, and scalar numbers. Failed sympification now returns `NotImplemented`, and inequality propagates it correctly. Regression tests cover wrappers, plain objects, successful conversions, and numeric singletons. No existing test expectations changed.
+
+Commands run with the requested environment variables:
+
+```powershell
+& .\.venv\Scripts\python.exe run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/core/tests/test_basic.py sympy/core/tests/test_numbers.py
+```
+
+**97 passed, 1 xfailed.**
+
+```powershell
+& .\.venv\Scripts\python.exe run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/core/tests
+```
+
+**1,428 passed, 60 skipped, 42 xfailed, 1 failed.** The failure, `test_evaluate_false`, also fails with unmodified source due to a Python AST error.
+
+The reproducer now returns `True, True`. `git diff --check` is clean.

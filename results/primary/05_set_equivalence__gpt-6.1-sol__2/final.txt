@@ -1,0 +1,17 @@
+Implemented finite-product subset checks and mutual-subset equality reasoning. Both operand orders now agree; unequal sets return `False`; symbolic cases remain undecided. Set `Eq`/`Ne` simplification avoids arithmetic assumptions and crashes.
+
+Added regression coverage, including ordinary set operations. Updated the old tuple-versus-real-interval expectation to `False`, since tuples cannot belong to that interval.
+
+Ran with the supplied environment settings:
+
+```powershell
+& '.\.venv\Scripts\python.exe' run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/sets/tests/test_sets.py sympy/core/tests/test_relational.py
+```
+
+159 passed, 6 xfailed.
+
+```powershell
+& '.\.venv\Scripts\python.exe' run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/sets/tests sympy/core/tests/test_relational.py sympy/simplify/tests/test_simplify.py
+```
+
+305 passed, 8 xfailed, 1 xpassed. `git diff --check` also passed.

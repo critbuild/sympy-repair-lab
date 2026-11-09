@@ -1,0 +1,256 @@
+{
+  "case": "03_geometry_recovery",
+  "derivation": "Readable export of the passing reference oracle frozen before the expanded primary run; no scoring changes.",
+  "reference_patch": "assets/geometry-reference.patch",
+  "reference_oracle": "validation/controls-v2/03_geometry_recovery-reference/oracle.json",
+  "requirements": [
+    {
+      "name": "Line_None",
+      "group": "required",
+      "expected": [
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "Line_unrelated",
+      "group": "required",
+      "expected": [
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "Line_equal_values",
+      "group": "preservation",
+      "expected": [
+        true,
+        false
+      ]
+    },
+    {
+      "name": "Line_different_values",
+      "group": "preservation",
+      "expected": [
+        false,
+        true
+      ]
+    },
+    {
+      "name": "Ray_None",
+      "group": "required",
+      "expected": [
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "Ray_unrelated",
+      "group": "required",
+      "expected": [
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "Ray_equal_values",
+      "group": "preservation",
+      "expected": [
+        true,
+        false
+      ]
+    },
+    {
+      "name": "Ray_different_values",
+      "group": "preservation",
+      "expected": [
+        false,
+        true
+      ]
+    },
+    {
+      "name": "Segment_None",
+      "group": "required",
+      "expected": [
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "Segment_unrelated",
+      "group": "required",
+      "expected": [
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "Segment_equal_values",
+      "group": "preservation",
+      "expected": [
+        true,
+        false
+      ]
+    },
+    {
+      "name": "Segment_different_values",
+      "group": "preservation",
+      "expected": [
+        false,
+        true
+      ]
+    },
+    {
+      "name": "consumer_two_edges",
+      "group": "required",
+      "expected": 2
+    },
+    {
+      "name": "consumer_duplicate_edges",
+      "group": "required",
+      "expected": 2
+    },
+    {
+      "name": "consumer_empty",
+      "group": "required",
+      "expected": 0
+    },
+    {
+      "name": "consumer_single",
+      "group": "required",
+      "expected": 1
+    },
+    {
+      "name": "Basic_reflected_equality",
+      "group": "preservation",
+      "expected": [
+        true,
+        true
+      ]
+    },
+    {
+      "name": "Basic_reflected_inequality",
+      "group": "preservation",
+      "expected": [
+        false,
+        false
+      ]
+    },
+    {
+      "name": "Basic_unrelated_fallback",
+      "group": "preservation",
+      "expected": [
+        false,
+        true
+      ]
+    },
+    {
+      "name": "Symbol_reflected_equality",
+      "group": "preservation",
+      "expected": [
+        true,
+        true
+      ]
+    },
+    {
+      "name": "Symbol_reflected_inequality",
+      "group": "preservation",
+      "expected": [
+        false,
+        false
+      ]
+    },
+    {
+      "name": "Symbol_unrelated_fallback",
+      "group": "preservation",
+      "expected": [
+        false,
+        true
+      ]
+    },
+    {
+      "name": "Integer_reflected_equality",
+      "group": "preservation",
+      "expected": [
+        true,
+        true
+      ]
+    },
+    {
+      "name": "Integer_reflected_inequality",
+      "group": "preservation",
+      "expected": [
+        false,
+        false
+      ]
+    },
+    {
+      "name": "Integer_unrelated_fallback",
+      "group": "preservation",
+      "expected": [
+        false,
+        true
+      ]
+    },
+    {
+      "name": "Rational_reflected_equality",
+      "group": "preservation",
+      "expected": [
+        true,
+        true
+      ]
+    },
+    {
+      "name": "Rational_reflected_inequality",
+      "group": "preservation",
+      "expected": [
+        false,
+        false
+      ]
+    },
+    {
+      "name": "Rational_unrelated_fallback",
+      "group": "preservation",
+      "expected": [
+        false,
+        true
+      ]
+    },
+    {
+      "name": "Float_reflected_equality",
+      "group": "preservation",
+      "expected": [
+        true,
+        true
+      ]
+    },
+    {
+      "name": "Float_reflected_inequality",
+      "group": "preservation",
+      "expected": [
+        false,
+        false
+      ]
+    },
+    {
+      "name": "Float_unrelated_fallback",
+      "group": "preservation",
+      "expected": [
+        false,
+        true
+      ]
+    }
+  ],
+  "regression_suites": [
+    "sympy/core/tests/test_basic.py",
+    "sympy/core/tests/test_numbers.py",
+    "sympy/geometry/tests"
+  ],
+  "task_level_pass": "All required and preservation checks and relevant regression suites pass."
+}

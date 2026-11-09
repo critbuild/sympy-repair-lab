@@ -1,0 +1,73 @@
+{
+  "case": "07_algebraic_factorization",
+  "complete_pass": true,
+  "required_pass": true,
+  "preservation_pass": true,
+  "check_count": 9,
+  "passed_checks": 9,
+  "checks": [
+    {
+      "name": "reported_identity",
+      "group": "required",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "reported_factor_structure",
+      "group": "required",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "complex_identity",
+      "group": "required",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "complex_factor_structure",
+      "group": "required",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "coefficient_identity",
+      "group": "required",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "coefficient_factor_structure",
+      "group": "required",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "rational_factorization",
+      "group": "preservation",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "irreducible_input",
+      "group": "preservation",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "univariate_multiplicity",
+      "group": "preservation",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    }
+  ]
+}

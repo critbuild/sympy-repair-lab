@@ -1,0 +1,10 @@
+Fixed normalization in `dup_mul_ground` and `dmp_mul_ground`: EX multiplication can simplify coefficients to zero, so results now strip leading zeros at every nesting level.
+
+Added regression coverage for zero representations, downstream methods, surviving terms, multivariate polynomials, conversion modes, and undecidable symbolic coefficients. No old expectations changed.
+
+Verification using the supplied interpreter and environment:
+
+- `run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/polys/tests/test_densearith.py sympy/polys/tests/test_densetools.py sympy/polys/tests/test_polytools.py` — **242 passed**.
+- Same options with `sympy/polys/tests/test_polyclasses.py` — **19 passed**.
+- Original reproducer now returns canonical zero; `is_zero`, `terms_gcd()`, and `primitive()` pass.
+- `git diff --check` passed.

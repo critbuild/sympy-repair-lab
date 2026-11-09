@@ -1,0 +1,20 @@
+A configuration validator represents combinations either as a Cartesian product or as an explicit list of tuples. Equivalent representations should agree:
+    from sympy import FiniteSet, ProductSet, Eq
+    a = FiniteSet(1, 2)
+    product = ProductSet(a, a)
+    listed = FiniteSet((1, 1), (1, 2), (2, 1), (2, 2))
+    print(product.is_subset(listed))  # desired True; currently None
+    print(Eq(product, listed).simplify())  # desired True; currently crashes
+
+Repair subset and equality reasoning for these finite representations, including the reverse operand order and demonstrably unequal sets. Simplifying a set equality must not crash or force a truth value when symbolic membership is undecidable. Preserve normal set operations. An old test may expect an undecided result for a product of tuples versus a real interval; a justified transition to a provably False result is allowed. Add regression coverage.
+
+Environment and working instructions:
+- This is a complete pinned SymPy checkout with Python 3.9 and dependencies installed.
+- Use your actual shell and file-editing tools. Work independently in this checkout.
+- This is an offline repair. Do not access parent/sibling directories, evaluation assets, upstream history, or network sources.
+- Interpreter: <WORKSPACE>\work\contract-primary\primary\05_set_equivalence__gpt-6.1-sol__1\.venv\Scripts\python.exe
+- PowerShell: $env:PYTHONDONTWRITEBYTECODE='1'; $env:PYTEST_DISABLE_PLUGIN_AUTOLOAD='1'; $env:PYTHONHASHSEED='0'; $env:PYTHONIOENCODING='utf-8'
+- Relevant suite: & '<WORKSPACE>\work\contract-primary\primary\05_set_equivalence__gpt-6.1-sol__1\.venv\Scripts\python.exe' run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/sets/tests/test_sets.py sympy/core/tests/test_relational.py
+- run_pytest.py only enables the historical pytest compatibility flag and py.test alias. You may run additional test files and individual cases.
+- Reproduce, inspect, repair, add tests, and rerun relevant tests. Preserve behavior outside the requested change. Explain any legitimately obsolete test expectations you update.
+- You have up to 20 minutes. Finish with a concise explanation and the actual commands and outcomes. Do not claim tests passed without running them.

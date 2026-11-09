@@ -1,0 +1,60 @@
+{
+  "file": "sympy-contract-walkthrough.mp4",
+  "estimated_duration_seconds": 272.61,
+  "bytes": 4129775,
+  "sha256": "50674fd28486b547c81ea985037013e86aecfefdda258f439b72e4bb2333ed7b",
+  "synthetic_voice": "Microsoft Zira Desktop (local SAPI)",
+  "full_decode_passed": true,
+  "has_audio": true,
+  "slides": [
+    {
+      "slide": 1,
+      "audio_seconds": 37.672,
+      "segment_seconds": 38.472,
+      "audio_rms": 3241.14
+    },
+    {
+      "slide": 2,
+      "audio_seconds": 29.938,
+      "segment_seconds": 30.738,
+      "audio_rms": 3257.03
+    },
+    {
+      "slide": 3,
+      "audio_seconds": 31.123,
+      "segment_seconds": 31.923,
+      "audio_rms": 3340.15
+    },
+    {
+      "slide": 4,
+      "audio_seconds": 33.273,
+      "segment_seconds": 34.073,
+      "audio_rms": 3267.03
+    },
+    {
+      "slide": 5,
+      "audio_seconds": 34.362,
+      "segment_seconds": 35.162,
+      "audio_rms": 3204.38
+    },
+    {
+      "slide": 6,
+      "audio_seconds": 32.068,
+      "segment_seconds": 32.868,
+      "audio_rms": 3187.34
+    },
+    {
+      "slide": 7,
+      "audio_seconds": 33.162,
+      "segment_seconds": 33.962,
+      "audio_rms": 3256.33
+    },
+    {
+      "slide": 8,
+      "audio_seconds": 34.613,
+      "segment_seconds": 35.413,
+      "audio_rms": 3197.78
+    }
+  ],
+  "encoded_duration_seconds": 273.05
+}

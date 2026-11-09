@@ -1,0 +1,18 @@
+{
+  "id": "01_foreign_equality",
+  "title": "Foreign equality compatibility",
+  "base": "13091",
+  "base_commit": "d1320814eda6549996190618a21eaf212cfd4d1e",
+  "prompt": "A Python integration wraps symbolic values in its own class. SymPy currently blocks reflected equality: wrapper == value can be True while value == wrapper is False.\n\nReproducer:\n    from sympy import Basic, Symbol, Integer, Rational, Float\n    class Box:\n        def __eq__(self, other):\n            if isinstance(other, Basic):\n                return True\n            return NotImplemented\n        def __ne__(self, other):\n            return not self == other\n    box = Box()\n    value = Integer(3)\n    print(box == value, value == box)  # desired: True, True\n\nRepair equality and inequality interoperability for Basic, symbols, and scalar numeric objects when the other operand cannot be sympified. Let Python try the reflected comparison. Unsupported plain objects should still compare unequal, and existing comparisons and downstream APIs must retain their behavior. Add useful regression coverage.",
+  "tests": [
+    "sympy/core/tests/test_basic.py",
+    "sympy/core/tests/test_numbers.py"
+  ],
+  "provenance": "Adapted from public SymPy issue #13078 / SWE-bench sympy__sympy-13091. The consumer preservation oracle is newly authored.",
+  "sources": [
+    "https://github.com/sympy/sympy/issues/13078"
+  ],
+  "seed": null,
+  "reference": "13091-reference.patch",
+  "frozen_test_patch": null
+}

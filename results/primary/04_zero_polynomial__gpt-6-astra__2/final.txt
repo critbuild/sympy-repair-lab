@@ -1,0 +1,10 @@
+Fixed dense scalar multiplication to strip coefficients that cancel to zero, recursively producing canonical zero polynomials.
+
+Added regressions for cancellation, multivariate polynomials, preserved nonzero/symbolic coefficients, and the denominator identity. No existing expectations changed.
+
+Commands run with the supplied interpreter and environment:
+
+- `run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/polys/tests/test_polytools.py sympy/polys/tests/test_densearith.py sympy/polys/tests/test_densetools.py` — **242 passed**, 1 warning.
+- `incident.py` — now reports `is_zero=True`; `terms_gcd()` succeeds.
+- Additional reproducer assertions — canonical zero and `primitive()` verified.
+- `git diff --check` — clean.

@@ -1,0 +1,10 @@
+Fixed the discarded `cancel(ret)` result in Bareiss elimination. Intermediate polynomial zeros now simplify before pivot selection, preventing division by zero and NaN. Bareiss is valid for symbolic polynomial matrices, not just integer matrices.
+
+Added three regression tests across mutable/immutable dense/sparse matrices, covering the reported failure, nonsingular matrices needing pivot swaps, and undecidable symbolic pivots. No existing expectations changed.
+
+Using the supplied interpreter, environment, and pytest flags:
+
+- `run_pytest.py … sympy/matrices/tests/test_matrices.py` — **155 passed, 1 skipped, 4 xfailed**.
+- `run_pytest.py … sympy/matrices/tests sympy/matrices/expressions/tests --ignore=sympy/matrices/tests/test_matrices.py` — **250 passed, 3 xfailed**.
+- Both bug regressions fail against the original implementation.
+- `git diff --check` passes.

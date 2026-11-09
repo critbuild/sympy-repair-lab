@@ -1,0 +1,13 @@
+Fixed by removing `GeometryEntity.__ne__`, which incorrectly turned `NotImplemented` into `False`. Geometry now inherits `Basic`’s sentinel-aware inequality, preserving reflected foreign-object comparisons.
+
+Added coverage for the original loop, `None`, foreign objects, and equal/different geometry objects, including 2D/3D lines, rays, and segments. No existing expectations changed.
+
+With the supplied environment variables, ran:
+
+```powershell
+& '.\.venv\Scripts\python.exe' run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/core/tests/test_basic.py sympy/core/tests/test_numbers.py sympy/geometry/tests
+```
+
+Result: **168 passed, 1 xfailed**, 12 warnings.
+
+The focused `test_entity.py` run passed all **6 tests**; its three new tests failed before the fix. `git diff --check` passed.

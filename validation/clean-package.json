@@ -1,0 +1,31 @@
+{
+  "completed_utc": "2026-11-08T23:49:03.638094+00:00",
+  "candidate_archive_sha256": "a1858b4a5e909bb55b5cdb2ac72ae3f9c613bff122c3503fd246917ad419f5d1",
+  "candidate_archive_bytes": 39277534,
+  "clean_extraction": true,
+  "separate_dependency_cache": true,
+  "audit": {
+    "name": "audit",
+    "exit_code": 0,
+    "seconds": 6.03
+  },
+  "replay": {
+    "name": "replay",
+    "exit_code": 0,
+    "seconds": 286.92
+  },
+  "demo": {
+    "name": "demo",
+    "exit_code": 0,
+    "seconds": 7.91
+  },
+  "all_42_replays_match": true,
+  "demo_counts": [
+    4,
+    3,
+    4
+  ],
+  "no_model_calls": true,
+  "no_desktop_control": true,
+  "note": "Final sealing may add this verification record and measured runtime documentation. Executable code, inputs, and candidate bytes must remain identical to this verified copy."
+}

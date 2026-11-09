@@ -1,0 +1,54 @@
+{
+  "case": "04_zero_polynomial",
+  "derivation": "Readable export of the passing reference oracle frozen before the expanded primary run; no scoring changes.",
+  "reference_patch": "assets/20428-reference.patch",
+  "reference_oracle": "validation/controls-v2/04_zero_polynomial-reference/oracle.json",
+  "requirements": [
+    {
+      "name": "cleared_expression_zero",
+      "group": "required",
+      "expected": true
+    },
+    {
+      "name": "cleared_poly_zero",
+      "group": "required",
+      "expected": true
+    },
+    {
+      "name": "terms_gcd_zero",
+      "group": "required",
+      "expected": true
+    },
+    {
+      "name": "primitive_zero",
+      "group": "required",
+      "expected": true
+    },
+    {
+      "name": "nonzero_identity",
+      "group": "preservation",
+      "expected": true
+    },
+    {
+      "name": "unknown_identity",
+      "group": "preservation",
+      "expected": true
+    },
+    {
+      "name": "rational_identity",
+      "group": "preservation",
+      "expected": true
+    },
+    {
+      "name": "plain_zero",
+      "group": "preservation",
+      "expected": true
+    }
+  ],
+  "regression_suites": [
+    "sympy/polys/tests/test_polytools.py",
+    "sympy/polys/tests/test_densearith.py",
+    "sympy/polys/tests/test_densetools.py"
+  ],
+  "task_level_pass": "All required and preservation checks and relevant regression suites pass."
+}

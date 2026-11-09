@@ -1,0 +1,11 @@
+Fixed multivariate extension factorization by recursively factoring content before the square-free step. Both factors now survive and expand back to the input.
+
+Added regressions for complex linear factors, non-unit coefficients, and factors involving only later variables. Removed `XFAIL` from `test_issue_5786` because the repair resolves it. Existing univariate repeated-factor and rational tests pass.
+
+Ran with the supplied environment settings:
+
+```powershell
+& .\.venv\Scripts\python.exe run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/polys/tests/test_factortools.py sympy/polys/tests/test_polytools.py
+```
+
+Result: **172 passed, 1 xfailed, 1 warning**. `git diff --check` also passed.

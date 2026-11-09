@@ -1,0 +1,47 @@
+{
+  "case": "20438",
+  "model": "gpt-6-astra",
+  "repeat": 1,
+  "cli_exit_code": 0,
+  "agent_seconds": 366.45,
+  "thread_ids": [
+    "01a1bc8b-6501-76b3-a665-690338bd4fba"
+  ],
+  "command_count": 19,
+  "changed_files": [
+    "sympy/core/relational.py",
+    "sympy/core/tests/test_relational.py",
+    "sympy/sets/handlers/comparison.py",
+    "sympy/sets/sets.py",
+    "sympy/sets/tests/test_powerset.py",
+    "sympy/sets/tests/test_sets.py"
+  ],
+  "usage": [
+    {
+      "input_tokens": 709386,
+      "cached_input_tokens": 677120,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 7209,
+      "reasoning_output_tokens": 1765
+    }
+  ],
+  "checks": {
+    "exit_code": 0,
+    "summary": "96 passed, 4 xfailed, 5 warnings in 5.34s",
+    "seconds": 10.67,
+    "command": [
+      "$WORKSPACE\\work\\real-debug-env39\\Scripts\\python.exe",
+      "-c",
+      "import sys; sys._running_pytest = True; import pytest; sys.exit(pytest.main(sys.argv[1:]))",
+      "-p",
+      "pytest_timeout",
+      "--timeout=60",
+      "-q",
+      "--tb=short",
+      "--disable-warnings",
+      "sympy/sets/tests/test_sets.py"
+    ],
+    "grader_root": "$WORKSPACE\\work\\real-repo-debug-sessions\\grade-20438-bbebf98a"
+  },
+  "category": "passed_frozen_suite"
+}

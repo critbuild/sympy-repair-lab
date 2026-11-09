@@ -1,0 +1,15 @@
+Fixed failed-conversion handling in `Basic`, `Expr`, and numeric comparisons to return `NotImplemented`, allowing reflected dispatch. `__ne__` now propagates that sentinel correctly.
+
+Added regression coverage for all six comparisons, unsupported operands, conversion hooks, and symbolic/undecidable cases. Existing test expectations remain unchanged.
+
+Using the supplied interpreter and environment:
+
+```powershell
+& .\.venv\Scripts\python.exe run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/core/tests/test_basic.py sympy/core/tests/test_numbers.py
+```
+
+Result: **98 passed, 1 xfailed**.
+
+The same command targeting `sympy/core/tests` produced **1,429 passed, 60 skipped, 42 xfailed, 1 failed**. The failure, `test_sympify.py::test_evaluate_false`, also occurs with the original production files: a pre-existing parser error.
+
+`git diff --check` passed.

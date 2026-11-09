@@ -1,0 +1,66 @@
+{
+  "case": "06_symbolic_determinant",
+  "complete_pass": false,
+  "required_pass": true,
+  "preservation_pass": false,
+  "check_count": 8,
+  "passed_checks": 4,
+  "checks": [
+    {
+      "name": "rank_two_size_3",
+      "group": "required",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "rank_two_size_5",
+      "group": "required",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "rank_two_size_6",
+      "group": "required",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "rank_two_size_7",
+      "group": "required",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "diagonal_preserved",
+      "group": "preservation",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "name": "permutation_preserved",
+      "group": "preservation",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "name": "symbolic_preserved",
+      "group": "preservation",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "name": "independent_method_agreement",
+      "group": "preservation",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    }
+  ]
+}

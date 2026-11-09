@@ -1,0 +1,18 @@
+Implemented reflected `==` and `!=` handling for `Basic`, symbols, and scalar numbers when sympification fails. Plain objects remain unequal. Added regression coverage and fixed `.has()` so it cannot treat `NotImplemented` as a match. No existing test expectations were changed.
+
+Commands used this prefix:
+
+```powershell
+& '.\.venv\Scripts\python.exe' run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings
+```
+
+| Arguments | Outcome |
+|---|---|
+| `sympy/core/tests/test_basic.py sympy/core/tests/test_numbers.py` | **97 passed, 1 xfailed** |
+| `sympy/core/tests` | 1 parser failure; 1,427 passed |
+| `sympy/core/tests -k 'not test_evaluate_false'` | **1,427 passed**, 60 skipped, 2 deselected, 42 xfailed |
+| `sympy/physics/vector/tests` | **45 passed** |
+
+The parser failure also reproduces with the original comparison methods restored in memory. An additional combined run including `sympy/utilities/tests/test_wester.py` timed out during symbolic integration.
+
+The reproducer now prints `True True`. `git diff --check` is clean.

@@ -1,0 +1,8 @@
+Fixed scalar multiplication to strip newly exposed zero coefficients recursively. `clear_denoms()` now produces canonical zero; `terms_gcd()` and `primitive()` work. Added regressions covering symbolic cancellation, preserved coefficients, multivariate polynomials, and the denominator identity. No existing expectations changed.
+
+Commands run with the supplied interpreter and environment settings:
+
+- `python incident.py` — now reports `is_zero=True`; `terms_gcd()` succeeds.
+- `python run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/polys/tests/test_polytools.py sympy/polys/tests/test_densearith.py sympy/polys/tests/test_densetools.py` — **243 passed**.
+- `python run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/polys/tests` — **890 passed, 3 xfailed, 1 xpassed**.
+- `git diff --check` — clean.

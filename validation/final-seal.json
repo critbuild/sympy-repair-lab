@@ -1,0 +1,13 @@
+{
+  "verified_candidate_archive_sha256": "a1858b4a5e909bb55b5cdb2ac72ae3f9c613bff122c3503fd246917ad419f5d1",
+  "all_existing_non_documentation_files_unchanged": true,
+  "unchanged_files_compared": 1246,
+  "existing_files_updated": [
+    "README.md",
+    "RESULTS.md",
+    "manifest.json"
+  ],
+  "added_files": "Clean replay and package verification records only.",
+  "human_review_and_public_video_url_remain_pending": true,
+  "subsequent_documentation_amendments": "validation/documentation-amendments.json"
+}

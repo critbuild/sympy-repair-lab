@@ -1,0 +1,100 @@
+diff --git a/sympy/geometry/entity.py b/sympy/geometry/entity.py
+index a9ce2f3..68452d2 100644
+--- a/sympy/geometry/entity.py
++++ b/sympy/geometry/entity.py
+@@ -104,7 +104,10 @@ def __getnewargs__(self):
+ 
+     def __ne__(self, o):
+         """Test inequality of two geometrical entities."""
+-        return not self.__eq__(o)
++        result = self.__eq__(o)
++        if result is NotImplemented:
++            return NotImplemented
++        return not result
+ 
+     def __new__(cls, *args, **kwargs):
+         # Points are sequences, but they should not
+diff --git a/sympy/geometry/tests/test_entity.py b/sympy/geometry/tests/test_entity.py
+index 088d2f5..46557cf 100644
+--- a/sympy/geometry/tests/test_entity.py
++++ b/sympy/geometry/tests/test_entity.py
+@@ -1,11 +1,78 @@
+ from __future__ import division
+ 
+ from sympy import Symbol, pi, sqrt
+-from sympy.geometry import Circle, Ellipse, Line, Point, Polygon, Ray, RegularPolygon, Segment, Triangle, Parabola
++from sympy.geometry import Circle, Curve, Ellipse, Line, Plane, Point, Polygon, Ray, RegularPolygon, Segment, Triangle, Parabola
+ from sympy.geometry.entity import scale
+ from sympy.utilities.pytest import raises
+ 
+ 
++def test_inequality_with_none():
++    edges = [Segment(Point(0, 0), Point(1, 1)),
++             Segment(Point(1, 1), Point(2, 0))]
++    previous = None
++    kept = []
++    for edge in edges:
++        if edge != previous:
++            kept.append(edge)
++        previous = edge
++    assert kept == edges
++
++
++def test_equality_and_inequality():
++    t = Symbol('t')
++    factories = [
++        lambda n: Point(n, 0),
++        lambda n: Point(n, 0, 0),
++        lambda n: Line((n, 0), (n + 1, 1)),
++        lambda n: Line((n, 0, 0), (n + 1, 1, 1)),
++        lambda n: Ray((n, 0), (n + 1, 1)),
++        lambda n: Ray((n, 0, 0), (n + 1, 1, 1)),
++        lambda n: Segment((n, 0), (n + 1, 1)),
++        lambda n: Segment((n, 0, 0), (n + 1, 1, 1)),
++        lambda n: Circle((n, 0), 1),
++        lambda n: Ellipse((n, 0), 1, 2),
++        lambda n: Triangle((n, 0), (n + 1, 0), (n, 1)),
++        lambda n: Polygon((n, 0), (n + 1, 0), (n + 1, 1), (n, 1)),
++        lambda n: RegularPolygon((n, 0), 1, 5),
++        lambda n: Plane((n, 0, 0), normal_vector=(1, 0, 0)),
++        lambda n: Curve((t + n, t**2), (t, 0, 1)),
++        lambda n: Parabola(Point(n, 1), Line((0, 0), (1, 0))),
++    ]
++    for factory in factories:
++        a, equal, different = factory(0), factory(0), factory(1)
++        assert (a == equal) is True
++        assert (a != equal) is False
++        assert (a == different) is False
++        assert (a != different) is True
++        assert (different == a) is False
++        assert (different != a) is True
++        for other in (None, object()):
++            assert (a == other) is False
++            assert (a != other) is True
++            assert (other == a) is False
++            assert (other != a) is True
++
++
++def test_reflected_comparison():
++    class Foreign:
++        def __eq__(self, other):
++            return 'reflected equality'
++
++        def __ne__(self, other):
++            return 'reflected inequality'
++
++    foreign = Foreign()
++    for cls in (Line, Ray, Segment):
++        for coords in (((0, 0), (1, 1)), ((0, 0, 0), (1, 1, 1))):
++            entity = cls(*coords)
++            assert entity.__eq__(foreign) is NotImplemented
++            assert entity.__ne__(foreign) is NotImplemented
++            assert (entity == foreign) == 'reflected equality'
++            assert (entity != foreign) == 'reflected inequality'
++            assert (foreign == entity) == 'reflected equality'
++            assert (foreign != entity) == 'reflected inequality'
++
++
+ def test_subs():
+     x = Symbol('x', real=True)
+     y = Symbol('y', real=True)

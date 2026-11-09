@@ -1,0 +1,19 @@
+Fixed reversed strict/inclusive operators and removed NumberSymbol’s separately rounded comparison path. Comparisons now use the existing difference evaluation. No global precision changes.
+
+Added regression coverage for both operand orders, close boundaries, equality strictness, infinities, and symbolic relations. Your example now prints `False False True True`.
+
+Commands run with the supplied environment settings:
+
+```powershell
+& .\.venv\Scripts\python.exe run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/core/tests/test_numbers.py sympy/core/tests/test_relational.py
+```
+
+118 passed, 3 xfailed.
+
+```powershell
+& .\.venv\Scripts\python.exe run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/core/tests
+```
+
+1,428 passed, 60 skipped, 42 xfailed; one unrelated Python 3.9 parser AST failure in `test_evaluate_false`.
+
+`git diff --check` passed. No existing test expectations changed.

@@ -1,0 +1,80 @@
+{
+  "case": "05_set_equivalence",
+  "complete_pass": false,
+  "required_pass": false,
+  "preservation_pass": true,
+  "check_count": 10,
+  "passed_checks": 8,
+  "checks": [
+    {
+      "name": "product_subset",
+      "group": "required",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "reverse_subset",
+      "group": "required",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "equal_representations",
+      "group": "required",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "reverse_equal_representations",
+      "group": "required",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "missing_tuple",
+      "group": "required",
+      "expected": false,
+      "actual": true,
+      "passed": false
+    },
+    {
+      "name": "scalar_tuple_mismatch",
+      "group": "required",
+      "expected": false,
+      "actual": true,
+      "passed": false
+    },
+    {
+      "name": "unknown_membership",
+      "group": "preservation",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "disjoint_sets",
+      "group": "preservation",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "intersection",
+      "group": "preservation",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "empty_subset",
+      "group": "preservation",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    }
+  ]
+}

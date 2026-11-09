@@ -1,0 +1,586 @@
+[
+  {
+    "case": "03_geometry_recovery",
+    "complete_pass": false,
+    "required_pass": true,
+    "preservation_pass": false,
+    "oracle_execution": {
+      "exit_code": 1,
+      "seconds": 3.64,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "03_geometry_recovery"
+      ],
+      "summary": ""
+    },
+    "regression": null,
+    "failed_checks": [
+      {
+        "name": "Basic_reflected_equality",
+        "group": "preservation",
+        "expected": [
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          true
+        ],
+        "passed": false
+      },
+      {
+        "name": "Basic_reflected_inequality",
+        "group": "preservation",
+        "expected": [
+          false,
+          false
+        ],
+        "actual": [
+          true,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "Symbol_reflected_equality",
+        "group": "preservation",
+        "expected": [
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          true
+        ],
+        "passed": false
+      },
+      {
+        "name": "Symbol_reflected_inequality",
+        "group": "preservation",
+        "expected": [
+          false,
+          false
+        ],
+        "actual": [
+          true,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "Integer_reflected_equality",
+        "group": "preservation",
+        "expected": [
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          true
+        ],
+        "passed": false
+      },
+      {
+        "name": "Integer_reflected_inequality",
+        "group": "preservation",
+        "expected": [
+          false,
+          false
+        ],
+        "actual": [
+          true,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "Rational_reflected_equality",
+        "group": "preservation",
+        "expected": [
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          true
+        ],
+        "passed": false
+      },
+      {
+        "name": "Rational_reflected_inequality",
+        "group": "preservation",
+        "expected": [
+          false,
+          false
+        ],
+        "actual": [
+          true,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "Float_reflected_equality",
+        "group": "preservation",
+        "expected": [
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          true
+        ],
+        "passed": false
+      },
+      {
+        "name": "Float_reflected_inequality",
+        "group": "preservation",
+        "expected": [
+          false,
+          false
+        ],
+        "actual": [
+          true,
+          false
+        ],
+        "passed": false
+      }
+    ],
+    "check_count": 31,
+    "passed_checks": 21,
+    "description": "Rollback geometry seed to original source, losing the required foreign-object compatibility.",
+    "mutation_rejected": true
+  },
+  {
+    "case": "02_precise_ordering",
+    "complete_pass": false,
+    "required_pass": false,
+    "preservation_pass": true,
+    "oracle_execution": {
+      "exit_code": 1,
+      "seconds": 3.56,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "02_precise_ordering"
+      ],
+      "summary": ""
+    },
+    "regression": null,
+    "failed_checks": [
+      {
+        "name": "below_forward",
+        "group": "required",
+        "expected": [
+          true,
+          true,
+          false,
+          true,
+          false,
+          false
+        ],
+        "actual": [
+          true,
+          true,
+          false,
+          true,
+          true,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "below_reflected",
+        "group": "required",
+        "expected": [
+          true,
+          true,
+          false,
+          true,
+          false,
+          false
+        ],
+        "actual": [
+          true,
+          true,
+          false,
+          true,
+          true,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "float_below_forward",
+        "group": "required",
+        "expected": [
+          true,
+          true,
+          false,
+          true,
+          false,
+          false
+        ],
+        "actual": [
+          true,
+          true,
+          false,
+          true,
+          true,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "float_below_reflected",
+        "group": "required",
+        "expected": [
+          true,
+          true,
+          false,
+          true,
+          false,
+          false
+        ],
+        "actual": [
+          true,
+          true,
+          false,
+          true,
+          true,
+          false
+        ],
+        "passed": false
+      }
+    ],
+    "check_count": 12,
+    "passed_checks": 8,
+    "description": "Always-true ordering shortcut.",
+    "mutation_rejected": true
+  },
+  {
+    "case": "01_foreign_equality",
+    "complete_pass": false,
+    "required_pass": true,
+    "preservation_pass": false,
+    "oracle_execution": {
+      "exit_code": 1,
+      "seconds": 3.58,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "01_foreign_equality"
+      ],
+      "summary": ""
+    },
+    "regression": null,
+    "failed_checks": [
+      {
+        "name": "Line_None",
+        "group": "preservation",
+        "expected": [
+          false,
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          false,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "Line_unrelated",
+        "group": "preservation",
+        "expected": [
+          false,
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          false,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "Ray_None",
+        "group": "preservation",
+        "expected": [
+          false,
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          false,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "Ray_unrelated",
+        "group": "preservation",
+        "expected": [
+          false,
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          false,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "Segment_None",
+        "group": "preservation",
+        "expected": [
+          false,
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          false,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "Segment_unrelated",
+        "group": "preservation",
+        "expected": [
+          false,
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          false,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "consumer_two_edges",
+        "group": "preservation",
+        "expected": 2,
+        "actual": 1,
+        "passed": false
+      },
+      {
+        "name": "consumer_duplicate_edges",
+        "group": "preservation",
+        "expected": 2,
+        "actual": 1,
+        "passed": false
+      },
+      {
+        "name": "consumer_single",
+        "group": "preservation",
+        "expected": 1,
+        "actual": 0,
+        "passed": false
+      }
+    ],
+    "check_count": 34,
+    "passed_checks": 25,
+    "description": "Observed partial repair: shared equality changes, subclass inequality not adapted.",
+    "mutation_rejected": true
+  },
+  {
+    "case": "06_symbolic_determinant",
+    "complete_pass": false,
+    "required_pass": true,
+    "preservation_pass": false,
+    "oracle_execution": {
+      "exit_code": 1,
+      "seconds": 3.75,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "06_symbolic_determinant"
+      ],
+      "summary": ""
+    },
+    "regression": null,
+    "failed_checks": [
+      {
+        "name": "diagonal_preserved",
+        "group": "preservation",
+        "expected": true,
+        "actual": false,
+        "passed": false
+      },
+      {
+        "name": "permutation_preserved",
+        "group": "preservation",
+        "expected": true,
+        "actual": false,
+        "passed": false
+      },
+      {
+        "name": "symbolic_preserved",
+        "group": "preservation",
+        "expected": true,
+        "actual": false,
+        "passed": false
+      },
+      {
+        "name": "independent_method_agreement",
+        "group": "preservation",
+        "expected": true,
+        "actual": false,
+        "passed": false
+      }
+    ],
+    "check_count": 8,
+    "passed_checks": 4,
+    "description": "Always-zero determinant shortcut.",
+    "mutation_rejected": true
+  },
+  {
+    "case": "05_set_equivalence",
+    "complete_pass": false,
+    "required_pass": false,
+    "preservation_pass": true,
+    "oracle_execution": {
+      "exit_code": 1,
+      "seconds": 4.7,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "05_set_equivalence"
+      ],
+      "summary": ""
+    },
+    "regression": null,
+    "failed_checks": [
+      {
+        "name": "missing_tuple",
+        "group": "required",
+        "expected": false,
+        "actual": true,
+        "passed": false
+      },
+      {
+        "name": "scalar_tuple_mismatch",
+        "group": "required",
+        "expected": false,
+        "actual": true,
+        "passed": false
+      }
+    ],
+    "check_count": 10,
+    "passed_checks": 8,
+    "description": "Always-true subset shortcut.",
+    "mutation_rejected": true
+  },
+  {
+    "case": "04_zero_polynomial",
+    "complete_pass": false,
+    "required_pass": true,
+    "preservation_pass": false,
+    "oracle_execution": {
+      "exit_code": 1,
+      "seconds": 10.14,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "04_zero_polynomial"
+      ],
+      "summary": ""
+    },
+    "regression": null,
+    "failed_checks": [
+      {
+        "name": "nonzero_identity",
+        "group": "preservation",
+        "expected": true,
+        "actual": false,
+        "passed": false
+      },
+      {
+        "name": "unknown_identity",
+        "group": "preservation",
+        "expected": true,
+        "actual": false,
+        "passed": false
+      },
+      {
+        "name": "rational_identity",
+        "group": "preservation",
+        "expected": true,
+        "actual": false,
+        "passed": false
+      }
+    ],
+    "check_count": 8,
+    "passed_checks": 5,
+    "description": "Always return a zero polynomial.",
+    "mutation_rejected": true
+  },
+  {
+    "case": "07_algebraic_factorization",
+    "complete_pass": false,
+    "required_pass": false,
+    "preservation_pass": false,
+    "oracle_execution": {
+      "exit_code": 1,
+      "seconds": 4.67,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "07_algebraic_factorization"
+      ],
+      "summary": ""
+    },
+    "regression": null,
+    "failed_checks": [
+      {
+        "name": "reported_factored_output",
+        "group": "required",
+        "expected": true,
+        "actual": false,
+        "passed": false
+      },
+      {
+        "name": "complex_factored_output",
+        "group": "required",
+        "expected": true,
+        "actual": false,
+        "passed": false
+      },
+      {
+        "name": "coefficient_factored_output",
+        "group": "required",
+        "expected": true,
+        "actual": false,
+        "passed": false
+      },
+      {
+        "name": "rational_factorization",
+        "group": "preservation",
+        "expected": true,
+        "actual": false,
+        "passed": false
+      },
+      {
+        "name": "univariate_multiplicity",
+        "group": "preservation",
+        "expected": true,
+        "actual": false,
+        "passed": false
+      }
+    ],
+    "check_count": 12,
+    "passed_checks": 7,
+    "description": "Return the input without factoring; algebraic identity alone would pass.",
+    "mutation_rejected": true
+  }
+]

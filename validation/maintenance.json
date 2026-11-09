@@ -1,0 +1,6 @@
+{
+  "event": "Syntax-check bytecode cleanup during primary run",
+  "date_utc": "2026-11-08",
+  "detail": "A syntax-only compile check generated Python bytecode caches, including beneath copied source assets. Individual generated .pyc files were removed; source files, prompts, patches, and frozen grader files were unchanged. Empty cache directories are not copied or packaged.",
+  "verification": "audit.py verifies every preflight input digest. The final clean-package replay uses source-only assets and independently verifies every recorded primary result. No model attempt is retried or replaced."
+}

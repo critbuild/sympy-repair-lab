@@ -1,0 +1,19 @@
+Fixed scalar multiplication to strip leading zero coefficients recursively. `clear_denoms()` now produces canonical zero, so `is_zero`, `terms_gcd()`, and `primitive()` work.
+
+Regression tests cover symbolic cancellation, nonzero and unresolved coefficients, both conversion modes, multiple generators, and the denominator identity. No existing expectations changed.
+
+Commands run with the supplied environment settings:
+
+```powershell
+& '.\.venv\Scripts\python.exe' run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/polys/tests/test_polytools.py sympy/polys/tests/test_densearith.py sympy/polys/tests/test_densetools.py
+```
+
+243 passed.
+
+```powershell
+& '.\.venv\Scripts\python.exe' run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/polys/tests/test_polyclasses.py sympy/polys/tests/test_rings.py
+```
+
+81 passed.
+
+`incident.py` now succeeds. Additional assertions verified its canonical representation, `primitive()`, and denominator identity. `git diff --check` passed.

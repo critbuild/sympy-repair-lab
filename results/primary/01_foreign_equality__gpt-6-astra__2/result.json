@@ -1,0 +1,179 @@
+{
+  "case": "01_foreign_equality",
+  "model": "gpt-6-astra",
+  "repeat": 2,
+  "reasoning_effort": "medium",
+  "label": "primary",
+  "category": "semantic_or_regression_failure",
+  "complete_pass": false,
+  "cli_exit_code": 0,
+  "agent_seconds": 244.99,
+  "thread_ids": [
+    "01a1bd62-0415-7cb0-8068-3cde75dfd458"
+  ],
+  "command_count": 12,
+  "changed_files": [
+    "sympy/core/basic.py",
+    "sympy/core/numbers.py",
+    "sympy/core/tests/test_basic.py",
+    "sympy/core/tests/test_numbers.py"
+  ],
+  "usage": [
+    {
+      "input_tokens": 415182,
+      "cached_input_tokens": 384512,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 4802,
+      "reasoning_output_tokens": 1035
+    }
+  ],
+  "checks": {
+    "case": "01_foreign_equality",
+    "complete_pass": false,
+    "required_pass": true,
+    "preservation_pass": false,
+    "oracle_execution": {
+      "exit_code": 1,
+      "seconds": 3.86,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "01_foreign_equality"
+      ],
+      "summary": ""
+    },
+    "regression": {
+      "exit_code": 0,
+      "seconds": 4.67,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "-c",
+        "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+        "-p",
+        "pytest_timeout",
+        "--timeout=60",
+        "-q",
+        "--tb=short",
+        "--disable-warnings",
+        "sympy/core/tests/test_basic.py",
+        "sympy/core/tests/test_numbers.py"
+      ],
+      "summary": "95 passed, 1 xfailed, 3 warnings in 2.50s"
+    },
+    "failed_checks": [
+      {
+        "name": "Line_None",
+        "group": "preservation",
+        "expected": [
+          false,
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          false,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "Line_unrelated",
+        "group": "preservation",
+        "expected": [
+          false,
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          false,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "Ray_None",
+        "group": "preservation",
+        "expected": [
+          false,
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          false,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "Ray_unrelated",
+        "group": "preservation",
+        "expected": [
+          false,
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          false,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "Segment_None",
+        "group": "preservation",
+        "expected": [
+          false,
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          false,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "Segment_unrelated",
+        "group": "preservation",
+        "expected": [
+          false,
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          false,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "consumer_two_edges",
+        "group": "preservation",
+        "expected": 2,
+        "actual": 1,
+        "passed": false
+      },
+      {
+        "name": "consumer_duplicate_edges",
+        "group": "preservation",
+        "expected": 2,
+        "actual": 1,
+        "passed": false
+      },
+      {
+        "name": "consumer_single",
+        "group": "preservation",
+        "expected": 1,
+        "actual": 0,
+        "passed": false
+      }
+    ],
+    "check_count": 34,
+    "passed_checks": 25
+  }
+}

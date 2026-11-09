@@ -1,0 +1,51 @@
+{
+  "headless": true,
+  "no_desktop_control": true,
+  "scenes": [
+    {
+      "scenario": "Closed square",
+      "counts": [
+        4,
+        3,
+        4
+      ],
+      "metrics": [
+        "4 / 4 expected edges retained",
+        "3 / 4 expected edges retained",
+        "4 / 4 expected edges retained"
+      ],
+      "export_matches": true
+    },
+    {
+      "scenario": "Two edges",
+      "counts": [
+        2,
+        1,
+        2
+      ],
+      "metrics": [
+        "2 / 2 expected edges retained",
+        "1 / 2 expected edges retained",
+        "2 / 2 expected edges retained"
+      ],
+      "export_matches": true
+    },
+    {
+      "scenario": "Repeated edge",
+      "counts": [
+        3,
+        2,
+        3
+      ],
+      "metrics": [
+        "3 / 3 expected edges retained",
+        "2 / 3 expected edges retained",
+        "3 / 3 expected edges retained"
+      ],
+      "export_matches": true
+    }
+  ],
+  "mobile_overflow": false,
+  "page_errors": [],
+  "invalid_scene_status": 400
+}

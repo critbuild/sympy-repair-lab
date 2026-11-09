@@ -1,0 +1,1103 @@
+[
+  {
+    "case": "02_precise_ordering",
+    "complete_pass": false,
+    "required_pass": false,
+    "preservation_pass": true,
+    "oracle_execution": {
+      "exit_code": 1,
+      "seconds": 4.58,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "02_precise_ordering"
+      ],
+      "summary": ""
+    },
+    "regression": {
+      "exit_code": 0,
+      "seconds": 5.08,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "-c",
+        "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+        "-p",
+        "pytest_timeout",
+        "--timeout=60",
+        "-q",
+        "--tb=short",
+        "--disable-warnings",
+        "sympy/core/tests/test_numbers.py"
+      ],
+      "summary": "79 passed, 1 xfailed, 5 warnings in 2.47s"
+    },
+    "failed_checks": [
+      {
+        "name": "reported_forward",
+        "group": "required",
+        "expected": [
+          false,
+          false,
+          false,
+          true,
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          false,
+          false,
+          true,
+          true,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "reported_reflected",
+        "group": "required",
+        "expected": [
+          false,
+          false,
+          false,
+          true,
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          false,
+          false,
+          true,
+          false,
+          true
+        ],
+        "passed": false
+      },
+      {
+        "name": "float_below_forward",
+        "group": "required",
+        "expected": [
+          true,
+          true,
+          false,
+          true,
+          false,
+          false
+        ],
+        "actual": [
+          true,
+          true,
+          false,
+          true,
+          true,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "float_below_reflected",
+        "group": "required",
+        "expected": [
+          true,
+          true,
+          false,
+          true,
+          false,
+          false
+        ],
+        "actual": [
+          true,
+          true,
+          false,
+          true,
+          false,
+          true
+        ],
+        "passed": false
+      }
+    ],
+    "check_count": 12,
+    "passed_checks": 8,
+    "reference": false,
+    "expected_complete_pass": false,
+    "control_matches": true
+  },
+  {
+    "case": "01_foreign_equality",
+    "complete_pass": true,
+    "required_pass": true,
+    "preservation_pass": true,
+    "oracle_execution": {
+      "exit_code": 0,
+      "seconds": 4.44,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "01_foreign_equality"
+      ],
+      "summary": ""
+    },
+    "regression": {
+      "exit_code": 0,
+      "seconds": 5.22,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "-c",
+        "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+        "-p",
+        "pytest_timeout",
+        "--timeout=60",
+        "-q",
+        "--tb=short",
+        "--disable-warnings",
+        "sympy/core/tests/test_basic.py",
+        "sympy/core/tests/test_numbers.py"
+      ],
+      "summary": "95 passed, 1 xfailed, 5 warnings in 2.56s"
+    },
+    "failed_checks": [],
+    "check_count": 34,
+    "passed_checks": 34,
+    "reference": true,
+    "expected_complete_pass": true,
+    "control_matches": true
+  },
+  {
+    "case": "01_foreign_equality",
+    "complete_pass": false,
+    "required_pass": false,
+    "preservation_pass": true,
+    "oracle_execution": {
+      "exit_code": 1,
+      "seconds": 4.56,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "01_foreign_equality"
+      ],
+      "summary": ""
+    },
+    "regression": {
+      "exit_code": 0,
+      "seconds": 5.22,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "-c",
+        "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+        "-p",
+        "pytest_timeout",
+        "--timeout=60",
+        "-q",
+        "--tb=short",
+        "--disable-warnings",
+        "sympy/core/tests/test_basic.py",
+        "sympy/core/tests/test_numbers.py"
+      ],
+      "summary": "95 passed, 1 xfailed, 5 warnings in 2.57s"
+    },
+    "failed_checks": [
+      {
+        "name": "Basic_reflected_equality",
+        "group": "required",
+        "expected": [
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          true
+        ],
+        "passed": false
+      },
+      {
+        "name": "Basic_reflected_inequality",
+        "group": "required",
+        "expected": [
+          false,
+          false
+        ],
+        "actual": [
+          true,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "Symbol_reflected_equality",
+        "group": "required",
+        "expected": [
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          true
+        ],
+        "passed": false
+      },
+      {
+        "name": "Symbol_reflected_inequality",
+        "group": "required",
+        "expected": [
+          false,
+          false
+        ],
+        "actual": [
+          true,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "Integer_reflected_equality",
+        "group": "required",
+        "expected": [
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          true
+        ],
+        "passed": false
+      },
+      {
+        "name": "Integer_reflected_inequality",
+        "group": "required",
+        "expected": [
+          false,
+          false
+        ],
+        "actual": [
+          true,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "Rational_reflected_equality",
+        "group": "required",
+        "expected": [
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          true
+        ],
+        "passed": false
+      },
+      {
+        "name": "Rational_reflected_inequality",
+        "group": "required",
+        "expected": [
+          false,
+          false
+        ],
+        "actual": [
+          true,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "Float_reflected_equality",
+        "group": "required",
+        "expected": [
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          true
+        ],
+        "passed": false
+      },
+      {
+        "name": "Float_reflected_inequality",
+        "group": "required",
+        "expected": [
+          false,
+          false
+        ],
+        "actual": [
+          true,
+          false
+        ],
+        "passed": false
+      }
+    ],
+    "check_count": 34,
+    "passed_checks": 24,
+    "reference": false,
+    "expected_complete_pass": false,
+    "control_matches": true
+  },
+  {
+    "case": "02_precise_ordering",
+    "complete_pass": false,
+    "required_pass": false,
+    "preservation_pass": true,
+    "oracle_execution": {
+      "exit_code": 1,
+      "seconds": 4.67,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "02_precise_ordering"
+      ],
+      "summary": ""
+    },
+    "regression": {
+      "exit_code": 0,
+      "seconds": 4.72,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "-c",
+        "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+        "-p",
+        "pytest_timeout",
+        "--timeout=60",
+        "-q",
+        "--tb=short",
+        "--disable-warnings",
+        "sympy/core/tests/test_numbers.py"
+      ],
+      "summary": "79 passed, 1 xfailed, 5 warnings in 2.33s"
+    },
+    "failed_checks": [
+      {
+        "name": "reported_forward",
+        "group": "required",
+        "expected": [
+          false,
+          false,
+          false,
+          true,
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          false,
+          false,
+          true,
+          false,
+          true
+        ],
+        "passed": false
+      },
+      {
+        "name": "reported_reflected",
+        "group": "required",
+        "expected": [
+          false,
+          false,
+          false,
+          true,
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          false,
+          false,
+          true,
+          false,
+          true
+        ],
+        "passed": false
+      },
+      {
+        "name": "float_below_forward",
+        "group": "required",
+        "expected": [
+          true,
+          true,
+          false,
+          true,
+          false,
+          false
+        ],
+        "actual": [
+          true,
+          true,
+          false,
+          true,
+          false,
+          true
+        ],
+        "passed": false
+      },
+      {
+        "name": "float_below_reflected",
+        "group": "required",
+        "expected": [
+          true,
+          true,
+          false,
+          true,
+          false,
+          false
+        ],
+        "actual": [
+          true,
+          true,
+          false,
+          true,
+          false,
+          true
+        ],
+        "passed": false
+      }
+    ],
+    "check_count": 12,
+    "passed_checks": 8,
+    "reference": true,
+    "expected_complete_pass": true,
+    "control_matches": false
+  },
+  {
+    "case": "04_zero_polynomial",
+    "complete_pass": false,
+    "required_pass": false,
+    "preservation_pass": true,
+    "oracle_execution": {
+      "exit_code": 1,
+      "seconds": 11.25,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "04_zero_polynomial"
+      ],
+      "summary": ""
+    },
+    "regression": {
+      "exit_code": 0,
+      "seconds": 10.55,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "-c",
+        "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+        "-p",
+        "pytest_timeout",
+        "--timeout=60",
+        "-q",
+        "--tb=short",
+        "--disable-warnings",
+        "sympy/polys/tests/test_polytools.py",
+        "sympy/polys/tests/test_densearith.py",
+        "sympy/polys/tests/test_densetools.py"
+      ],
+      "summary": "240 passed, 3 warnings in 7.79s"
+    },
+    "failed_checks": [
+      {
+        "name": "cleared_poly_zero",
+        "group": "required",
+        "expected": true,
+        "actual": false,
+        "passed": false
+      },
+      {
+        "name": "terms_gcd_zero",
+        "group": "required",
+        "expected": true,
+        "exception": "IndexError: tuple index out of range",
+        "passed": false
+      },
+      {
+        "name": "primitive_zero",
+        "group": "required",
+        "expected": true,
+        "actual": false,
+        "passed": false
+      }
+    ],
+    "check_count": 8,
+    "passed_checks": 5,
+    "reference": false,
+    "expected_complete_pass": false,
+    "control_matches": true
+  },
+  {
+    "case": "04_zero_polynomial",
+    "complete_pass": true,
+    "required_pass": true,
+    "preservation_pass": true,
+    "oracle_execution": {
+      "exit_code": 0,
+      "seconds": 10.03,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "04_zero_polynomial"
+      ],
+      "summary": ""
+    },
+    "regression": {
+      "exit_code": 0,
+      "seconds": 11.36,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "-c",
+        "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+        "-p",
+        "pytest_timeout",
+        "--timeout=60",
+        "-q",
+        "--tb=short",
+        "--disable-warnings",
+        "sympy/polys/tests/test_polytools.py",
+        "sympy/polys/tests/test_densearith.py",
+        "sympy/polys/tests/test_densetools.py"
+      ],
+      "summary": "240 passed, 1 warning in 8.39s"
+    },
+    "failed_checks": [],
+    "check_count": 8,
+    "passed_checks": 8,
+    "reference": true,
+    "expected_complete_pass": true,
+    "control_matches": true
+  },
+  {
+    "case": "03_geometry_recovery",
+    "complete_pass": false,
+    "required_pass": false,
+    "preservation_pass": true,
+    "oracle_execution": {
+      "exit_code": 1,
+      "seconds": 4.61,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "03_geometry_recovery"
+      ],
+      "summary": ""
+    },
+    "regression": {
+      "exit_code": 0,
+      "seconds": 65.92,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "-c",
+        "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+        "-p",
+        "pytest_timeout",
+        "--timeout=60",
+        "-q",
+        "--tb=short",
+        "--disable-warnings",
+        "sympy/core/tests/test_basic.py",
+        "sympy/core/tests/test_numbers.py",
+        "sympy/geometry/tests"
+      ],
+      "summary": "165 passed, 1 xfailed, 14 warnings in 63.48s (0:01:03)"
+    },
+    "failed_checks": [
+      {
+        "name": "Line_None",
+        "group": "required",
+        "expected": [
+          false,
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          false,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "Line_unrelated",
+        "group": "required",
+        "expected": [
+          false,
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          false,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "Ray_None",
+        "group": "required",
+        "expected": [
+          false,
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          false,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "Ray_unrelated",
+        "group": "required",
+        "expected": [
+          false,
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          false,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "Segment_None",
+        "group": "required",
+        "expected": [
+          false,
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          false,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "Segment_unrelated",
+        "group": "required",
+        "expected": [
+          false,
+          true,
+          true
+        ],
+        "actual": [
+          false,
+          false,
+          false
+        ],
+        "passed": false
+      },
+      {
+        "name": "consumer_two_edges",
+        "group": "required",
+        "expected": 2,
+        "actual": 1,
+        "passed": false
+      },
+      {
+        "name": "consumer_duplicate_edges",
+        "group": "required",
+        "expected": 2,
+        "actual": 1,
+        "passed": false
+      },
+      {
+        "name": "consumer_single",
+        "group": "required",
+        "expected": 1,
+        "actual": 0,
+        "passed": false
+      }
+    ],
+    "check_count": 31,
+    "passed_checks": 22,
+    "reference": false,
+    "expected_complete_pass": false,
+    "control_matches": true
+  },
+  {
+    "case": "03_geometry_recovery",
+    "complete_pass": true,
+    "required_pass": true,
+    "preservation_pass": true,
+    "oracle_execution": {
+      "exit_code": 0,
+      "seconds": 4.56,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "03_geometry_recovery"
+      ],
+      "summary": ""
+    },
+    "regression": {
+      "exit_code": 0,
+      "seconds": 66.88,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "-c",
+        "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+        "-p",
+        "pytest_timeout",
+        "--timeout=60",
+        "-q",
+        "--tb=short",
+        "--disable-warnings",
+        "sympy/core/tests/test_basic.py",
+        "sympy/core/tests/test_numbers.py",
+        "sympy/geometry/tests"
+      ],
+      "summary": "165 passed, 1 xfailed, 14 warnings in 64.43s (0:01:04)"
+    },
+    "failed_checks": [],
+    "check_count": 31,
+    "passed_checks": 31,
+    "reference": true,
+    "expected_complete_pass": true,
+    "control_matches": true
+  },
+  {
+    "case": "05_set_equivalence",
+    "complete_pass": false,
+    "required_pass": false,
+    "preservation_pass": false,
+    "oracle_execution": {
+      "exit_code": 1,
+      "seconds": 4.72,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "05_set_equivalence"
+      ],
+      "summary": ""
+    },
+    "regression": {
+      "exit_code": 1,
+      "seconds": 12.36,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "-c",
+        "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+        "-p",
+        "pytest_timeout",
+        "--timeout=60",
+        "-q",
+        "--tb=short",
+        "--disable-warnings",
+        "sympy/sets/tests/test_sets.py",
+        "sympy/core/tests/test_relational.py"
+      ],
+      "summary": "2 failed, 155 passed, 6 xfailed, 3 warnings in 10.03s"
+    },
+    "failed_checks": [
+      {
+        "name": "product_subset",
+        "group": "required",
+        "expected": true,
+        "actual": null,
+        "passed": false
+      },
+      {
+        "name": "equal_representations",
+        "group": "required",
+        "expected": true,
+        "exception": "AttributeError: 'Complement' object has no attribute 'equals'",
+        "passed": false
+      },
+      {
+        "name": "reverse_equal_representations",
+        "group": "required",
+        "expected": true,
+        "exception": "AttributeError: 'EmptySet' object has no attribute 'equals'",
+        "passed": false
+      },
+      {
+        "name": "missing_tuple",
+        "group": "required",
+        "expected": false,
+        "actual": null,
+        "passed": false
+      },
+      {
+        "name": "scalar_tuple_mismatch",
+        "group": "required",
+        "expected": false,
+        "actual": null,
+        "passed": false
+      },
+      {
+        "name": "unknown_membership",
+        "group": "preservation",
+        "expected": true,
+        "exception": "AttributeError: 'Complement' object has no attribute 'equals'",
+        "passed": false
+      }
+    ],
+    "check_count": 10,
+    "passed_checks": 4,
+    "reference": false,
+    "expected_complete_pass": false,
+    "control_matches": true
+  },
+  {
+    "case": "05_set_equivalence",
+    "complete_pass": true,
+    "required_pass": true,
+    "preservation_pass": true,
+    "oracle_execution": {
+      "exit_code": 0,
+      "seconds": 4.73,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "05_set_equivalence"
+      ],
+      "summary": ""
+    },
+    "regression": {
+      "exit_code": 0,
+      "seconds": 11.66,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "-c",
+        "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+        "-p",
+        "pytest_timeout",
+        "--timeout=60",
+        "-q",
+        "--tb=short",
+        "--disable-warnings",
+        "sympy/sets/tests/test_sets.py",
+        "sympy/core/tests/test_relational.py"
+      ],
+      "summary": "157 passed, 6 xfailed, 3 warnings in 9.36s"
+    },
+    "failed_checks": [],
+    "check_count": 10,
+    "passed_checks": 10,
+    "reference": true,
+    "expected_complete_pass": true,
+    "control_matches": true
+  },
+  {
+    "case": "07_algebraic_factorization",
+    "complete_pass": false,
+    "required_pass": false,
+    "preservation_pass": true,
+    "oracle_execution": {
+      "exit_code": 1,
+      "seconds": 5.27,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "07_algebraic_factorization"
+      ],
+      "summary": ""
+    },
+    "regression": {
+      "exit_code": 1,
+      "seconds": 11.05,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "-c",
+        "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+        "-p",
+        "pytest_timeout",
+        "--timeout=60",
+        "-q",
+        "--tb=short",
+        "--disable-warnings",
+        "sympy/polys/tests/test_polytools.py"
+      ],
+      "summary": "1 failed, 149 passed, 1 warning in 8.34s"
+    },
+    "failed_checks": [
+      {
+        "name": "reported_identity",
+        "group": "required",
+        "expected": true,
+        "actual": false,
+        "passed": false
+      },
+      {
+        "name": "reported_factor_structure",
+        "group": "required",
+        "expected": true,
+        "actual": false,
+        "passed": false
+      },
+      {
+        "name": "complex_identity",
+        "group": "required",
+        "expected": true,
+        "actual": false,
+        "passed": false
+      },
+      {
+        "name": "complex_factor_structure",
+        "group": "required",
+        "expected": true,
+        "actual": false,
+        "passed": false
+      },
+      {
+        "name": "coefficient_identity",
+        "group": "required",
+        "expected": true,
+        "actual": false,
+        "passed": false
+      },
+      {
+        "name": "coefficient_factor_structure",
+        "group": "required",
+        "expected": true,
+        "actual": false,
+        "passed": false
+      }
+    ],
+    "check_count": 9,
+    "passed_checks": 3,
+    "reference": false,
+    "expected_complete_pass": false,
+    "control_matches": true
+  },
+  {
+    "case": "06_symbolic_determinant",
+    "complete_pass": false,
+    "required_pass": false,
+    "preservation_pass": true,
+    "oracle_execution": {
+      "exit_code": 1,
+      "seconds": 5.72,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "06_symbolic_determinant"
+      ],
+      "summary": ""
+    },
+    "regression": {
+      "exit_code": 0,
+      "seconds": 35.19,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "-c",
+        "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+        "-p",
+        "pytest_timeout",
+        "--timeout=60",
+        "-q",
+        "--tb=short",
+        "--disable-warnings",
+        "sympy/matrices/tests/test_matrices.py"
+      ],
+      "summary": "152 passed, 1 skipped, 4 xfailed, 7 warnings in 33.06s"
+    },
+    "failed_checks": [
+      {
+        "name": "rank_two_size_5",
+        "group": "required",
+        "expected": true,
+        "actual": false,
+        "passed": false
+      },
+      {
+        "name": "rank_two_size_6",
+        "group": "required",
+        "expected": true,
+        "exception": "TypeError: Invalid NaN comparison",
+        "passed": false
+      },
+      {
+        "name": "rank_two_size_7",
+        "group": "required",
+        "expected": true,
+        "exception": "TypeError: Invalid NaN comparison",
+        "passed": false
+      }
+    ],
+    "check_count": 8,
+    "passed_checks": 5,
+    "reference": false,
+    "expected_complete_pass": false,
+    "control_matches": true
+  },
+  {
+    "case": "06_symbolic_determinant",
+    "complete_pass": true,
+    "required_pass": true,
+    "preservation_pass": true,
+    "oracle_execution": {
+      "exit_code": 0,
+      "seconds": 4.0,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "06_symbolic_determinant"
+      ],
+      "summary": ""
+    },
+    "regression": {
+      "exit_code": 0,
+      "seconds": 34.47,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "-c",
+        "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+        "-p",
+        "pytest_timeout",
+        "--timeout=60",
+        "-q",
+        "--tb=short",
+        "--disable-warnings",
+        "sympy/matrices/tests/test_matrices.py"
+      ],
+      "summary": "152 passed, 1 skipped, 4 xfailed, 7 warnings in 32.26s"
+    },
+    "failed_checks": [],
+    "check_count": 8,
+    "passed_checks": 8,
+    "reference": true,
+    "expected_complete_pass": true,
+    "control_matches": true
+  },
+  {
+    "case": "07_algebraic_factorization",
+    "complete_pass": true,
+    "required_pass": true,
+    "preservation_pass": true,
+    "oracle_execution": {
+      "exit_code": 0,
+      "seconds": 5.2,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "07_algebraic_factorization"
+      ],
+      "summary": ""
+    },
+    "regression": {
+      "exit_code": 0,
+      "seconds": 7.27,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "-c",
+        "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+        "-p",
+        "pytest_timeout",
+        "--timeout=60",
+        "-q",
+        "--tb=short",
+        "--disable-warnings",
+        "sympy/polys/tests/test_polytools.py"
+      ],
+      "summary": "150 passed, 1 warning in 5.20s"
+    },
+    "failed_checks": [],
+    "check_count": 9,
+    "passed_checks": 9,
+    "reference": true,
+    "expected_complete_pass": true,
+    "control_matches": true
+  }
+]

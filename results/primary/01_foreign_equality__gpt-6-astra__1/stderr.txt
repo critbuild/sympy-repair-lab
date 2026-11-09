@@ -1,0 +1,7 @@
+2026-11-08T22:38:06.355498Z  WARN codex_app_server::request_processors::thread_processor: failed to persist trusted project state for <WORKSPACE>\work\contract-primary\primary\01_foreign_equality__gpt-6-astra__1; continuing with in-memory trust for this thread: failed to persist config at <USER_HOME>\.codex\config.toml
+2026-11-08T22:38:06.976598Z  WARN codex_core::shell_snapshot: Failed to create shell snapshot for powershell: Shell snapshot not supported yet for PowerShell
+2026-11-08T22:40:56.631251Z ERROR codex_core::tools::router: error=apply_patch verification failed: Failed to find expected lines in <WORKSPACE>\work\contract-primary\primary\01_foreign_equality__gpt-6-astra__1\sympy\core\tests\test_numbers.py:
+    assert hash(python_int) not in _intcache
+
+
+def test_seterr():

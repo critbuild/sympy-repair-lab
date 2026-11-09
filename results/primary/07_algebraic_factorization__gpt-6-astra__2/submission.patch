@@ -1,0 +1,116 @@
+diff --git a/sympy/polys/factortools.py b/sympy/polys/factortools.py
+index c6a5f9f..003a963 100644
+--- a/sympy/polys/factortools.py
++++ b/sympy/polys/factortools.py
+@@ -1146,6 +1146,16 @@ def dmp_ext_factor(f, u, K):
+     if all(d <= 0 for d in dmp_degree_list(f, u)):
+         return lc, []
+ 
++    # Square-free preprocessing in the main variable removes its content.
++    # Factor that content separately so factors in the other variables survive.
++    cont, f = dmp_primitive(f, u, K)
++    cont_coeff, cont_factors = dmp_ext_factor(cont, u - 1, K)
++    lc *= cont_coeff
++    cont_factors = [([factor], k) for factor, k in cont_factors]
++
++    if dmp_degree(f, u) <= 0:
++        return lc, cont_factors
++
+     f, F = dmp_sqf_part(f, u, K), f
+     s, g, r = dmp_sqf_norm(f, u, K)
+ 
+@@ -1162,7 +1172,8 @@ def dmp_ext_factor(f, u, K):
+             h = dmp_compose(h, H, u, K)
+             factors[i] = h
+ 
+-    return lc, dmp_trial_division(F, factors, u, K)
++    factors = dmp_trial_division(F, factors, u, K)
++    return lc, _sort_factors(factors + cont_factors)
+ 
+ 
+ def dup_gf_factor(f, K):
+diff --git a/sympy/polys/tests/test_factortools.py b/sympy/polys/tests/test_factortools.py
+index 7bcd935..c5251ad 100644
+--- a/sympy/polys/tests/test_factortools.py
++++ b/sympy/polys/tests/test_factortools.py
+@@ -497,6 +497,31 @@ def anp(x):
+                         (anp([QQ(1)])*x + anp([QQ( 1), QQ(0)])*y, 1)])
+ 
+ 
++def test_dmp_ext_factor_content():
++    K = QQ.algebraic_field(I)
++    R, x, y, z = ring("x,y,z", K)
++    a = K.unit
++    cases = [
++        (K.one, [x - 1, y - 1]),
++        (K.one, [y - a, z + a]),
++        (K.one, [x - y, y - z, z - a]),
++        (K.one, [x - a*y, y - a, y + a]),
++        (K(6), [x - K(QQ(1, 2)), y - K(QQ(1, 3))]),
++        (K.one + a, [x - a, y + a]),
++    ]
++    for coeff, factors in cases:
++        f = R.ground_new(coeff)
++        for g in factors:
++            f *= g
++        result_coeff, result_factors = R.dmp_ext_factor(f)
++        assert result_coeff == coeff
++        assert dict(result_factors) == dict((g, 1) for g in factors)
++        result = R.ground_new(result_coeff)
++        for g, k in result_factors:
++            result *= g**k
++        assert result == f
++
++
+ def test_dup_factor_list():
+     R, x = ring("x", ZZ)
+     assert R.dup_factor_list(0) == (0, [])
+diff --git a/sympy/polys/tests/test_polytools.py b/sympy/polys/tests/test_polytools.py
+index b0b4cd6..8fc97de 100644
+--- a/sympy/polys/tests/test_polytools.py
++++ b/sympy/polys/tests/test_polytools.py
+@@ -2503,6 +2503,29 @@ def test_factor():
+     assert factor(f, deep=True, fraction=False) == 5*x + 3*exp(2)*exp(-7*x)
+ 
+ 
++def test_factor_extension_multivariate_content():
++    cases = [
++        (x - 1)*(y - 1),
++        (x - I)*(y + I),
++        (x - I*y)*(y - I),
++        (x - y)*(y - z)*(z - I),
++        (x - I)*(x + I)*(y - I)*(y + I),
++        Mul(18, x - S.Half, y - Rational(1, 3)),
++        (1 + I)*(x - I)*(y + I),
++    ]
++    for expected in cases:
++        expression = expand(expected)
++        result = factor(expression, extension=[I])
++        assert result == expected
++        assert expand(result) == expression
++
++    # The univariate multiplicity and rational-domain paths are unchanged.
++    expected = 3*(x - I)**2*(x + I)**3
++    assert factor(expand(expected), extension=[I]) == expected
++    expected = Mul(3, 2*x - 1, 3*y - 1)
++    assert factor(expand(expected)) == expected
++
++
+ def test_factor_large():
+     f = (x**2 + 4*x + 4)**10000000*(x**2 + 1)*(x**2 + 2*x + 1)**1234567
+     g = ((x**2 + 2*x + 1)**3000*y**2 + (x**2 + 2*x + 1)**3000*2*y + (
+@@ -3249,10 +3272,11 @@ def test_poly_matching_consistency():
+     assert Poly(x, x) * I == Poly(I*x, x)
+ 
+ 
+-@XFAIL
+ def test_issue_5786():
+-    assert expand(factor(expand(
+-        (x - I*y)*(z - I*t)), extension=[I])) == -I*t*x - t*y + x*z - I*y*z
++    expected = (x - I*y)*(z - I*t)
++    result = factor(expand(expected), extension=[I])
++    assert result == expected
++    assert expand(result) == -I*t*x - t*y + x*z - I*y*z
+ 
+ 
+ def test_noncommutative():

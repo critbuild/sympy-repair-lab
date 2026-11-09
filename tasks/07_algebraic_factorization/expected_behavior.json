@@ -1,0 +1,72 @@
+{
+  "case": "07_algebraic_factorization",
+  "derivation": "Readable export of the passing reference oracle frozen before the expanded primary run; no scoring changes.",
+  "reference_patch": "assets/19040-reference.patch",
+  "reference_oracle": "validation/controls-v4/07_algebraic_factorization-reference/oracle.json",
+  "requirements": [
+    {
+      "name": "reported_identity",
+      "group": "required",
+      "expected": true
+    },
+    {
+      "name": "reported_factored_output",
+      "group": "required",
+      "expected": true
+    },
+    {
+      "name": "reported_factor_structure",
+      "group": "required",
+      "expected": true
+    },
+    {
+      "name": "complex_identity",
+      "group": "required",
+      "expected": true
+    },
+    {
+      "name": "complex_factored_output",
+      "group": "required",
+      "expected": true
+    },
+    {
+      "name": "complex_factor_structure",
+      "group": "required",
+      "expected": true
+    },
+    {
+      "name": "coefficient_identity",
+      "group": "required",
+      "expected": true
+    },
+    {
+      "name": "coefficient_factored_output",
+      "group": "required",
+      "expected": true
+    },
+    {
+      "name": "coefficient_factor_structure",
+      "group": "required",
+      "expected": true
+    },
+    {
+      "name": "rational_factorization",
+      "group": "preservation",
+      "expected": true
+    },
+    {
+      "name": "irreducible_input",
+      "group": "preservation",
+      "expected": true
+    },
+    {
+      "name": "univariate_multiplicity",
+      "group": "preservation",
+      "expected": true
+    }
+  ],
+  "regression_suites": [
+    "sympy/polys/tests/test_polytools.py"
+  ],
+  "task_level_pass": "All required and preservation checks and relevant regression suites pass."
+}

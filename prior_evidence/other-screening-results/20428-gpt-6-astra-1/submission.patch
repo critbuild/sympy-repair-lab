@@ -1,0 +1,98 @@
+diff --git a/sympy/polys/densearith.py b/sympy/polys/densearith.py
+index bce08bb..466c9f8 100644
+--- a/sympy/polys/densearith.py
++++ b/sympy/polys/densearith.py
+@@ -269,7 +269,8 @@ def dup_mul_ground(f, c, K):
+     if not c or not f:
+         return []
+     else:
+-        return [ cf * c for cf in f ]
++        # Multiplication can simplify a nonzero-looking EX coefficient to zero.
++        return dup_strip([ cf * c for cf in f ])
+ 
+ 
+ def dmp_mul_ground(f, c, u, K):
+@@ -291,7 +292,7 @@ def dmp_mul_ground(f, c, u, K):
+ 
+     v = u - 1
+ 
+-    return [ dmp_mul_ground(cf, c, v, K) for cf in f ]
++    return dmp_strip([ dmp_mul_ground(cf, c, v, K) for cf in f ], u)
+ 
+ 
+ def dup_quo_ground(f, c, K):
+diff --git a/sympy/polys/tests/test_densearith.py b/sympy/polys/tests/test_densearith.py
+index 55b2f47..dd1bdb0 100644
+--- a/sympy/polys/tests/test_densearith.py
++++ b/sympy/polys/tests/test_densearith.py
+@@ -39,7 +39,8 @@
+ )
+ 
+ from sympy.polys.specialpolys import f_polys
+-from sympy.polys.domains import FF, ZZ, QQ
++from sympy.polys.domains import FF, ZZ, QQ, EX
++from sympy import Rational
+ 
+ from sympy.testing.pytest import raises
+ 
+@@ -196,6 +197,20 @@ def test_dmp_mul_ground():
+     ]
+ 
+ 
++def test_mul_ground_EX_zero():
++    # This coefficient becomes literal zero only during EX arithmetic.
++    a = EX(18**Rational(1, 3) - 2**Rational(1, 3)*3**Rational(2, 3))
++    assert a != EX.zero
++    assert a*EX(3) == EX.zero
++    assert dup_mul_ground([a], EX(3), EX) == []
++    assert dup_mul_ground([a, EX.one, a], EX(3), EX) == [EX(3), EX.zero]
++    assert dmp_mul_ground([[a], [a]], EX(3), 1, EX) == [[]]
++    assert dmp_mul_ground([[a], [a, EX.one, a]], EX(3), 1, EX) == [
++        [EX(3), EX.zero]]
++    assert dmp_mul_ground([[[a]], [[a]]], EX(3), 2, EX) == [[[]]]
++    assert dmp_mul_ground([[EX.one], [EX.one]], EX.zero, 1, EX) == [[]]
++
++
+ def test_dup_quo_ground():
+     raises(ZeroDivisionError, lambda: dup_quo_ground(dup_normal([1, 2,
+            3], ZZ), ZZ(0), ZZ))
+diff --git a/sympy/polys/tests/test_polytools.py b/sympy/polys/tests/test_polytools.py
+index c774fc4..cac74d2 100644
+--- a/sympy/polys/tests/test_polytools.py
++++ b/sympy/polys/tests/test_polytools.py
+@@ -1445,6 +1445,35 @@ def test_Poly_clear_denoms():
+         x + 3*sqrt(2), x, domain='EX') and poly.get_domain() == EX
+ 
+ 
++def test_Poly_clear_denoms_EX_zero():
++    # Reduced reproducer for issue 20428: clearing the denominator simplifies
++    # a coefficient to zero, so its dense representation must be stripped.
++    a = (18**Rational(1, 3) - 2**Rational(1, 3)*3**Rational(2, 3))/3
++    for gens in ((x,), (x, y), (x, y, z)):
++        zero = Poly(0, *gens, domain=EX)
++        for convert in (False, True):
++            coeff, poly = Poly(a, *gens, domain=EX).clear_denoms(convert=convert)
++            assert coeff == 3
++            assert poly.rep == zero.rep
++            assert poly.is_zero
++            assert poly.as_expr() == 0
++            assert poly.terms_gcd() == ((0,)*len(gens), zero)
++            assert poly.primitive() == (0, zero)
++
++            # Remove vanished leading terms without losing the remaining ones.
++            f = Poly(a*x**2 + a*gens[-1] + S.One/3, *gens, domain=EX)
++            assert f.clear_denoms(convert=convert) == (
++                3, Poly(1, *gens, domain=EX))
++
++    # Undecidable coefficients must survive normalization.
++    assert sin(z).is_zero is None
++    for gens in ((x,), (x, y)):
++        for convert in (False, True):
++            f = Poly(sin(z)*x/3 + S.One/3, *gens, domain=EX)
++            assert f.clear_denoms(convert=convert) == (
++                3, Poly(sin(z)*x + 1, *gens, domain=EX))
++
++
+ def test_Poly_rat_clear_denoms():
+     f = Poly(x**2/y + 1, x)
+     g = Poly(x**3 + y, x)

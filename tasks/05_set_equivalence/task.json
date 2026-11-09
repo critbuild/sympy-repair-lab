@@ -1,0 +1,18 @@
+{
+  "id": "05_set_equivalence",
+  "title": "Equivalent configuration sets",
+  "base": "20438",
+  "base_commit": "33b47e4bd60e2302e42616141e76285038b724d6",
+  "prompt": "A configuration validator represents combinations either as a Cartesian product or as an explicit list of tuples. Equivalent representations should agree:\n    from sympy import FiniteSet, ProductSet, Eq\n    a = FiniteSet(1, 2)\n    product = ProductSet(a, a)\n    listed = FiniteSet((1, 1), (1, 2), (2, 1), (2, 2))\n    print(product.is_subset(listed))  # desired True; currently None\n    print(Eq(product, listed).simplify())  # desired True; currently crashes\n\nRepair subset and equality reasoning for these finite representations, including the reverse operand order and demonstrably unequal sets. Simplifying a set equality must not crash or force a truth value when symbolic membership is undecidable. Preserve normal set operations. An old test may expect an undecided result for a product of tuples versus a real interval; a justified transition to a provably False result is allowed. Add regression coverage.",
+  "tests": [
+    "sympy/sets/tests/test_sets.py",
+    "sympy/core/tests/test_relational.py"
+  ],
+  "provenance": "Adapted from issue #19378 / SWE-bench sympy__sympy-20438. A configuration-validation interpretation and explicit symbolic-preservation checks are authored.",
+  "sources": [
+    "https://github.com/sympy/sympy/issues/19378"
+  ],
+  "seed": null,
+  "reference": "20438-reference.patch",
+  "frozen_test_patch": "20438-tests.patch"
+}

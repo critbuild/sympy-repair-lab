@@ -1,0 +1,9 @@
+Fixed reversed strict/inclusive dispatch and routed Rational/Float–NumberSymbol comparisons through existing difference evaluation. No input rounding or global precision changes.
+
+The reproduction now prints `False False True True`. Added tests cover both operand orders, close boundaries, equality strictness, infinities, and undecidable symbolic relations. No existing expectations changed.
+
+Validation command:
+```powershell
+& '.\.venv\Scripts\python.exe' run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/core/tests/test_numbers.py sympy/core/tests/test_relational.py sympy/core/tests/test_expr.py sympy/core/tests/test_evalf.py
+```
+Result: **257 passed, 7 xfailed**. `git diff --check` also passed.

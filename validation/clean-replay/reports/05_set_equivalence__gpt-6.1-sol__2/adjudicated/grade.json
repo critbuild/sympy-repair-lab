@@ -1,0 +1,38 @@
+{
+  "case": "05_set_equivalence",
+  "complete_pass": true,
+  "required_pass": true,
+  "preservation_pass": true,
+  "oracle_execution": {
+    "exit_code": 0,
+    "seconds": 3.33,
+    "command": [
+      "<WORKSPACE>\\work\\contract-clean-uv-cache\\builds-v0\\.tmp8Ix2ty\\Scripts\\python.exe",
+      "<WORKSPACE>\\work\\contract-package-validation\\entry\\checks.py",
+      "05_set_equivalence"
+    ],
+    "summary": ""
+  },
+  "regression": {
+    "exit_code": 0,
+    "seconds": 7.72,
+    "command": [
+      "<WORKSPACE>\\work\\contract-clean-uv-cache\\builds-v0\\.tmp8Ix2ty\\Scripts\\python.exe",
+      "-c",
+      "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+      "-p",
+      "pytest_timeout",
+      "--timeout=60",
+      "-q",
+      "--tb=short",
+      "--disable-warnings",
+      "sympy/sets/tests/test_sets.py",
+      "sympy/core/tests/test_relational.py"
+    ],
+    "summary": "157 passed, 6 xfailed, 3 warnings in 5.87s"
+  },
+  "failed_checks": [],
+  "check_count": 10,
+  "passed_checks": 10,
+  "adjudication": "case05-permitted-behavior-v1"
+}

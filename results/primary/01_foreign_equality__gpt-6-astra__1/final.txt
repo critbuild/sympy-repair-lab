@@ -1,0 +1,19 @@
+Implemented reflected equality and inequality for Basic, symbols, and scalar numbers by returning and preserving `NotImplemented` for unsympifiable operands. Plain objects remain unequal; existing numeric comparison behavior is preserved.
+
+Added regression coverage. The reproducer now prints `True True`. No existing test expectations were changed.
+
+Commands run with the supplied environment settings:
+
+```powershell
+& .\.venv\Scripts\python.exe run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/core/tests/test_basic.py sympy/core/tests/test_numbers.py
+```
+
+**97 passed, 1 xfailed.**
+
+```powershell
+& .\.venv\Scripts\python.exe run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/core/tests sympy/sets/tests sympy/matrices/tests sympy/physics/vector/tests
+```
+
+**1860 passed, 61 skipped, 49 xfailed, 1 failed.** The failure, `test_evaluate_false`, raises a parser AST error and also fails with the original implementation.
+
+`git diff --check` passed.

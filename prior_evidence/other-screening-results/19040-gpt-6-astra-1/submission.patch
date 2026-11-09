@@ -1,0 +1,92 @@
+diff --git a/sympy/polys/factortools.py b/sympy/polys/factortools.py
+index c6a5f9f..f1e8ead 100644
+--- a/sympy/polys/factortools.py
++++ b/sympy/polys/factortools.py
+@@ -1146,6 +1146,16 @@ def dmp_ext_factor(f, u, K):
+     if all(d <= 0 for d in dmp_degree_list(f, u)):
+         return lc, []
+ 
++    # The square-free part with respect to the first variable removes
++    # its content. Factor that content separately in the remaining variables.
++    cont, f = dmp_primitive(f, u, K)
++    coeff, content_factors = dmp_ext_factor(cont, u - 1, K)
++    content_factors = [([factor], k) for factor, k in content_factors]
++    lc *= coeff
++
++    if dmp_degree(f, u) <= 0:
++        return lc, content_factors
++
+     f, F = dmp_sqf_part(f, u, K), f
+     s, g, r = dmp_sqf_norm(f, u, K)
+ 
+@@ -1162,7 +1172,8 @@ def dmp_ext_factor(f, u, K):
+             h = dmp_compose(h, H, u, K)
+             factors[i] = h
+ 
+-    return lc, dmp_trial_division(F, factors, u, K)
++    factors = dmp_trial_division(F, factors, u, K)
++    return lc, _sort_factors(factors + content_factors)
+ 
+ 
+ def dup_gf_factor(f, K):
+diff --git a/sympy/polys/tests/test_factortools.py b/sympy/polys/tests/test_factortools.py
+index 7bcd935..edff217 100644
+--- a/sympy/polys/tests/test_factortools.py
++++ b/sympy/polys/tests/test_factortools.py
+@@ -497,6 +497,26 @@ def anp(x):
+                         (anp([QQ(1)])*x + anp([QQ( 1), QQ(0)])*y, 1)])
+ 
+ 
++def test_dmp_ext_factor_content():
++    K = QQ.algebraic_field(sqrt(2))
++    R, x, y, z = ring("x,y,z", K)
++    a = K.unit
++
++    cases = [
++        (K.one, [(x - 1, 1), (y - 1, 1)]),
++        (K(3), [(x - a, 2), (y - a, 3), (y + a, 3), (z - 1, 4)]),
++        (a, [(y - a, 2), (z - 1, 3)]),
++        (K(2), [(z - a, 2), (z + a, 2)]),
++    ]
++    for coeff, factors in cases:
++        f = R(coeff)
++        for factor, multiplicity in factors:
++            f *= factor**multiplicity
++        result_coeff, result_factors = R.dmp_ext_factor(f)
++        assert result_coeff == coeff
++        assert dict(result_factors) == dict(factors)
++
++
+ def test_dup_factor_list():
+     R, x = ring("x", ZZ)
+     assert R.dup_factor_list(0) == (0, [])
+diff --git a/sympy/polys/tests/test_polytools.py b/sympy/polys/tests/test_polytools.py
+index b0b4cd6..c7d3599 100644
+--- a/sympy/polys/tests/test_polytools.py
++++ b/sympy/polys/tests/test_polytools.py
+@@ -3249,12 +3249,24 @@ def test_poly_matching_consistency():
+     assert Poly(x, x) * I == Poly(I*x, x)
+ 
+ 
+-@XFAIL
+ def test_issue_5786():
+     assert expand(factor(expand(
+         (x - I*y)*(z - I*t)), extension=[I])) == -I*t*x - t*y + x*z - I*y*z
+ 
+ 
++def test_issue_18895():
++    f = (x - 1)*(y - 1)
++    assert factor(expand(f), extension=[I]) == f
++    assert factor(expand(f), extension=True) == f
++
++    f = 3*(x - sqrt(2))**2*(y - 1)**3
++    assert factor(expand(f), extension=True) == f
++    assert factor(expand(f), extension=[sqrt(2)]) == f
++
++    f = (x - 1)*(y**2 + 1)**2
++    assert factor(expand(f), extension=[I]) == (x - 1)*(y - I)**2*(y + I)**2
++
++
+ def test_noncommutative():
+     class foo(Expr):
+         is_commutative=False

@@ -1,0 +1,11 @@
+Fixed `GeometryEntity.__ne__` to propagate `NotImplemented` instead of negating it. This preserves reflected foreign-object comparisons and makes your unchanged example print `2`.
+
+Added coverage for unknown objects, reflected methods, and equal/different lines, rays, segments, points, circles, ellipses, and polygons. No existing expectations changed.
+
+Using the specified environment variables and interpreter:
+
+```powershell
+& '.\.venv\Scripts\python.exe' run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/core/tests/test_basic.py sympy/core/tests/test_numbers.py sympy/geometry/tests
+```
+
+Result: **168 passed, 1 xfailed**. New tests demonstrated the failure before the fix. `git diff --check` also passed.

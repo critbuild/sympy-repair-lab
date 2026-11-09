@@ -1,0 +1,35 @@
+{
+  "case": "05_set_equivalence",
+  "complete_pass": false,
+  "required_pass": false,
+  "preservation_pass": true,
+  "oracle_execution": {
+    "exit_code": 1,
+    "seconds": 4.7,
+    "command": [
+      "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+      "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+      "05_set_equivalence"
+    ],
+    "summary": ""
+  },
+  "regression": null,
+  "failed_checks": [
+    {
+      "name": "missing_tuple",
+      "group": "required",
+      "expected": false,
+      "actual": true,
+      "passed": false
+    },
+    {
+      "name": "scalar_tuple_mismatch",
+      "group": "required",
+      "expected": false,
+      "actual": true,
+      "passed": false
+    }
+  ],
+  "check_count": 10,
+  "passed_checks": 8
+}

@@ -1,0 +1,27 @@
+A Python integration wraps symbolic values in its own class. SymPy currently blocks reflected equality: wrapper == value can be True while value == wrapper is False.
+
+Reproducer:
+    from sympy import Basic, Symbol, Integer, Rational, Float
+    class Box:
+        def __eq__(self, other):
+            if isinstance(other, Basic):
+                return True
+            return NotImplemented
+        def __ne__(self, other):
+            return not self == other
+    box = Box()
+    value = Integer(3)
+    print(box == value, value == box)  # desired: True, True
+
+Repair equality and inequality interoperability for Basic, symbols, and scalar numeric objects when the other operand cannot be sympified. Let Python try the reflected comparison. Unsupported plain objects should still compare unequal, and existing comparisons and downstream APIs must retain their behavior. Add useful regression coverage.
+
+Environment and working instructions:
+- This is a complete pinned SymPy checkout with Python 3.9 and dependencies installed.
+- Use your actual shell and file-editing tools. Work independently in this checkout.
+- This is an offline repair. Do not access parent/sibling directories, evaluation assets, upstream history, or network sources.
+- Interpreter: <WORKSPACE>\work\contract-primary\primary\01_foreign_equality__gpt-6-astra__3\.venv\Scripts\python.exe
+- PowerShell: $env:PYTHONDONTWRITEBYTECODE='1'; $env:PYTEST_DISABLE_PLUGIN_AUTOLOAD='1'; $env:PYTHONHASHSEED='0'; $env:PYTHONIOENCODING='utf-8'
+- Relevant suite: & '<WORKSPACE>\work\contract-primary\primary\01_foreign_equality__gpt-6-astra__3\.venv\Scripts\python.exe' run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/core/tests/test_basic.py sympy/core/tests/test_numbers.py
+- run_pytest.py only enables the historical pytest compatibility flag and py.test alias. You may run additional test files and individual cases.
+- Reproduce, inspect, repair, add tests, and rerun relevant tests. Preserve behavior outside the requested change. Explain any legitimately obsolete test expectations you update.
+- You have up to 20 minutes. Finish with a concise explanation and the actual commands and outcomes. Do not claim tests passed without running them.

@@ -1,0 +1,17 @@
+{
+  "id": "06_symbolic_determinant",
+  "title": "Singular symbolic matrices",
+  "base": "13877",
+  "base_commit": "1659712001810f5fc563a443949f8e3bb38af4bd",
+  "prompt": "A symbolic linear-algebra workflow evaluates determinants of matrices with entries M[j,i] = i + a*j:\n    from sympy import Matrix, symbols\n    a = symbols('a')\n    matrix = lambda n: Matrix([[i + a*j for i in range(n)] for j in range(n)])\n    print(matrix(5).det())  # currently nan; expected 0\n    print(matrix(6).det())  # currently raises; expected 0\n\nFor n >= 3 the rows span at most two vectors, so the determinant is identically zero. Repair the default determinant algorithm's handling of these symbolic zero pivots. Preserve correct results for nonsingular matrices and existing determinant methods. Do not special-case the displayed matrix family or replace all determinants with zero. Add regression coverage.",
+  "tests": [
+    "sympy/matrices/tests/test_matrices.py"
+  ],
+  "provenance": "Adapted from issue #13835 / SWE-bench sympy__sympy-13877. Rank reasoning supplies an independent expected result.",
+  "sources": [
+    "https://github.com/sympy/sympy/pull/13877"
+  ],
+  "seed": null,
+  "reference": "13877-reference.patch",
+  "frozen_test_patch": null
+}

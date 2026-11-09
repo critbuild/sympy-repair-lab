@@ -1,0 +1,8 @@
+A symbolic linear-algebra workflow evaluates determinants of matrices with entries M[j,i] = i + a*j:
+    from sympy import Matrix, symbols
+    a = symbols('a')
+    matrix = lambda n: Matrix([[i + a*j for i in range(n)] for j in range(n)])
+    print(matrix(5).det())  # currently nan; expected 0
+    print(matrix(6).det())  # currently raises; expected 0
+
+For n >= 3 the rows span at most two vectors, so the determinant is identically zero. Repair the default determinant algorithm's handling of these symbolic zero pivots. Preserve correct results for nonsingular matrices and existing determinant methods. Do not special-case the displayed matrix family or replace all determinants with zero. Add regression coverage.

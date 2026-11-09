@@ -1,0 +1,54 @@
+{
+  "case": "20428",
+  "passed": false,
+  "checks": [
+    {
+      "name": "reported_cleared_expression_is_zero",
+      "expected": "0",
+      "actual": "0",
+      "passed": true
+    },
+    {
+      "name": "reported_cleared_poly_is_zero",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "reported_terms_gcd_no_crash",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "original_constant_poly_is_zero",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "name": "original_equals_canonical_zero",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "name": "nonzero_radical_preserved",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "name": "unknown_symbolic_coefficient_preserved",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "name": "nonconstant_polynomial_preserved",
+      "expected": "x + sqrt(2)",
+      "actual": "x + sqrt(2)",
+      "passed": true
+    }
+  ]
+}

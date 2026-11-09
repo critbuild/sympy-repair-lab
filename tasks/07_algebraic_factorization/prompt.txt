@@ -1,0 +1,6 @@
+A polynomial factorization pipeline loses part of its input when factoring over a complex extension:
+    from sympy import symbols, expand, factor, I
+    x, y = symbols('x y')
+    expression = expand((x - 1)*(y - 1))
+    print(factor(expression, extension=[I]))  # currently x - 1
+The result must retain both factors and expand back to the input. Repair square-free multivariate inputs, including complex linear factors and non-unit coefficients. Preserve existing univariate repeated-factor handling and normal rational factorization. Multivariate inputs with repeated factors are outside this task's scope. Returning the input unfactored is not a solution. Add regression coverage.

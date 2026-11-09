@@ -1,0 +1,222 @@
+diff --git a/sympy/core/relational.py b/sympy/core/relational.py
+index e2e0b7f..1d93339 100644
+--- a/sympy/core/relational.py
++++ b/sympy/core/relational.py
+@@ -304,6 +304,10 @@ def _eval_simplify(self, **kwargs):
+         from .add import Add
+         r = self
+         r = r.func(*[i.simplify(**kwargs) for i in r.args])
++        if r.is_Relational and not all(isinstance(a, Expr) for a in r.args):
++            # Set difference (and other non-arithmetic operations) cannot
++            # be used to simplify a relation by comparing with zero.
++            return r.canonical
+         if r.is_Relational:
+             dif = r.lhs - r.rhs
+             # replace dif with a valid Number that will
+@@ -560,7 +564,8 @@ def _eval_simplify(self, **kwargs):
+         from sympy.solvers.solveset import linear_coeffs
+         # standard simplify
+         e = super()._eval_simplify(**kwargs)
+-        if not isinstance(e, Equality):
++        if not isinstance(e, Equality) or not all(
++                isinstance(a, Expr) for a in e.args):
+             return e
+         free = self.free_symbols
+         if len(free) == 1:
+@@ -666,7 +671,9 @@ def binary_symbols(self):
+ 
+     def _eval_simplify(self, **kwargs):
+         # simplify as an equality
+-        eq = Equality(*self.args)._eval_simplify(**kwargs)
++        eq = Equality(*self.args)
++        if isinstance(eq, Equality):
++            eq = eq._eval_simplify(**kwargs)
+         if isinstance(eq, Equality):
+             # send back Ne with the new args
+             return self.func(*eq.args)
+diff --git a/sympy/core/tests/test_relational.py b/sympy/core/tests/test_relational.py
+index e94437a..d7939e2 100644
+--- a/sympy/core/tests/test_relational.py
++++ b/sympy/core/tests/test_relational.py
+@@ -9,7 +9,7 @@
+                                    GreaterThan, LessThan, StrictGreaterThan,
+                                    StrictLessThan, Rel, Eq, Lt, Le,
+                                    Gt, Ge, Ne, is_le, is_gt, is_ge, is_lt, is_eq, is_neq)
+-from sympy.sets.sets import Interval, FiniteSet
++from sympy.sets.sets import Interval, FiniteSet, ProductSet
+ 
+ from itertools import combinations
+ 
+@@ -1099,6 +1099,27 @@ def test_set_equality_canonical():
+     assert B.canonical == B.reversed
+ 
+ 
++def test_simplify_set_equality():
++    # A set difference is not an arithmetic difference to compare with zero.
++    pairs = [
++        (FiniteSet(x), FiniteSet(y)),
++        (FiniteSet(x), FiniteSet(1)),
++        (ProductSet(FiniteSet(x)), FiniteSet((1,))),
++        (ProductSet(FiniteSet(x), FiniteSet(1)), FiniteSet((y, 1))),
++        (ProductSet(Interval(0, 1)), ProductSet(Interval(0, x))),
++    ]
++    for lhs, rhs in pairs:
++        for a, b in [(lhs, rhs), (rhs, lhs)]:
++            for relation in (Eq, Ne):
++                eq = relation(a, b)
++                assert eq.simplify() == eq.canonical
++
++    # Rebuilding an unevaluated relation can give a definitive result.
++    lhs = ProductSet(FiniteSet(1))
++    assert Eq(lhs, FiniteSet((1,)), evaluate=False).simplify() is S.true
++    assert Ne(lhs, FiniteSet((1,)), evaluate=False).simplify() is S.false
++
++
+ def test_trigsimp():
+     # issue 16736
+     s, c = sin(2*x), cos(2*x)
+diff --git a/sympy/sets/handlers/comparison.py b/sympy/sets/handlers/comparison.py
+index 6f7a19f..5d06cd5 100644
+--- a/sympy/sets/handlers/comparison.py
++++ b/sympy/sets/handlers/comparison.py
+@@ -56,4 +56,7 @@ def _eval_is_eq(lhs, rhs): # noqa: F811
+ 
+ @dispatch(Set, Set) # type:ignore
+ def _eval_is_eq(lhs, rhs): # noqa: F811
+-    return None
++    # Equality requires both inclusions; a false inclusion is decisive even
++    # when the other inclusion is unknown.
++    return fuzzy_and(a.is_subset(b) for a, b in
++                     ((lhs, rhs), (rhs, lhs)))
+diff --git a/sympy/sets/handlers/issubset.py b/sympy/sets/handlers/issubset.py
+index fdca060..1755c1a 100644
+--- a/sympy/sets/handlers/issubset.py
++++ b/sympy/sets/handlers/issubset.py
+@@ -1,7 +1,7 @@
+ from sympy import S, Symbol
+ from sympy.core.logic import fuzzy_and, fuzzy_bool, fuzzy_not, fuzzy_or
+ from sympy.core.relational import Eq
+-from sympy.sets.sets import FiniteSet, Interval, Set, Union
++from sympy.sets.sets import FiniteSet, Interval, ProductSet, Set, Union
+ from sympy.sets.fancysets import Complexes, Reals, Range, Rationals
+ from sympy.multipledispatch import dispatch
+ 
+@@ -12,6 +12,11 @@
+ def is_subset_sets(a, b): # noqa:F811
+     return None
+ 
++@dispatch(ProductSet, FiniteSet)  # type: ignore # noqa:F811
++def is_subset_sets(a, b): # noqa:F811
++    if a.is_finite_set and a.is_iterable:
++        return fuzzy_and(b.contains(element) for element in a)
++
+ @dispatch(Interval, Interval)  # type: ignore # noqa:F811
+ def is_subset_sets(a, b): # noqa:F811
+     # This is correct but can be made more comprehensive...
+diff --git a/sympy/sets/tests/test_powerset.py b/sympy/sets/tests/test_powerset.py
+index fdb5f50..c1fb1d8 100644
+--- a/sympy/sets/tests/test_powerset.py
++++ b/sympy/sets/tests/test_powerset.py
+@@ -5,7 +5,7 @@
+ from sympy.sets.fancysets import Interval
+ from sympy.sets.powerset import PowerSet
+ from sympy.sets.sets import FiniteSet
+-from sympy.testing.pytest import raises, XFAIL
++from sympy.testing.pytest import raises
+ 
+ 
+ def test_powerset_creation():
+@@ -54,10 +54,8 @@ def test_powerset__contains__():
+                     PowerSet(subset_series[j], evaluate=False)
+ 
+ 
+-@XFAIL
+-def test_failing_powerset__contains__():
+-    # XXX These are failing when evaluate=True,
+-    # but using unevaluated PowerSet works fine.
++def test_powerset_rewrite_contains():
++    # Membership in the explicit power set uses equality between sets.
+     assert FiniteSet(1, 2) not in PowerSet(S.EmptySet).rewrite(FiniteSet)
+     assert S.Naturals not in PowerSet(S.EmptySet).rewrite(FiniteSet)
+     assert S.Naturals not in PowerSet(FiniteSet(1, 2)).rewrite(FiniteSet)
+diff --git a/sympy/sets/tests/test_sets.py b/sympy/sets/tests/test_sets.py
+index d29a046..4147cb7 100644
+--- a/sympy/sets/tests/test_sets.py
++++ b/sympy/sets/tests/test_sets.py
+@@ -628,6 +628,34 @@ def test_ProductSet_is_empty():
+     assert ProductSet(Interval(x, 1), S.Reals).is_empty == None
+ 
+ 
++def test_ProductSet_finite_subset():
++    product = ProductSet(FiniteSet(1, 2), FiniteSet(1, 2))
++    listed = FiniteSet((1, 1), (1, 2), (2, 1), (2, 2))
++    missing = FiniteSet((1, 1), (1, 2), (2, 1))
++    extra = listed | FiniteSet((3, 3))
++
++    assert product.is_subset(listed) is True
++    assert listed.is_subset(product) is True
++    assert product.is_subset(missing) is False
++    assert missing.is_subset(product) is True
++    assert product.is_subset(extra) is True
++    assert extra.is_subset(product) is False
++    assert product.is_subset(S.EmptySet) is False
++    assert product.is_subset(FiniteSet(1, 2)) is False
++    assert ProductSet(S.Reals, S.Reals).is_subset(listed) is False
++
++    symbolic = ProductSet(FiniteSet(x), FiniteSet(1))
++    assert symbolic.is_subset(FiniteSet((y, 1))) is None
++    assert FiniteSet((y, 1)).is_subset(symbolic) is None
++    assert symbolic.is_subset(FiniteSet((y, 2))) is False
++
++    # Finite iterable factors need not themselves be FiniteSets.
++    assert ProductSet(Range(2), Range(2)).is_subset(
++        FiniteSet((0, 0), (0, 1), (1, 0), (1, 1))) is True
++    nested = ProductSet(ProductSet(FiniteSet(1)), FiniteSet(2))
++    assert nested.is_subset(FiniteSet(((1,), 2))) is True
++
++
+ def test_interval_subs():
+     a = Symbol('a', real=True)
+ 
+@@ -1251,7 +1279,8 @@ def test_Eq():
+     assert Eq(FiniteSet({x, y}).subs(y, x+1), FiniteSet({x})) is S.false
+     assert Eq(FiniteSet({x, y}), FiniteSet({x})).subs(y, x+1) is S.false
+ 
+-    assert Eq(ProductSet({1}, {2}), Interval(1, 2)) not in (S.true, S.false)
++    # A nonempty set of tuples cannot equal a real interval.
++    assert Eq(ProductSet({1}, {2}), Interval(1, 2)) is S.false
+     assert Eq(ProductSet({1}), ProductSet({1}, {2})) is S.false
+ 
+     assert Eq(FiniteSet(()), FiniteSet(1)) is S.false
+@@ -1262,6 +1291,31 @@ def test_Eq():
+     assert unchanged(Eq, ProductSet(i1, i1), ProductSet(i2, i2))
+ 
+ 
++def test_Eq_ProductSet_FiniteSet():
++    product = ProductSet(FiniteSet(1, 2), FiniteSet(1, 2))
++    listed = FiniteSet((1, 1), (1, 2), (2, 1), (2, 2))
++    missing = FiniteSet((1, 1), (1, 2), (2, 1))
++    extra = listed | FiniteSet((3, 3))
++    for other, expected in [(listed, S.true), (missing, S.false),
++                            (extra, S.false), (FiniteSet(1, 2), S.false),
++                            (S.EmptySet, S.false)]:
++        for lhs, rhs in [(product, other), (other, product)]:
++            assert Eq(lhs, rhs) is expected
++            assert Eq(lhs, rhs, evaluate=False).simplify() is expected
++
++    symbolic = ProductSet(FiniteSet(x), FiniteSet(1))
++    for lhs, rhs in [(symbolic, FiniteSet((y, 1))),
++                     (FiniteSet((y, 1)), symbolic)]:
++        assert isinstance(Eq(lhs, rhs), Eq)
++        assert Eq(lhs, rhs).subs(y, x) is S.true
++        assert Eq(lhs, rhs).subs(y, x + 1) is S.false
++
++    # An undecidable membership must not hide a known nonmember.
++    for lhs, rhs in [(ProductSet(FiniteSet(1, 2)), FiniteSet((x,), (3,))),
++                     (FiniteSet((x,), (3,)), ProductSet(FiniteSet(1, 2)))]:
++        assert Eq(lhs, rhs) is S.false
++
++
+ def test_SymmetricDifference():
+     A = FiniteSet(0, 1, 2, 3, 4, 5)
+     B = FiniteSet(2, 4, 6, 8, 10)

@@ -1,0 +1,19 @@
+{
+  "exit_code": 1,
+  "summary": "1 failed, 96 passed, 1 xfailed, 5 warnings in 1.92s",
+  "seconds": 5.77,
+  "command": [
+    "$WORKSPACE\\work\\real-debug-env39\\Scripts\\python.exe",
+    "-c",
+    "import sys; sys._running_pytest = True; import pytest, py; py.test = pytest; sys.modules[\"py.test\"] = pytest; sys.exit(pytest.main(sys.argv[1:]))",
+    "-p",
+    "pytest_timeout",
+    "--timeout=60",
+    "-q",
+    "--tb=short",
+    "--disable-warnings",
+    "sympy/core/tests/test_basic.py",
+    "sympy/core/tests/test_numbers.py"
+  ],
+  "grader_root": "$WORKSPACE\\work\\real-repo-debug-sessions\\grade-13091-33bb2edf"
+}

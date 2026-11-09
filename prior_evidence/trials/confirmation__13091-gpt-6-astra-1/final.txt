@@ -1,0 +1,10 @@
+Fixed unsupported comparisons to return `NotImplemented`, allowing Python to invoke reflected methods. Updated `__ne__` to propagate it without negation. Symbolic comparisons and singleton identity behavior remain intact.
+
+Added regression coverage for all six comparisons, fallback behavior, and supported conversions. New regressions fail against the original code. No old expectations changed.
+
+Using `.\.venv\Scripts\python.exe run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings`:
+
+- `sympy/core/tests/test_basic.py sympy/core/tests/test_numbers.py`: **98 passed, 1 xfailed**.
+- `sympy/core/tests`: **1,429 passed, 60 skipped, 42 xfailed, 1 failed**. The failure is an AST compatibility error in `test_evaluate_false`, confirmed on unmodified production code.
+
+`git diff --check` passed.

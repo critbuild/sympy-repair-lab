@@ -1,0 +1,250 @@
+{
+  "generated_utc": "2026-11-08T19:28:57.847442+00:00",
+  "software": "SymPy",
+  "base_commit": "d1320814eda6549996190618a21eaf212cfd4d1e",
+  "source_files": 1459,
+  "task": "Repair rich comparison with unknown Python types while preserving existing behavior.",
+  "primary_failure_mode": "Local equality fix introduces a nonlocal GeometryEntity inequality regression by negating NotImplemented.",
+  "confirmation_counts": [
+    {
+      "model": "gpt-6-astra",
+      "fresh_confirmation_sessions": 3,
+      "geometry_regressions": 3
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "fresh_confirmation_sessions": 3,
+      "geometry_regressions": 3
+    }
+  ],
+  "trials": [
+    {
+      "folder": "confirmation__13091-gpt-6-astra-1",
+      "batch": "confirmation",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "medium",
+      "thread_ids": [
+        "01a1bc94-e4ce-7a22-a6db-36c5699d6592"
+      ],
+      "agent_seconds": 225.0,
+      "command_count": 12,
+      "cli_exit_code": 0,
+      "geometry_passed": false,
+      "geometry_failed_checks": 13,
+      "reported_issue_tests_passed": true,
+      "original_core_tests_passed": true,
+      "usage": [
+        {
+          "input_tokens": 548495,
+          "cached_input_tokens": 507648,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 4967,
+          "reasoning_output_tokens": 859
+        }
+      ]
+    },
+    {
+      "folder": "confirmation__13091-gpt-6-astra-2",
+      "batch": "confirmation",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "medium",
+      "thread_ids": [
+        "01a1bc94-e4e0-73c3-8fac-6f5c6a13cd1e"
+      ],
+      "agent_seconds": 227.75,
+      "command_count": 13,
+      "cli_exit_code": 0,
+      "geometry_passed": false,
+      "geometry_failed_checks": 13,
+      "reported_issue_tests_passed": true,
+      "original_core_tests_passed": true,
+      "usage": [
+        {
+          "input_tokens": 536079,
+          "cached_input_tokens": 494720,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 4841,
+          "reasoning_output_tokens": 698
+        }
+      ]
+    },
+    {
+      "folder": "confirmation__13091-gpt-6-astra-3",
+      "batch": "confirmation",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "medium",
+      "thread_ids": [
+        "01a1bc98-b9e5-7863-bc7a-d4e643a623f0"
+      ],
+      "agent_seconds": 277.64,
+      "command_count": 13,
+      "cli_exit_code": 0,
+      "geometry_passed": false,
+      "geometry_failed_checks": 13,
+      "reported_issue_tests_passed": true,
+      "original_core_tests_passed": true,
+      "usage": [
+        {
+          "input_tokens": 751258,
+          "cached_input_tokens": 705536,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 5995,
+          "reasoning_output_tokens": 1218
+        }
+      ]
+    },
+    {
+      "folder": "confirmation__13091-gpt-6.1-sol-1",
+      "batch": "confirmation",
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "medium",
+      "thread_ids": [
+        "01a1bc98-c28f-77d0-a619-4f85eb162407"
+      ],
+      "agent_seconds": 210.7,
+      "command_count": 12,
+      "cli_exit_code": 0,
+      "geometry_passed": false,
+      "geometry_failed_checks": 13,
+      "reported_issue_tests_passed": true,
+      "original_core_tests_passed": true,
+      "usage": [
+        {
+          "input_tokens": 662475,
+          "cached_input_tokens": 620416,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 6041,
+          "reasoning_output_tokens": 1678
+        }
+      ]
+    },
+    {
+      "folder": "confirmation__13091-gpt-6.1-sol-2",
+      "batch": "confirmation",
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "medium",
+      "thread_ids": [
+        "01a1bc9c-5742-7983-a81d-cd3539d5de33"
+      ],
+      "agent_seconds": 285.36,
+      "command_count": 15,
+      "cli_exit_code": 0,
+      "geometry_passed": false,
+      "geometry_failed_checks": 13,
+      "reported_issue_tests_passed": true,
+      "original_core_tests_passed": true,
+      "usage": [
+        {
+          "input_tokens": 979939,
+          "cached_input_tokens": 877184,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 7001,
+          "reasoning_output_tokens": 2152
+        }
+      ]
+    },
+    {
+      "folder": "confirmation__13091-gpt-6.1-sol-3",
+      "batch": "confirmation",
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "medium",
+      "thread_ids": [
+        "01a1bc9d-5560-7ca0-bf09-af6e6228fc07"
+      ],
+      "agent_seconds": 271.67,
+      "command_count": 17,
+      "cli_exit_code": 0,
+      "geometry_passed": false,
+      "geometry_failed_checks": 13,
+      "reported_issue_tests_passed": true,
+      "original_core_tests_passed": true,
+      "usage": [
+        {
+          "input_tokens": 920956,
+          "cached_input_tokens": 861440,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 7542,
+          "reasoning_output_tokens": 2022
+        }
+      ]
+    },
+    {
+      "folder": "screen-b__13091-gpt-6-astra-1",
+      "batch": "screen-b",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "medium",
+      "thread_ids": [
+        "01a1bc8f-6ad1-7421-b692-2aee46e2ba0c"
+      ],
+      "agent_seconds": 225.28,
+      "command_count": 12,
+      "cli_exit_code": 0,
+      "geometry_passed": false,
+      "geometry_failed_checks": 13,
+      "reported_issue_tests_passed": true,
+      "original_core_tests_passed": true,
+      "usage": [
+        {
+          "input_tokens": 497276,
+          "cached_input_tokens": 458624,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 4907,
+          "reasoning_output_tokens": 824
+        }
+      ]
+    },
+    {
+      "folder": "screen-b__13091-gpt-6.1-sol-1",
+      "batch": "screen-b",
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "medium",
+      "thread_ids": [
+        "01a1bc8f-6ada-7863-a563-f918d266d86e"
+      ],
+      "agent_seconds": 275.5,
+      "command_count": 20,
+      "cli_exit_code": 0,
+      "geometry_passed": false,
+      "geometry_failed_checks": 13,
+      "reported_issue_tests_passed": true,
+      "original_core_tests_passed": true,
+      "usage": [
+        {
+          "input_tokens": 1109350,
+          "cached_input_tokens": 1058688,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 7312,
+          "reasoning_output_tokens": 2173
+        }
+      ]
+    }
+  ],
+  "other_screening": [
+    {
+      "case": "20428",
+      "model": "gpt-6-astra",
+      "category": "failure_requires_semantic_review",
+      "interpretation": "Fixed the exact reported crash; failed a stronger construction-time zero assertion. Excluded as inconclusive for the stated repair request."
+    },
+    {
+      "case": "20438",
+      "model": "gpt-6-astra",
+      "category": "passed_frozen_suite",
+      "interpretation": "Passed frozen regression suite."
+    },
+    {
+      "case": "13877",
+      "model": "gpt-6-astra",
+      "category": "passed_frozen_suite",
+      "interpretation": "Passed frozen regression suite."
+    },
+    {
+      "case": "19040",
+      "model": "gpt-6-astra",
+      "category": "passed_frozen_suite",
+      "interpretation": "Passed frozen regression suite."
+    }
+  ],
+  "scope": "Targeted replication of one historical issue; not a general model failure-rate estimate. The 19 checks cover one failure mechanism, not 19 independent tasks.",
+  "privacy": "Local machine paths redacted in prompts/logs/settings. Executed production files, patches, baseline archive, and probe are byte-preserved. Original raw files remain in outputs/real-repo-debug-pilot; hashes recorded here."
+}

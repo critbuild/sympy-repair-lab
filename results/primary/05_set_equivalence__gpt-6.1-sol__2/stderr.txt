@@ -1,0 +1,6 @@
+2026-11-08T23:10:21.270767Z  WARN codex_core::shell_snapshot: Failed to create shell snapshot for powershell: Shell snapshot not supported yet for PowerShell
+2026-11-08T23:12:24.163133Z ERROR codex_core::tools::router: error=apply_patch verification failed: Failed to find expected lines in <WORKSPACE>\work\contract-primary\primary\05_set_equivalence__gpt-6.1-sol__2\sympy\sets\tests\test_sets.py:
+    assert ProductSet(Interval(x, 1), S.Reals).is_empty == None
+
+
+def test_Interval_is_empty():

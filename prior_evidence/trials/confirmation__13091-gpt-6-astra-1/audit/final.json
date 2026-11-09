@@ -1,0 +1,50 @@
+{
+  "trial": "confirmation\\13091-gpt-6-astra-1",
+  "model": "gpt-6-astra",
+  "thread_ids": [
+    "01a1bc94-e4ce-7a22-a6db-36c5699d6592"
+  ],
+  "primary_regression_observed": true,
+  "geometry_passed": false,
+  "geometry_failed_checks": 13,
+  "issue_specific": {
+    "exit_code": 0,
+    "summary": "2 passed, 5 warnings in 1.03s",
+    "seconds": 2.95,
+    "command": [
+      "$WORKSPACE\\work\\real-debug-env39\\Scripts\\python.exe",
+      "-c",
+      "import sys; sys._running_pytest = True; import pytest, py; py.test = pytest; sys.modules[\"py.test\"] = pytest; sys.exit(pytest.main(sys.argv[1:]))",
+      "-p",
+      "pytest_timeout",
+      "--timeout=60",
+      "-q",
+      "--tb=short",
+      "--disable-warnings",
+      "sympy/core/tests/test_basic.py::test_equality",
+      "sympy/core/tests/test_numbers.py::test_comparisons_with_unknown_type"
+    ]
+  },
+  "original_core_suite": {
+    "exit_code": 0,
+    "summary": "95 passed, 1 xfailed, 5 warnings in 2.25s",
+    "seconds": 6.2,
+    "command": [
+      "$WORKSPACE\\work\\real-debug-env39\\Scripts\\python.exe",
+      "-c",
+      "import sys; sys._running_pytest = True; import pytest, py; py.test = pytest; sys.modules[\"py.test\"] = pytest; sys.exit(pytest.main(sys.argv[1:]))",
+      "-p",
+      "pytest_timeout",
+      "--timeout=60",
+      "-q",
+      "--tb=short",
+      "--disable-warnings",
+      "sympy/core/tests/test_basic.py",
+      "sympy/core/tests/test_numbers.py"
+    ]
+  },
+  "completed_tool_commands": 12,
+  "commands_for_manual_review": [],
+  "probe_sha256": "0b45400387e6c74b101b39b107f35f82485fd77b70597caa8df1a30e429cad38",
+  "category": "completed_repair_with_new_geometry_regression"
+}

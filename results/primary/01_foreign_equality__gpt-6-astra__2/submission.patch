@@ -1,0 +1,220 @@
+diff --git a/sympy/core/basic.py b/sympy/core/basic.py
+index db4e971..fd514b6 100644
+--- a/sympy/core/basic.py
++++ b/sympy/core/basic.py
+@@ -285,6 +285,9 @@ def __eq__(self, other):
+ 
+         This is the same as a.compare(b) == 0 but faster.
+ 
++        If the other operand cannot be sympified, return NotImplemented
++        so that it can try its own equality comparison.
++
+         Notes
+         =====
+ 
+@@ -313,7 +316,7 @@ def __eq__(self, other):
+             try:
+                 other = _sympify(other)
+             except SympifyError:
+-                return False    # sympy != other
++                return NotImplemented
+ 
+             if type(self) != type(other):
+                 return False
+@@ -329,7 +332,10 @@ def __ne__(self, other):
+ 
+            but faster
+         """
+-        return not self.__eq__(other)
++        result = self.__eq__(other)
++        if result is NotImplemented:
++            return NotImplemented
++        return not result
+ 
+     def dummy_eq(self, other, symbol=None):
+         """
+diff --git a/sympy/core/numbers.py b/sympy/core/numbers.py
+index 864d055..144923c 100644
+--- a/sympy/core/numbers.py
++++ b/sympy/core/numbers.py
+@@ -1258,7 +1258,7 @@ def __eq__(self, other):
+         try:
+             other = _sympify(other)
+         except SympifyError:
+-            return False    # sympy != other  -->  not ==
++            return NotImplemented
+         if isinstance(other, NumberSymbol):
+             if other.is_irrational:
+                 return False
+@@ -1276,7 +1276,10 @@ def __eq__(self, other):
+         return False    # Float != non-Number
+ 
+     def __ne__(self, other):
+-        return not self.__eq__(other)
++        result = self.__eq__(other)
++        if result is NotImplemented:
++            return NotImplemented
++        return not result
+ 
+     def __gt__(self, other):
+         try:
+@@ -1719,7 +1722,7 @@ def __eq__(self, other):
+         try:
+             other = _sympify(other)
+         except SympifyError:
+-            return False    # sympy != other  -->  not ==
++            return NotImplemented
+         if isinstance(other, NumberSymbol):
+             if other.is_irrational:
+                 return False
+@@ -1734,7 +1737,10 @@ def __eq__(self, other):
+         return False
+ 
+     def __ne__(self, other):
+-        return not self.__eq__(other)
++        result = self.__eq__(other)
++        if result is NotImplemented:
++            return NotImplemented
++        return not result
+ 
+     def __gt__(self, other):
+         try:
+@@ -2112,7 +2118,10 @@ def __eq__(self, other):
+         return Rational.__eq__(self, other)
+ 
+     def __ne__(self, other):
+-        return not self.__eq__(other)
++        result = self.__eq__(other)
++        if result is NotImplemented:
++            return NotImplemented
++        return not result
+ 
+     def __gt__(self, other):
+         try:
+@@ -3339,7 +3348,7 @@ def __eq__(self, other):
+         try:
+             other = _sympify(other)
+         except SympifyError:
+-            return False    # sympy != other  -->  not ==
++            return NotImplemented
+         if self is other:
+             return True
+         if isinstance(other, Number) and self.is_irrational:
+@@ -3348,7 +3357,10 @@ def __eq__(self, other):
+         return False    # NumberSymbol != non-(Number|self)
+ 
+     def __ne__(self, other):
+-        return not self.__eq__(other)
++        result = self.__eq__(other)
++        if result is NotImplemented:
++            return NotImplemented
++        return not result
+ 
+     def __lt__(self, other):
+         try:
+diff --git a/sympy/core/tests/test_basic.py b/sympy/core/tests/test_basic.py
+index 9d4a8fa..16935a4 100644
+--- a/sympy/core/tests/test_basic.py
++++ b/sympy/core/tests/test_basic.py
+@@ -39,6 +39,39 @@ def test_equality():
+     assert not(Basic() == 0)
+ 
+ 
++def test_equality_reflected():
++    class Box:
++        def __eq__(self, other):
++            if isinstance(other, Basic):
++                return True
++            return NotImplemented
++
++        def __ne__(self, other):
++            return not self == other
++
++    class Unsupported:
++        def __eq__(self, other):
++            return NotImplemented
++
++        def __ne__(self, other):
++            return NotImplemented
++
++    box = Box()
++    x = symbols('x')
++    for value in [Basic(), Basic(b1), x, x + 1]:
++        assert value.__eq__(box) is NotImplemented
++        assert value.__ne__(box) is NotImplemented
++        assert (box == value) is True
++        assert (value == box) is True
++        assert (box != value) is False
++        assert (value != box) is False
++        for other in [object(), Unsupported(), None, 'x', []]:
++            assert (value == other) is False
++            assert (other == value) is False
++            assert (value != other) is True
++            assert (other != value) is True
++
++
+ def test_matches_basic():
+     instances = [Basic(b1, b1, b2), Basic(b1, b2, b1), Basic(b2, b1, b1),
+                  Basic(b1, b2), Basic(b2, b1), b2, b1]
+diff --git a/sympy/core/tests/test_numbers.py b/sympy/core/tests/test_numbers.py
+index a09ff11..b363c72 100644
+--- a/sympy/core/tests/test_numbers.py
++++ b/sympy/core/tests/test_numbers.py
+@@ -24,6 +24,57 @@ def same_and_same_prec(a, b):
+     return a == b and a._prec == b._prec
+ 
+ 
++def test_equality_reflected():
++    class Box:
++        def __init__(self, value):
++            self.value = value
++
++        def __eq__(self, other):
++            return self.value == other
++
++        def __ne__(self, other):
++            return self.value != other
++
++    # Exercise Integer's override and the singleton Rational subclasses too.
++    for value in [Integer(3), S.Zero, S.One, S.NegativeOne,
++                  Rational(2, 3), S.Half, Float(1.25), pi, E]:
++        box = Box(value)
++        assert value.__eq__(box) is NotImplemented
++        assert value.__ne__(box) is NotImplemented
++        assert (box == value) is True
++        assert (value == box) is True
++        assert (box != value) is False
++        assert (value != box) is False
++        different = Box(Symbol('x'))
++        assert (value == different) is False
++        assert (value != different) is True
++        for other in [object(), None, str(value), []]:
++            assert (value == other) is False
++            assert (other == value) is False
++            assert (value != other) is True
++            assert (other != value) is True
++
++
++def test_equality_sympifiable():
++    class Convertible:
++        def __init__(self, value):
++            self.value = value
++
++        def _sympy_(self):
++            return self.value
++
++        def __eq__(self, other):
++            raise AssertionError('Sympifiable operands should be compared directly')
++
++        __ne__ = __eq__
++
++    for value in [Integer(3), Rational(2, 3), Float(1.25), pi]:
++        assert (value == Convertible(value)) is True
++        assert (value != Convertible(value)) is False
++        assert (value == Convertible(Symbol('x'))) is False
++        assert (value != Convertible(Symbol('x'))) is True
++
++
+ def test_integers_cache():
+     python_int = 2**65 + 3175259
+ 

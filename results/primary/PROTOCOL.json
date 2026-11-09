@@ -1,0 +1,29 @@
+{
+  "created_utc": "2026-11-08T22:37:37.882506+00:00",
+  "label": "primary",
+  "cases": [
+    "01_foreign_equality",
+    "02_precise_ordering",
+    "03_geometry_recovery",
+    "04_zero_polynomial",
+    "05_set_equivalence",
+    "06_symbolic_determinant",
+    "07_algebraic_factorization"
+  ],
+  "models": [
+    "gpt-6-astra",
+    "gpt-6.1-sol"
+  ],
+  "repeats": 3,
+  "workers": 3,
+  "reasoning": "medium",
+  "limit_seconds": 1200,
+  "planned_trials": 42,
+  "frozen_hashes": {
+    "tasks.json": "69143a2477135eb7529c10590dc335a30ca2968650cfb14273e5d715b3c82bec",
+    "checks.py": "a296289366b073873b5ab5e35f4920671d38dcd124a6fb6ded280b8917f3c6e3",
+    "common.py": "3df67a440ff31d73e4eafc4791d74d3179d45e2ecfa7eca4c3421d1f073b55ea",
+    "run_eval.py": "0faba183024c0b63aab916bee7b31d9ccd65011dd08bc3b80b6ac4fb15d21792"
+  },
+  "retry_policy": "No substantive attempt is retried or replaced. Infrastructure/timeouts remain separate. Any amendment must be disclosed."
+}

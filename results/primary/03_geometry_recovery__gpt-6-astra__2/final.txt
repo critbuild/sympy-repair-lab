@@ -1,0 +1,11 @@
+Fixed `GeometryEntity.__ne__` by removing its redundant override. Geometry now inherits `Basic.__ne__`, which preserves `NotImplemented` and allows reflected comparisons. Previously, negating `NotImplemented` incorrectly returned `False`.
+
+Added coverage for the unchanged consumer, equal/different geometry, `None`, plain objects, and foreign reflected comparisons. No existing expectations changed.
+
+Using the supplied environment variables and interpreter, ran:
+
+```powershell
+& '.\.venv\Scripts\python.exe' run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/core/tests/test_basic.py sympy/core/tests/test_numbers.py sympy/geometry/tests
+```
+
+Result: **168 passed, 1 xfailed**, 12 warnings. The consumer regression failed before the fix and passes now. `git diff --check` also passed.

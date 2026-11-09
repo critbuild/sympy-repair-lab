@@ -1,0 +1,277 @@
+{
+  "case": "01_foreign_equality",
+  "derivation": "Readable export of the passing reference oracle frozen before the expanded primary run; no scoring changes.",
+  "reference_patch": "assets/13091-reference.patch",
+  "reference_oracle": "validation/controls-v2/01_foreign_equality-reference/oracle.json",
+  "requirements": [
+    {
+      "name": "Basic_reflected_equality",
+      "group": "required",
+      "expected": [
+        true,
+        true
+      ]
+    },
+    {
+      "name": "Basic_reflected_inequality",
+      "group": "required",
+      "expected": [
+        false,
+        false
+      ]
+    },
+    {
+      "name": "Basic_unrelated_fallback",
+      "group": "preservation",
+      "expected": [
+        false,
+        true
+      ]
+    },
+    {
+      "name": "Symbol_reflected_equality",
+      "group": "required",
+      "expected": [
+        true,
+        true
+      ]
+    },
+    {
+      "name": "Symbol_reflected_inequality",
+      "group": "required",
+      "expected": [
+        false,
+        false
+      ]
+    },
+    {
+      "name": "Symbol_unrelated_fallback",
+      "group": "preservation",
+      "expected": [
+        false,
+        true
+      ]
+    },
+    {
+      "name": "Integer_reflected_equality",
+      "group": "required",
+      "expected": [
+        true,
+        true
+      ]
+    },
+    {
+      "name": "Integer_reflected_inequality",
+      "group": "required",
+      "expected": [
+        false,
+        false
+      ]
+    },
+    {
+      "name": "Integer_unrelated_fallback",
+      "group": "preservation",
+      "expected": [
+        false,
+        true
+      ]
+    },
+    {
+      "name": "Rational_reflected_equality",
+      "group": "required",
+      "expected": [
+        true,
+        true
+      ]
+    },
+    {
+      "name": "Rational_reflected_inequality",
+      "group": "required",
+      "expected": [
+        false,
+        false
+      ]
+    },
+    {
+      "name": "Rational_unrelated_fallback",
+      "group": "preservation",
+      "expected": [
+        false,
+        true
+      ]
+    },
+    {
+      "name": "Float_reflected_equality",
+      "group": "required",
+      "expected": [
+        true,
+        true
+      ]
+    },
+    {
+      "name": "Float_reflected_inequality",
+      "group": "required",
+      "expected": [
+        false,
+        false
+      ]
+    },
+    {
+      "name": "Float_unrelated_fallback",
+      "group": "preservation",
+      "expected": [
+        false,
+        true
+      ]
+    },
+    {
+      "name": "Line_None",
+      "group": "preservation",
+      "expected": [
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "Line_unrelated",
+      "group": "preservation",
+      "expected": [
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "Line_equal_values",
+      "group": "preservation",
+      "expected": [
+        true,
+        false
+      ]
+    },
+    {
+      "name": "Line_different_values",
+      "group": "preservation",
+      "expected": [
+        false,
+        true
+      ]
+    },
+    {
+      "name": "Ray_None",
+      "group": "preservation",
+      "expected": [
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "Ray_unrelated",
+      "group": "preservation",
+      "expected": [
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "Ray_equal_values",
+      "group": "preservation",
+      "expected": [
+        true,
+        false
+      ]
+    },
+    {
+      "name": "Ray_different_values",
+      "group": "preservation",
+      "expected": [
+        false,
+        true
+      ]
+    },
+    {
+      "name": "Segment_None",
+      "group": "preservation",
+      "expected": [
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "Segment_unrelated",
+      "group": "preservation",
+      "expected": [
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "Segment_equal_values",
+      "group": "preservation",
+      "expected": [
+        true,
+        false
+      ]
+    },
+    {
+      "name": "Segment_different_values",
+      "group": "preservation",
+      "expected": [
+        false,
+        true
+      ]
+    },
+    {
+      "name": "consumer_two_edges",
+      "group": "preservation",
+      "expected": 2
+    },
+    {
+      "name": "consumer_duplicate_edges",
+      "group": "preservation",
+      "expected": 2
+    },
+    {
+      "name": "consumer_empty",
+      "group": "preservation",
+      "expected": 0
+    },
+    {
+      "name": "consumer_single",
+      "group": "preservation",
+      "expected": 1
+    },
+    {
+      "name": "ordinary_numeric_equality",
+      "group": "preservation",
+      "expected": [
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "name": "numeric_infinities",
+      "group": "preservation",
+      "expected": [
+        true,
+        true
+      ]
+    },
+    {
+      "name": "symbolic_order_remains_undecided",
+      "group": "preservation",
+      "expected": true
+    }
+  ],
+  "regression_suites": [
+    "sympy/core/tests/test_basic.py",
+    "sympy/core/tests/test_numbers.py"
+  ],
+  "task_level_pass": "All required and preservation checks and relevant regression suites pass."
+}

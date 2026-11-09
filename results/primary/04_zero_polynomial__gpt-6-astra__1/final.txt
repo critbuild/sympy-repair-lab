@@ -1,0 +1,12 @@
+Fixed scalar multiplication to strip newly exposed zero coefficients at every nesting level. Cleared polynomials now have canonical zero representations, so `is_zero`, `terms_gcd()`, and `primitive()` work.
+
+Added regressions covering cancellation, multivariate polynomials, conversion modes, preserved symbolic/nonzero coefficients, and the denominator identity. No existing expectations changed.
+
+Using the supplied interpreter and environment:
+
+- `python incident.py` — now prints `is_zero=True`; `terms_gcd()` succeeds.
+- `python run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/polys/tests/test_polytools.py sympy/polys/tests/test_densearith.py sympy/polys/tests/test_densetools.py` — **242 passed**.
+- Same pytest options with `test_polyclasses.py`, `test_rings.py`, `test_euclidtools.py`, `test_factortools.py`, and `test_sqfreetools.py` under `sympy/polys/tests/` — **124 passed, 1 xfailed**.
+- `git diff --check` — clean.
+
+Both new regression tests were also run before the fix and failed as expected.

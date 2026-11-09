@@ -1,0 +1,13 @@
+Fixed multivariate extension factorization by recursively factoring polynomial content before the square-free step can discard it.
+
+The example now returns `(x - 1)*(y - 1)` and expands back to the input. Added coverage for complex factors, non-unit coefficients, recursive content, univariate multiplicities, and rational factorization. Removed `XFAIL` from the existing complex regression because it now passes.
+
+Validation, with the requested environment variables:
+
+```powershell
+& .\.venv\Scripts\python.exe run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/polys/tests/test_polytools.py sympy/polys/tests/test_factortools.py
+```
+
+**172 passed, 1 xfailed, 1 warning.**
+
+`git diff --check` also passed.

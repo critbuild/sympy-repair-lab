@@ -1,0 +1,38 @@
+{
+  "case": "04_zero_polynomial",
+  "complete_pass": true,
+  "required_pass": true,
+  "preservation_pass": true,
+  "oracle_execution": {
+    "exit_code": 0,
+    "seconds": 7.53,
+    "command": [
+      "<WORKSPACE>\\work\\contract-clean-uv-cache\\builds-v0\\.tmp8Ix2ty\\Scripts\\python.exe",
+      "<WORKSPACE>\\work\\contract-package-validation\\entry\\checks.py",
+      "04_zero_polynomial"
+    ],
+    "summary": ""
+  },
+  "regression": {
+    "exit_code": 0,
+    "seconds": 7.01,
+    "command": [
+      "<WORKSPACE>\\work\\contract-clean-uv-cache\\builds-v0\\.tmp8Ix2ty\\Scripts\\python.exe",
+      "-c",
+      "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+      "-p",
+      "pytest_timeout",
+      "--timeout=60",
+      "-q",
+      "--tb=short",
+      "--disable-warnings",
+      "sympy/polys/tests/test_polytools.py",
+      "sympy/polys/tests/test_densearith.py",
+      "sympy/polys/tests/test_densetools.py"
+    ],
+    "summary": "240 passed, 1 warning in 5.09s"
+  },
+  "failed_checks": [],
+  "check_count": 8,
+  "passed_checks": 8
+}

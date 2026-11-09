@@ -1,0 +1,4 @@
+<WORKSPACE>\work\real-debug-env39\lib\site-packages\mpmath\ctx_mp_python.py:892: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if other is 0:
+<WORKSPACE>\work\real-debug-env39\lib\site-packages\mpmath\ctx_mp_python.py:986: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if other is 0:

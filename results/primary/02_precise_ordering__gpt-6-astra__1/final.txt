@@ -1,0 +1,15 @@
+Fixed reversed strict/inclusive dispatch and removed premature operand rounding. Comparisons now use the existing adaptive difference evaluation; global precision is unchanged. Your example returns `False False True True`.
+
+Added regressions for both operand orders, close boundaries, exact equality, infinities, and symbolic relations. No existing expectations changed.
+
+Commands run with the supplied environment:
+
+```powershell
+& '.\.venv\Scripts\python.exe' run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/core/tests/test_numbers.py sympy/core/tests/test_relational.py
+```
+
+119 passed, 3 xfailed.
+
+The same command targeting `sympy/core/tests` produced 1429 passed, 60 skipped, 42 xfailed, and one parser AST failure. Confirmed that failure also occurs with the repair reverted; both new numeric regressions fail without the repair.
+
+`git diff --check` passed.

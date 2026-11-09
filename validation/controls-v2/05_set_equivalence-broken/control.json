@@ -1,0 +1,83 @@
+{
+  "case": "05_set_equivalence",
+  "complete_pass": false,
+  "required_pass": false,
+  "preservation_pass": false,
+  "oracle_execution": {
+    "exit_code": 1,
+    "seconds": 4.72,
+    "command": [
+      "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+      "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+      "05_set_equivalence"
+    ],
+    "summary": ""
+  },
+  "regression": {
+    "exit_code": 1,
+    "seconds": 12.36,
+    "command": [
+      "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+      "-c",
+      "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+      "-p",
+      "pytest_timeout",
+      "--timeout=60",
+      "-q",
+      "--tb=short",
+      "--disable-warnings",
+      "sympy/sets/tests/test_sets.py",
+      "sympy/core/tests/test_relational.py"
+    ],
+    "summary": "2 failed, 155 passed, 6 xfailed, 3 warnings in 10.03s"
+  },
+  "failed_checks": [
+    {
+      "name": "product_subset",
+      "group": "required",
+      "expected": true,
+      "actual": null,
+      "passed": false
+    },
+    {
+      "name": "equal_representations",
+      "group": "required",
+      "expected": true,
+      "exception": "AttributeError: 'Complement' object has no attribute 'equals'",
+      "passed": false
+    },
+    {
+      "name": "reverse_equal_representations",
+      "group": "required",
+      "expected": true,
+      "exception": "AttributeError: 'EmptySet' object has no attribute 'equals'",
+      "passed": false
+    },
+    {
+      "name": "missing_tuple",
+      "group": "required",
+      "expected": false,
+      "actual": null,
+      "passed": false
+    },
+    {
+      "name": "scalar_tuple_mismatch",
+      "group": "required",
+      "expected": false,
+      "actual": null,
+      "passed": false
+    },
+    {
+      "name": "unknown_membership",
+      "group": "preservation",
+      "expected": true,
+      "exception": "AttributeError: 'Complement' object has no attribute 'equals'",
+      "passed": false
+    }
+  ],
+  "check_count": 10,
+  "passed_checks": 4,
+  "reference": false,
+  "expected_complete_pass": false,
+  "control_matches": true
+}

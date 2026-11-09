@@ -1,0 +1,140 @@
+diff --git a/sympy/core/relational.py b/sympy/core/relational.py
+index e2e0b7f..c12d41a 100644
+--- a/sympy/core/relational.py
++++ b/sympy/core/relational.py
+@@ -558,6 +558,10 @@ def binary_symbols(self):
+     def _eval_simplify(self, **kwargs):
+         from .add import Add
+         from sympy.solvers.solveset import linear_coeffs
++        from sympy.sets.sets import Set
++        if isinstance(self.lhs, Set) and isinstance(self.rhs, Set):
++            # Set subtraction is a complement, not an arithmetic difference.
++            return self.func(*[arg.simplify(**kwargs) for arg in self.args]).canonical
+         # standard simplify
+         e = super()._eval_simplify(**kwargs)
+         if not isinstance(e, Equality):
+diff --git a/sympy/core/tests/test_relational.py b/sympy/core/tests/test_relational.py
+index e94437a..f7b9eb5 100644
+--- a/sympy/core/tests/test_relational.py
++++ b/sympy/core/tests/test_relational.py
+@@ -9,7 +9,7 @@
+                                    GreaterThan, LessThan, StrictGreaterThan,
+                                    StrictLessThan, Rel, Eq, Lt, Le,
+                                    Gt, Ge, Ne, is_le, is_gt, is_ge, is_lt, is_eq, is_neq)
+-from sympy.sets.sets import Interval, FiniteSet
++from sympy.sets.sets import Interval, FiniteSet, ProductSet
+ 
+ from itertools import combinations
+ 
+@@ -704,6 +704,36 @@ def test_issue_8449():
+     assert Le(oo, -p) is S.false
+ 
+ 
++def test_simplify_set_equality():
++    product = ProductSet(FiniteSet(1, 2), FiniteSet(1, 2))
++    listed = FiniteSet((1, 1), (1, 2), (2, 1), (2, 2))
++    cases = [
++        (product, listed, S.true),
++        (product, FiniteSet((1, 1), (1, 2), (2, 1)), S.false),
++        (product, listed | FiniteSet((3, 3)), S.false),
++        (product, FiniteSet((1, 1), (1, 2), (2, 1), (3, 3)), S.false),
++        (product, Interval(1, 2), S.false),
++    ]
++    for lhs, rhs, expected in cases:
++        for a, b in [(lhs, rhs), (rhs, lhs)]:
++            assert Eq(a, b) is expected
++            assert Eq(a, b, evaluate=False).simplify() is expected
++
++    # Unknown membership must remain unknown, including after simplification.
++    cases = [
++        (ProductSet(FiniteSet(x), FiniteSet(1)), FiniteSet((y, 1))),
++        (ProductSet(FiniteSet(x), FiniteSet(1)), FiniteSet((1, 1))),
++        (FiniteSet(x), FiniteSet(y)),
++        (ProductSet(Interval(0, x), Interval(0, 1)),
++         ProductSet(Interval(0, y), Interval(0, 1))),
++    ]
++    for lhs, rhs in cases:
++        for a, b in [(lhs, rhs), (rhs, lhs)]:
++            result = Eq(a, b).simplify()
++            assert isinstance(result, Equality)
++            assert result == Eq(a, b).canonical
++
++
+ def test_simplify_relational():
+     assert simplify(x*(y + 1) - x*y - x + 1 < x) == (x > 1)
+     assert simplify(x*(y + 1) - x*y - x - 1 < x) == (x > -1)
+diff --git a/sympy/sets/handlers/comparison.py b/sympy/sets/handlers/comparison.py
+index 6f7a19f..1f91782 100644
+--- a/sympy/sets/handlers/comparison.py
++++ b/sympy/sets/handlers/comparison.py
+@@ -56,4 +56,4 @@ def _eval_is_eq(lhs, rhs): # noqa: F811
+ 
+ @dispatch(Set, Set) # type:ignore
+ def _eval_is_eq(lhs, rhs): # noqa: F811
+-    return None
++    return fuzzy_and([lhs.is_subset(rhs), rhs.is_subset(lhs)])
+diff --git a/sympy/sets/sets.py b/sympy/sets/sets.py
+index 3c4aa86..cbfab33 100644
+--- a/sympy/sets/sets.py
++++ b/sympy/sets/sets.py
+@@ -809,6 +809,13 @@ def as_relational(self, *symbols):
+                 'number of symbols must match the number of sets')
+         return And(*[s.as_relational(i) for s, i in zip(self.sets, symbols)])
+ 
++    def _eval_is_subset(self, other):
++        if (isinstance(other, FiniteSet) and self.is_finite_set
++                and self.is_iterable):
++            # Enumerate only for an explicit finite target; products can be
++            # compared without expanding all their elements.
++            return fuzzy_and(other.contains(element) for element in self)
++
+     @property
+     def _boundary(self):
+         return Union(*(ProductSet(*(b + b.boundary if i != j else b.boundary
+diff --git a/sympy/sets/tests/test_sets.py b/sympy/sets/tests/test_sets.py
+index d29a046..c4b13a7 100644
+--- a/sympy/sets/tests/test_sets.py
++++ b/sympy/sets/tests/test_sets.py
+@@ -628,6 +628,32 @@ def test_ProductSet_is_empty():
+     assert ProductSet(Interval(x, 1), S.Reals).is_empty == None
+ 
+ 
++def test_finite_product_subset():
++    product = ProductSet(FiniteSet(1, 2), FiniteSet(1, 2))
++    listed = FiniteSet((1, 1), (1, 2), (2, 1), (2, 2))
++    smaller = FiniteSet((1, 1), (1, 2), (2, 1))
++    larger = listed | FiniteSet((3, 3))
++    assert product.is_subset(listed) is True
++    assert listed.is_subset(product) is True
++    assert product.is_subset(smaller) is False
++    assert smaller.is_subset(product) is True
++    assert product.is_subset(larger) is True
++    assert larger.is_subset(product) is False
++
++    symbolic = ProductSet(FiniteSet(x), FiniteSet(1))
++    assert symbolic.is_subset(FiniteSet((y, 1))) is None
++    assert FiniteSet((y, 1)).is_subset(symbolic) is None
++    assert symbolic.is_subset(FiniteSet((y, 2))) is False
++    assert FiniteSet((y, 2)).is_subset(symbolic) is False
++    # An unknown membership must not hide a definite counterexample.
++    assert ProductSet(FiniteSet(x), FiniteSet(1, 2)).is_subset(
++        FiniteSet((y, 1))) is False
++
++    nested = ProductSet(product, FiniteSet(0))
++    assert nested.is_subset(FiniteSet(*nested)) is True
++    assert ProductSet(S.Integers, S.Integers).is_subset(listed) is False
++
++
+ def test_interval_subs():
+     a = Symbol('a', real=True)
+ 
+@@ -1251,7 +1277,8 @@ def test_Eq():
+     assert Eq(FiniteSet({x, y}).subs(y, x+1), FiniteSet({x})) is S.false
+     assert Eq(FiniteSet({x, y}), FiniteSet({x})).subs(y, x+1) is S.false
+ 
+-    assert Eq(ProductSet({1}, {2}), Interval(1, 2)) not in (S.true, S.false)
++    # A nonempty set of tuples cannot equal a real interval.
++    assert Eq(ProductSet({1}, {2}), Interval(1, 2)) is S.false
+     assert Eq(ProductSet({1}), ProductSet({1}, {2})) is S.false
+ 
+     assert Eq(FiniteSet(()), FiniteSet(1)) is S.false

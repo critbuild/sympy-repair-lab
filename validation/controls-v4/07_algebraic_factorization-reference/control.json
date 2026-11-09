@@ -1,0 +1,39 @@
+{
+  "case": "07_algebraic_factorization",
+  "complete_pass": true,
+  "required_pass": true,
+  "preservation_pass": true,
+  "oracle_execution": {
+    "exit_code": 0,
+    "seconds": 5.16,
+    "command": [
+      "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+      "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+      "07_algebraic_factorization"
+    ],
+    "summary": ""
+  },
+  "regression": {
+    "exit_code": 0,
+    "seconds": 9.55,
+    "command": [
+      "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+      "-c",
+      "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+      "-p",
+      "pytest_timeout",
+      "--timeout=60",
+      "-q",
+      "--tb=short",
+      "--disable-warnings",
+      "sympy/polys/tests/test_polytools.py"
+    ],
+    "summary": "150 passed, 1 warning in 7.07s"
+  },
+  "failed_checks": [],
+  "check_count": 12,
+  "passed_checks": 12,
+  "reference": true,
+  "expected_complete_pass": true,
+  "control_matches": true
+}

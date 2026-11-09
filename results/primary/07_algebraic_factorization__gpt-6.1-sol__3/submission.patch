@@ -1,0 +1,126 @@
+diff --git a/sympy/polys/factortools.py b/sympy/polys/factortools.py
+index c6a5f9f..a1c9114 100644
+--- a/sympy/polys/factortools.py
++++ b/sympy/polys/factortools.py
+@@ -1146,23 +1146,34 @@ def dmp_ext_factor(f, u, K):
+     if all(d <= 0 for d in dmp_degree_list(f, u)):
+         return lc, []
+ 
+-    f, F = dmp_sqf_part(f, u, K), f
+-    s, g, r = dmp_sqf_norm(f, u, K)
++    # Square-free reduction in the main variable removes the content, so
++    # factor it separately in the remaining variables.
++    cont, f = dmp_primitive(f, u, K)
++    factors = []
+ 
+-    factors = dmp_factor_list_include(r, u, K.dom)
++    if dmp_degree(f, u) > 0:
++        f, F = dmp_sqf_part(f, u, K), f
++        s, g, r = dmp_sqf_norm(f, u, K)
+ 
+-    if len(factors) == 1:
+-        factors = [f]
+-    else:
+-        H = dmp_raise([K.one, s*K.unit], u, 0, K)
++        factors = dmp_factor_list_include(r, u, K.dom)
++
++        if len(factors) == 1:
++            factors = [f]
++        else:
++            H = dmp_raise([K.one, s*K.unit], u, 0, K)
++
++            for i, (factor, _) in enumerate(factors):
++                h = dmp_convert(factor, u, K.dom, K)
++                h, _, g = dmp_inner_gcd(h, g, u, K)
++                h = dmp_compose(h, H, u, K)
++                factors[i] = h
++
++        factors = dmp_trial_division(F, factors, u, K)
+ 
+-        for i, (factor, _) in enumerate(factors):
+-            h = dmp_convert(factor, u, K.dom, K)
+-            h, _, g = dmp_inner_gcd(h, g, u, K)
+-            h = dmp_compose(h, H, u, K)
+-            factors[i] = h
++    coeff, content_factors = dmp_ext_factor(cont, u - 1, K)
++    factors.extend(([factor], k) for factor, k in content_factors)
+ 
+-    return lc, dmp_trial_division(F, factors, u, K)
++    return lc*coeff, _sort_factors(factors)
+ 
+ 
+ def dup_gf_factor(f, K):
+diff --git a/sympy/polys/tests/test_factortools.py b/sympy/polys/tests/test_factortools.py
+index 7bcd935..8dd9e26 100644
+--- a/sympy/polys/tests/test_factortools.py
++++ b/sympy/polys/tests/test_factortools.py
+@@ -497,6 +497,32 @@ def anp(x):
+                         (anp([QQ(1)])*x + anp([QQ( 1), QQ(0)])*y, 1)])
+ 
+ 
++def test_dmp_ext_factor_content():
++    K = QQ.algebraic_field(I)
++    R, x, y, z = ring("x,y,z", K)
++    i = K.unit
++
++    cases = [
++        (K.one, [x - 1, y - 1]),
++        (K.one, [x - i, y - i]),
++        (K(6), [x - QQ(1, 2), y - QQ(2, 3)]),
++        (K(2) + i, [x - i*y, z - i]),
++        (K.one, [y - i, z + i]),
++        (K.one, [x - y, x + y, z - i, z + i]),
++    ]
++    for coeff, expected in cases:
++        f = R.ground_new(coeff)
++        for g in expected:
++            f *= g
++        actual_coeff, factors = R.dmp_ext_factor(f)
++        assert actual_coeff == coeff
++        assert dict(factors) == dict((g, 1) for g in expected)
++        product = R.ground_new(actual_coeff)
++        for g, k in factors:
++            product *= g**k
++        assert product == f
++
++
+ def test_dup_factor_list():
+     R, x = ring("x", ZZ)
+     assert R.dup_factor_list(0) == (0, [])
+diff --git a/sympy/polys/tests/test_polytools.py b/sympy/polys/tests/test_polytools.py
+index b0b4cd6..2271f05 100644
+--- a/sympy/polys/tests/test_polytools.py
++++ b/sympy/polys/tests/test_polytools.py
+@@ -3249,12 +3249,31 @@ def test_poly_matching_consistency():
+     assert Poly(x, x) * I == Poly(I*x, x)
+ 
+ 
+-@XFAIL
+ def test_issue_5786():
+     assert expand(factor(expand(
+         (x - I*y)*(z - I*t)), extension=[I])) == -I*t*x - t*y + x*z - I*y*z
+ 
+ 
++def test_factor_extension_multivariate_content():
++    cases = [
++        ((x - 1)*(y - 1), (x - 1)*(y - 1)),
++        ((x - I)*(y - I), (x - I)*(y - I)),
++        (6*(2*x - 1)*(3*y - 2), Mul(36, x - S.Half, y - Rational(2, 3))),
++        ((2 + I)*(x - I*y)*(z - I), (2 + I)*(x - I*y)*(z - I)),
++        ((x - y)*(x + y)*(z**2 + 1),
++         (x - y)*(x + y)*(z - I)*(z + I)),
++    ]
++    for expression, expected in cases:
++        result = factor(expand(expression), extension=[I])
++        assert result == expected
++        assert expand(result - expression) == 0
++
++    # Rational factorization and univariate multiplicities use their own paths.
++    assert factor(expand(6*(2*x - 1)*(3*y - 2))) == Mul(6, 2*x - 1, 3*y - 2)
++    assert factor(expand((x - I)**3*(x + I)**2), extension=[I]) == \
++        (x - I)**3*(x + I)**2
++
++
+ def test_noncommutative():
+     class foo(Expr):
+         is_commutative=False

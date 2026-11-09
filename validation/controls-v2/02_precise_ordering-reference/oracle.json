@@ -1,0 +1,230 @@
+{
+  "case": "02_precise_ordering",
+  "complete_pass": false,
+  "required_pass": false,
+  "preservation_pass": true,
+  "check_count": 12,
+  "passed_checks": 8,
+  "checks": [
+    {
+      "name": "reported_forward",
+      "group": "required",
+      "expected": [
+        false,
+        false,
+        false,
+        true,
+        true,
+        true
+      ],
+      "actual": [
+        false,
+        false,
+        false,
+        true,
+        false,
+        true
+      ],
+      "passed": false
+    },
+    {
+      "name": "reported_reflected",
+      "group": "required",
+      "expected": [
+        false,
+        false,
+        false,
+        true,
+        true,
+        true
+      ],
+      "actual": [
+        false,
+        false,
+        false,
+        true,
+        false,
+        true
+      ],
+      "passed": false
+    },
+    {
+      "name": "below_forward",
+      "group": "required",
+      "expected": [
+        true,
+        true,
+        false,
+        true,
+        false,
+        false
+      ],
+      "actual": [
+        true,
+        true,
+        false,
+        true,
+        false,
+        false
+      ],
+      "passed": true
+    },
+    {
+      "name": "below_reflected",
+      "group": "required",
+      "expected": [
+        true,
+        true,
+        false,
+        true,
+        false,
+        false
+      ],
+      "actual": [
+        true,
+        true,
+        false,
+        true,
+        false,
+        false
+      ],
+      "passed": true
+    },
+    {
+      "name": "above_forward",
+      "group": "required",
+      "expected": [
+        false,
+        false,
+        false,
+        true,
+        true,
+        true
+      ],
+      "actual": [
+        false,
+        false,
+        false,
+        true,
+        true,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "above_reflected",
+      "group": "required",
+      "expected": [
+        false,
+        false,
+        false,
+        true,
+        true,
+        true
+      ],
+      "actual": [
+        false,
+        false,
+        false,
+        true,
+        true,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "float_below_forward",
+      "group": "required",
+      "expected": [
+        true,
+        true,
+        false,
+        true,
+        false,
+        false
+      ],
+      "actual": [
+        true,
+        true,
+        false,
+        true,
+        false,
+        true
+      ],
+      "passed": false
+    },
+    {
+      "name": "float_below_reflected",
+      "group": "required",
+      "expected": [
+        true,
+        true,
+        false,
+        true,
+        false,
+        false
+      ],
+      "actual": [
+        true,
+        true,
+        false,
+        true,
+        false,
+        true
+      ],
+      "passed": false
+    },
+    {
+      "name": "ordinary_numeric_equality",
+      "group": "preservation",
+      "expected": [
+        true,
+        true,
+        false
+      ],
+      "actual": [
+        true,
+        true,
+        false
+      ],
+      "passed": true
+    },
+    {
+      "name": "numeric_infinities",
+      "group": "preservation",
+      "expected": [
+        true,
+        true
+      ],
+      "actual": [
+        true,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "symbolic_order_remains_undecided",
+      "group": "preservation",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "inclusive_rational_boundary",
+      "group": "preservation",
+      "expected": [
+        false,
+        true,
+        false,
+        true
+      ],
+      "actual": [
+        false,
+        true,
+        false,
+        true
+      ],
+      "passed": true
+    }
+  ]
+}

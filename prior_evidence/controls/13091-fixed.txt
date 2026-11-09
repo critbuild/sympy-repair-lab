@@ -1,0 +1,16 @@
+........................................................................ [ 73%]
+......F...................                                               [100%]
+================================== FAILURES ===================================
+_____________________________ test_mpmath_issues ______________________________
+sympy\core\tests\test_numbers.py:1500: in test_mpmath_issues
+    assert _normalize(mpf, 53) != (0, long(0), 0, 0)
+E   TypeError: _normalize() missing 4 required positional arguments: 'exp', 'bc', 'prec', and 'rnd'
+
+During handling of the above exception, another exception occurred:
+sympy\utilities\pytest.py:121: in wrapper
+    raise XFail(get_function_name(func))
+E   sympy.utilities.pytest.XFail: test_mpmath_issues
+                               DO *NOT* COMMIT!                               
+=========================== short test summary info ===========================
+FAILED sympy/core/tests/test_numbers.py::test_mpmath_issues - sympy.utilities...
+1 failed, 97 passed, 5 warnings in 1.94s

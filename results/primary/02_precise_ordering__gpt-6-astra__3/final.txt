@@ -1,0 +1,19 @@
+Fixed scalar delegation to preserve strictness and removed separately rounded `NumberSymbol` comparisons. Comparisons now use the original operands through `Expr`; no global precision changes.
+
+Your reproducer now prints `False False True True`.
+
+Added regressions covering both operand orders, close Rational/Float bounds, equality strictness, infinities, and symbolic relations. No existing expectations changed.
+
+Commands run using the supplied environment and interpreter:
+
+```powershell
+& .\.venv\Scripts\python.exe run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/core/tests/test_numbers.py
+```
+
+**82 passed, 1 xfailed.**
+
+The same command with:
+- `test_numbers.py test_relational.py test_expr.py`: **211 passed, 5 xfailed**.
+- `sympy/core/tests`: **1429 passed, 60 skipped, 42 xfailed, 1 failed**.
+
+The failure, `test_sympify.py::test_evaluate_false`, also fails with the original `numbers.py`: a parser error involving the `False` constant. `git diff --check` passed.

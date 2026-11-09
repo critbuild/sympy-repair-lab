@@ -1,0 +1,64 @@
+{
+  "case": "02_precise_ordering",
+  "model": "gpt-6.1-sol",
+  "repeat": 2,
+  "reasoning_effort": "medium",
+  "label": "primary",
+  "category": "complete_repair",
+  "complete_pass": true,
+  "cli_exit_code": 0,
+  "agent_seconds": 196.72,
+  "thread_ids": [
+    "01a1bd66-3a35-7ba2-97f7-6cd52361390c"
+  ],
+  "command_count": 17,
+  "changed_files": [
+    "sympy/core/numbers.py",
+    "sympy/core/tests/test_numbers.py"
+  ],
+  "usage": [
+    {
+      "input_tokens": 573628,
+      "cached_input_tokens": 541952,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 5944,
+      "reasoning_output_tokens": 1672
+    }
+  ],
+  "checks": {
+    "case": "02_precise_ordering",
+    "complete_pass": true,
+    "required_pass": true,
+    "preservation_pass": true,
+    "oracle_execution": {
+      "exit_code": 0,
+      "seconds": 4.38,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "02_precise_ordering"
+      ],
+      "summary": ""
+    },
+    "regression": {
+      "exit_code": 0,
+      "seconds": 4.48,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "-c",
+        "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+        "-p",
+        "pytest_timeout",
+        "--timeout=60",
+        "-q",
+        "--tb=short",
+        "--disable-warnings",
+        "sympy/core/tests/test_numbers.py"
+      ],
+      "summary": "79 passed, 1 xfailed, 3 warnings in 2.24s"
+    },
+    "failed_checks": [],
+    "check_count": 12,
+    "passed_checks": 12
+  }
+}

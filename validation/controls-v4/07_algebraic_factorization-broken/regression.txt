@@ -1,0 +1,15 @@
+........................................................................ [ 48%]
+.................................................................F...... [ 96%]
+......                                                                   [100%]
+================================== FAILURES ===================================
+_______________________________ test_issue_5786 _______________________________
+sympy\polys\tests\test_polytools.py:3253: in test_issue_5786
+    assert expand(factor(expand(
+E   assert x - I*y == (((((-I * t) * x) - (t * y)) + (x * z)) - ((I * y) * z))
+E    +  where x - I*y = expand(x - I*y)
+E    +    where x - I*y = factor(-I*t*x - t*y + x*z - I*y*z, extension=[I])
+E    +      where -I*t*x - t*y + x*z - I*y*z = expand(((x - (I * y)) * (z - (I * t))))
+                               DO *NOT* COMMIT!                               
+=========================== short test summary info ===========================
+FAILED sympy/polys/tests/test_polytools.py::test_issue_5786 - assert x - I*y ...
+1 failed, 149 passed, 1 warning in 7.47s

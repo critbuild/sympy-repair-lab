@@ -1,0 +1,217 @@
+diff --git a/sympy/core/numbers.py b/sympy/core/numbers.py
+index 864d055..f398b01 100644
+--- a/sympy/core/numbers.py
++++ b/sympy/core/numbers.py
+@@ -1284,7 +1284,7 @@ def __gt__(self, other):
+         except SympifyError:
+             raise TypeError("Invalid comparison %s > %s" % (self, other))
+         if isinstance(other, NumberSymbol):
+-            return other.__le__(self)
++            return other.__lt__(self)
+         if other.is_comparable:
+             other = other.evalf()
+         if isinstance(other, Number) and other is not S.NaN:
+@@ -1298,7 +1298,7 @@ def __ge__(self, other):
+         except SympifyError:
+             raise TypeError("Invalid comparison %s >= %s" % (self, other))
+         if isinstance(other, NumberSymbol):
+-            return other.__lt__(self)
++            return other.__le__(self)
+         if other.is_comparable:
+             other = other.evalf()
+         if isinstance(other, Number) and other is not S.NaN:
+@@ -1312,7 +1312,7 @@ def __lt__(self, other):
+         except SympifyError:
+             raise TypeError("Invalid comparison %s < %s" % (self, other))
+         if isinstance(other, NumberSymbol):
+-            return other.__ge__(self)
++            return other.__gt__(self)
+         if other.is_real and other.is_number:
+             other = other.evalf()
+         if isinstance(other, Number) and other is not S.NaN:
+@@ -1326,7 +1326,7 @@ def __le__(self, other):
+         except SympifyError:
+             raise TypeError("Invalid comparison %s <= %s" % (self, other))
+         if isinstance(other, NumberSymbol):
+-            return other.__gt__(self)
++            return other.__ge__(self)
+         if other.is_real and other.is_number:
+             other = other.evalf()
+         if isinstance(other, Number) and other is not S.NaN:
+@@ -1742,7 +1742,7 @@ def __gt__(self, other):
+         except SympifyError:
+             raise TypeError("Invalid comparison %s > %s" % (self, other))
+         if isinstance(other, NumberSymbol):
+-            return other.__le__(self)
++            return other.__lt__(self)
+         expr = self
+         if isinstance(other, Number):
+             if isinstance(other, Rational):
+@@ -1760,7 +1760,7 @@ def __ge__(self, other):
+         except SympifyError:
+             raise TypeError("Invalid comparison %s >= %s" % (self, other))
+         if isinstance(other, NumberSymbol):
+-            return other.__lt__(self)
++            return other.__le__(self)
+         expr = self
+         if isinstance(other, Number):
+             if isinstance(other, Rational):
+@@ -1778,7 +1778,7 @@ def __lt__(self, other):
+         except SympifyError:
+             raise TypeError("Invalid comparison %s < %s" % (self, other))
+         if isinstance(other, NumberSymbol):
+-            return other.__ge__(self)
++            return other.__gt__(self)
+         expr = self
+         if isinstance(other, Number):
+             if isinstance(other, Rational):
+@@ -1797,7 +1797,7 @@ def __le__(self, other):
+             raise TypeError("Invalid comparison %s <= %s" % (self, other))
+         expr = self
+         if isinstance(other, NumberSymbol):
+-            return other.__gt__(self)
++            return other.__ge__(self)
+         elif isinstance(other, Number):
+             if isinstance(other, Rational):
+                 return _sympify(bool(self.p*other.q <= self.q*other.p))
+@@ -3365,10 +3365,8 @@ def __lt__(self, other):
+                     return S.false
+                 if other > u:
+                     return S.true
+-            return _sympify(self.evalf() < other)
+-        if other.is_real and other.is_number:
+-            other = other.evalf()
+-            return _sympify(self.evalf() < other)
++        # Compare the difference, retaining the original operands so that
++        # evalf can resolve cancellation near the value of the constant.
+         return Expr.__lt__(self, other)
+ 
+     def __le__(self, other):
+@@ -3378,10 +3376,6 @@ def __le__(self, other):
+             raise TypeError("Invalid comparison %s <= %s" % (self, other))
+         if self is other:
+             return S.true
+-        if other.is_real and other.is_number:
+-            other = other.evalf()
+-        if isinstance(other, Number):
+-            return _sympify(self.evalf() <= other)
+         return Expr.__le__(self, other)
+ 
+     def __gt__(self, other):
+diff --git a/sympy/core/tests/test_numbers.py b/sympy/core/tests/test_numbers.py
+index a09ff11..9ae818b 100644
+--- a/sympy/core/tests/test_numbers.py
++++ b/sympy/core/tests/test_numbers.py
+@@ -1372,6 +1372,112 @@ def test_relational():
+     assert (x == cos) is False
+ 
+ 
++def test_numbersymbol_close_comparisons():
++    r = Rational('905502432259640373/288230376151711744')
++    # This exact value is above pi, but rounds to pi at default precision.
++    for above in (r, Float(r, 70)):
++        assert (above < pi) is S.false
++        assert (above <= pi) is S.false
++        assert (above > pi) is S.true
++        assert (above >= pi) is S.true
++        assert (pi < above) is S.true
++        assert (pi <= above) is S.true
++        assert (pi > above) is S.false
++        assert (pi >= above) is S.false
++
++    # Decimal bounds much closer than the default evaluation precision.
++    bounds = [
++        (pi, '3.141592653589793238462643383279'),
++        (E, '2.718281828459045235360287471352'),
++        (GoldenRatio, '1.618033988749894848204586834365'),
++        (EulerGamma, '0.577215664901532860606512090082'),
++        (Catalan, '0.915965594177219015054603514932'),
++    ]
++    for constant, lower in bounds:
++        lower = Rational(lower)
++        upper = lower + Rational(1, 10**30)
++        for a, b in [(lower, upper), (Float(lower, 40), Float(upper, 40))]:
++            assert (a < constant) is (constant > a) is S.true
++            assert (a <= constant) is (constant >= a) is S.true
++            assert (a > constant) is (constant < a) is S.false
++            assert (a >= constant) is (constant <= a) is S.false
++            assert (b > constant) is (constant < b) is S.true
++            assert (b >= constant) is (constant <= b) is S.true
++            assert (b < constant) is (constant > b) is S.false
++            assert (b <= constant) is (constant >= b) is S.false
++
++    # The rounded Float is an exact binary value below pi, not equal to pi.
++    below = pi.evalf()
++    assert (below < pi) is (pi > below) is S.true
++    assert (below <= pi) is (pi >= below) is S.true
++    assert (below > pi) is (pi < below) is S.false
++    assert (below >= pi) is (pi <= below) is S.false
++
++
++def test_numbersymbol_comparison_boundaries():
++    from sympy.core.numbers import NumberSymbol
++
++    class ZeroConstant(NumberSymbol):
++        is_zero = True
++
++        def _eval_evalf(self, prec):
++            return S.Zero
++
++        def approximation_interval(self, number_cls):
++            return None
++
++    # A rational-valued NumberSymbol makes strictness observable in scalar
++    # comparisons: equality must satisfy only the inclusive orderings.
++    zero = ZeroConstant()
++    for scalar in (S.Zero, Float(0)):
++        assert (scalar < zero) is (zero > scalar) is S.false
++        assert (scalar > zero) is (zero < scalar) is S.false
++        assert (scalar <= zero) is (zero >= scalar) is S.true
++        assert (scalar >= zero) is (zero <= scalar) is S.true
++
++    for constant in (pi, E, GoldenRatio, EulerGamma, Catalan):
++        assert (constant < constant) is S.false
++        assert (constant > constant) is S.false
++        assert (constant <= constant) is S.true
++        assert (constant >= constant) is S.true
++        for lower, upper in [(S.Zero, S(4)), (Float(0), Float(4)), (-oo, oo)]:
++            assert (lower < constant) is (constant > lower) is S.true
++            assert (lower <= constant) is (constant >= lower) is S.true
++            assert (lower > constant) is (constant < lower) is S.false
++            assert (lower >= constant) is (constant <= lower) is S.false
++            assert (upper > constant) is (constant < upper) is S.true
++            assert (upper >= constant) is (constant <= upper) is S.true
++            assert (upper < constant) is (constant > upper) is S.false
++            assert (upper <= constant) is (constant >= upper) is S.false
++
++
++def test_numbersymbol_undecidable_comparisons():
++    from sympy.core.numbers import NumberSymbol
++
++    class UnknownConstant(NumberSymbol):
++        is_real = True
++
++        def _eval_evalf(self, prec):
++            return None
++
++        def approximation_interval(self, number_cls):
++            return None
++
++    constant = UnknownConstant()
++    # Delegating to the other operand must preserve strictness even when
++    # the result is symbolic, rather than relying on the values being unequal.
++    for scalar in (S.Half, Float('0.5')):
++        for relation, reverse in [(Lt, Gt), (Le, Ge), (Gt, Lt), (Ge, Le)]:
++            expected = reverse(constant, scalar, evaluate=False)
++            assert relation(scalar, constant) == expected
++            assert reverse(constant, scalar) == expected
++
++    x = Symbol('x', real=True)
++    for relation in (Lt, Le, Gt, Ge):
++        assert relation(pi, x) == relation(pi, x, evaluate=False)
++        assert relation(x, pi) == relation(x, pi, evaluate=False)
++
++
+ def test_Integer_as_index():
+     assert 'hello'[Integer(2):] == 'llo'
+ 

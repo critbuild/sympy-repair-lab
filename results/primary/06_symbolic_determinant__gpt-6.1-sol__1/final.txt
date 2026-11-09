@@ -1,0 +1,13 @@
+Fixed Bareiss pivot selection to recognize symbolic zeros and retain canceled intermediate expressions. Both reported examples now return `0`.
+
+Added regression coverage for singular matrices, symbolic zero pivots requiring row swaps, dense/sparse and mutable/immutable matrices, and nonsingular agreement across determinant methods. No existing test expectations changed.
+
+Ran with the supplied environment variables:
+
+```powershell
+& '.\.venv\Scripts\python.exe' run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/matrices/tests/test_matrices.py sympy/matrices/tests/test_commonmatrix.py sympy/matrices/tests/test_sparse.py sympy/matrices/tests/test_immutable.py
+```
+
+Result: **256 passed, 1 skipped, 5 xfailed**.
+
+Also reran the supplied examples directly: `n=5: 0`, `n=6: 0`. `git diff --check` passed.

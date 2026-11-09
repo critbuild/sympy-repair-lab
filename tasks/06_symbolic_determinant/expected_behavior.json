@@ -1,0 +1,52 @@
+{
+  "case": "06_symbolic_determinant",
+  "derivation": "Readable export of the passing reference oracle frozen before the expanded primary run; no scoring changes.",
+  "reference_patch": "assets/13877-reference.patch",
+  "reference_oracle": "validation/controls-v2/06_symbolic_determinant-reference/oracle.json",
+  "requirements": [
+    {
+      "name": "rank_two_size_3",
+      "group": "required",
+      "expected": true
+    },
+    {
+      "name": "rank_two_size_5",
+      "group": "required",
+      "expected": true
+    },
+    {
+      "name": "rank_two_size_6",
+      "group": "required",
+      "expected": true
+    },
+    {
+      "name": "rank_two_size_7",
+      "group": "required",
+      "expected": true
+    },
+    {
+      "name": "diagonal_preserved",
+      "group": "preservation",
+      "expected": true
+    },
+    {
+      "name": "permutation_preserved",
+      "group": "preservation",
+      "expected": true
+    },
+    {
+      "name": "symbolic_preserved",
+      "group": "preservation",
+      "expected": true
+    },
+    {
+      "name": "independent_method_agreement",
+      "group": "preservation",
+      "expected": true
+    }
+  ],
+  "regression_suites": [
+    "sympy/matrices/tests/test_matrices.py"
+  ],
+  "task_level_pass": "All required and preservation checks and relevant regression suites pass."
+}

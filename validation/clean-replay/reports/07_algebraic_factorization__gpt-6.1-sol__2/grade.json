@@ -1,0 +1,36 @@
+{
+  "case": "07_algebraic_factorization",
+  "complete_pass": true,
+  "required_pass": true,
+  "preservation_pass": true,
+  "oracle_execution": {
+    "exit_code": 0,
+    "seconds": 3.69,
+    "command": [
+      "<WORKSPACE>\\work\\contract-clean-uv-cache\\builds-v0\\.tmp8Ix2ty\\Scripts\\python.exe",
+      "<WORKSPACE>\\work\\contract-package-validation\\entry\\checks.py",
+      "07_algebraic_factorization"
+    ],
+    "summary": ""
+  },
+  "regression": {
+    "exit_code": 0,
+    "seconds": 5.92,
+    "command": [
+      "<WORKSPACE>\\work\\contract-clean-uv-cache\\builds-v0\\.tmp8Ix2ty\\Scripts\\python.exe",
+      "-c",
+      "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+      "-p",
+      "pytest_timeout",
+      "--timeout=60",
+      "-q",
+      "--tb=short",
+      "--disable-warnings",
+      "sympy/polys/tests/test_polytools.py"
+    ],
+    "summary": "150 passed, 1 warning in 4.19s"
+  },
+  "failed_checks": [],
+  "check_count": 12,
+  "passed_checks": 12
+}

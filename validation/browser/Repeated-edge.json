@@ -1,0 +1,371 @@
+{
+  "scenario": "Repeated edge",
+  "executed_utc": "2026-11-08T23:25:09.119423+00:00",
+  "python": "3.9.25",
+  "source_revision": "d1320814eda6549996190618a21eaf212cfd4d1e",
+  "recorded_patch": "gpt-6-astra, discovery session 01a1bc8f-6ad1-7421-b692-2aee46e2ba0c",
+  "correction": "Evaluator-authored one-line GeometryEntity.__ne__ fix",
+  "modes": [
+    {
+      "sympy_version": "1.1.2.dev",
+      "input_edges": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            4,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            0
+          ],
+          [
+            4,
+            0
+          ]
+        ],
+        [
+          [
+            4,
+            0
+          ],
+          [
+            4,
+            3
+          ]
+        ],
+        [
+          [
+            4,
+            3
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      ],
+      "kept_indices": [
+        0,
+        2,
+        3
+      ],
+      "kept_edges": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            4,
+            0
+          ]
+        ],
+        [
+          [
+            4,
+            0
+          ],
+          [
+            4,
+            3
+          ]
+        ],
+        [
+          [
+            4,
+            3
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      ],
+      "trace": [
+        {
+          "index": 0,
+          "previous": "None",
+          "equal": false,
+          "unequal": true,
+          "kept": true
+        },
+        {
+          "index": 1,
+          "previous": "Segment2D(Point2D(0, 0), Point2D(4, 0))",
+          "equal": true,
+          "unequal": false,
+          "kept": false
+        },
+        {
+          "index": 2,
+          "previous": "Segment2D(Point2D(0, 0), Point2D(4, 0))",
+          "equal": false,
+          "unequal": true,
+          "kept": true
+        },
+        {
+          "index": 3,
+          "previous": "Segment2D(Point2D(4, 0), Point2D(4, 3))",
+          "equal": false,
+          "unequal": true,
+          "kept": true
+        }
+      ],
+      "foreign_equality": [
+        true,
+        false
+      ],
+      "source_hashes": {
+        "core/basic.py": "b466e6cdee6c4b9b33dcc3a2d96ddc16ee0cdf093aa18b7944de3a49380a1d78",
+        "core/expr.py": "6a55832c1c79a4920259589608045debbfb5482059d5d9cf55d5ffbae58229b5",
+        "core/numbers.py": "47543f72daf99c36fc0c3078a8a0ff31a97ba3bb47a3e8c2078455b0a37fb484",
+        "geometry/entity.py": "6b48d962ef6158b8a63e3409102a27953e0d3138b133235e8b5adbd4e63a0f87"
+      },
+      "seconds": 1.937,
+      "mode": "Original checkout"
+    },
+    {
+      "sympy_version": "1.1.2.dev",
+      "input_edges": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            4,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            0
+          ],
+          [
+            4,
+            0
+          ]
+        ],
+        [
+          [
+            4,
+            0
+          ],
+          [
+            4,
+            3
+          ]
+        ],
+        [
+          [
+            4,
+            3
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      ],
+      "kept_indices": [
+        2,
+        3
+      ],
+      "kept_edges": [
+        [
+          [
+            4,
+            0
+          ],
+          [
+            4,
+            3
+          ]
+        ],
+        [
+          [
+            4,
+            3
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      ],
+      "trace": [
+        {
+          "index": 0,
+          "previous": "None",
+          "equal": false,
+          "unequal": false,
+          "kept": false
+        },
+        {
+          "index": 1,
+          "previous": "Segment2D(Point2D(0, 0), Point2D(4, 0))",
+          "equal": true,
+          "unequal": false,
+          "kept": false
+        },
+        {
+          "index": 2,
+          "previous": "Segment2D(Point2D(0, 0), Point2D(4, 0))",
+          "equal": false,
+          "unequal": true,
+          "kept": true
+        },
+        {
+          "index": 3,
+          "previous": "Segment2D(Point2D(4, 0), Point2D(4, 3))",
+          "equal": false,
+          "unequal": true,
+          "kept": true
+        }
+      ],
+      "foreign_equality": [
+        true,
+        true
+      ],
+      "source_hashes": {
+        "core/basic.py": "11e5242d0366702fc83054c71ea3f05f118fd0bac67d4fd390f8c22c1281c038",
+        "core/expr.py": "8b20d51a6ea004d40165b9df9ae9ec0c6ebd444d66b9d9970259f6cf6ac7b9d2",
+        "core/numbers.py": "23013f8bf9a0dccdfbfdce6da0a5f5ce517982421f3f3e8e113c53cb70401a60",
+        "geometry/entity.py": "6b48d962ef6158b8a63e3409102a27953e0d3138b133235e8b5adbd4e63a0f87"
+      },
+      "seconds": 1.937,
+      "mode": "Recorded agent repair"
+    },
+    {
+      "sympy_version": "1.1.2.dev",
+      "input_edges": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            4,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            0
+          ],
+          [
+            4,
+            0
+          ]
+        ],
+        [
+          [
+            4,
+            0
+          ],
+          [
+            4,
+            3
+          ]
+        ],
+        [
+          [
+            4,
+            3
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      ],
+      "kept_indices": [
+        0,
+        2,
+        3
+      ],
+      "kept_edges": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            4,
+            0
+          ]
+        ],
+        [
+          [
+            4,
+            0
+          ],
+          [
+            4,
+            3
+          ]
+        ],
+        [
+          [
+            4,
+            3
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      ],
+      "trace": [
+        {
+          "index": 0,
+          "previous": "None",
+          "equal": false,
+          "unequal": true,
+          "kept": true
+        },
+        {
+          "index": 1,
+          "previous": "Segment2D(Point2D(0, 0), Point2D(4, 0))",
+          "equal": true,
+          "unequal": false,
+          "kept": false
+        },
+        {
+          "index": 2,
+          "previous": "Segment2D(Point2D(0, 0), Point2D(4, 0))",
+          "equal": false,
+          "unequal": true,
+          "kept": true
+        },
+        {
+          "index": 3,
+          "previous": "Segment2D(Point2D(4, 0), Point2D(4, 3))",
+          "equal": false,
+          "unequal": true,
+          "kept": true
+        }
+      ],
+      "foreign_equality": [
+        true,
+        true
+      ],
+      "source_hashes": {
+        "core/basic.py": "11e5242d0366702fc83054c71ea3f05f118fd0bac67d4fd390f8c22c1281c038",
+        "core/expr.py": "8b20d51a6ea004d40165b9df9ae9ec0c6ebd444d66b9d9970259f6cf6ac7b9d2",
+        "core/numbers.py": "23013f8bf9a0dccdfbfdce6da0a5f5ce517982421f3f3e8e113c53cb70401a60",
+        "geometry/entity.py": "0c9fce17cc6cfa226faf4ba4a54043c98aac54b07b203cac787ae091adb227c7"
+      },
+      "seconds": 1.953,
+      "mode": "Corrected repair"
+    }
+  ]
+}

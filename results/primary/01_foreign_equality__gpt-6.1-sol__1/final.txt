@@ -1,0 +1,10 @@
+Implemented `NotImplemented` propagation for failed sympification in equality and inequality, allowing Python’s reflected comparisons. Symbols inherit the fix. Plain unsupported objects remain unequal, and numeric singleton identity behavior is preserved.
+
+Added regressions for wrappers, independent `__ne__` behavior, declined comparisons, and successful conversion. No existing test expectations changed.
+
+Commands run using the supplied interpreter and environment:
+
+- `run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/core/tests/test_basic.py sympy/core/tests/test_numbers.py` — **98 passed, 1 xfailed**.
+- Same flags with `sympy/core/tests -k 'not test_evaluate_false'` — **1,428 passed, 60 skipped, 2 deselected, 42 xfailed**.
+- `test_sympify.py::test_evaluate_false` fails identically with the original implementation due to Python 3.9 AST compatibility.
+- `git diff --check` — clean.

@@ -1,0 +1,64 @@
+{
+  "case": "06_symbolic_determinant",
+  "model": "gpt-6-astra",
+  "repeat": 2,
+  "reasoning_effort": "medium",
+  "label": "primary",
+  "category": "complete_repair",
+  "complete_pass": true,
+  "cli_exit_code": 0,
+  "agent_seconds": 148.34,
+  "thread_ids": [
+    "01a1bd6f-0b7e-7010-a9bd-d1f4d0d558d0"
+  ],
+  "command_count": 8,
+  "changed_files": [
+    "sympy/matrices/matrices.py",
+    "sympy/matrices/tests/test_matrices.py"
+  ],
+  "usage": [
+    {
+      "input_tokens": 265474,
+      "cached_input_tokens": 242560,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 2582,
+      "reasoning_output_tokens": 463
+    }
+  ],
+  "checks": {
+    "case": "06_symbolic_determinant",
+    "complete_pass": true,
+    "required_pass": true,
+    "preservation_pass": true,
+    "oracle_execution": {
+      "exit_code": 0,
+      "seconds": 4.09,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "06_symbolic_determinant"
+      ],
+      "summary": ""
+    },
+    "regression": {
+      "exit_code": 0,
+      "seconds": 33.89,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "-c",
+        "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+        "-p",
+        "pytest_timeout",
+        "--timeout=60",
+        "-q",
+        "--tb=short",
+        "--disable-warnings",
+        "sympy/matrices/tests/test_matrices.py"
+      ],
+      "summary": "152 passed, 1 skipped, 4 xfailed, 7 warnings in 31.79s"
+    },
+    "failed_checks": [],
+    "check_count": 8,
+    "passed_checks": 8
+  }
+}

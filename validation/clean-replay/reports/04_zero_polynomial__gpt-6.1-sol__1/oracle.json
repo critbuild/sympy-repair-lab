@@ -1,0 +1,66 @@
+{
+  "case": "04_zero_polynomial",
+  "complete_pass": true,
+  "required_pass": true,
+  "preservation_pass": true,
+  "check_count": 8,
+  "passed_checks": 8,
+  "checks": [
+    {
+      "name": "cleared_expression_zero",
+      "group": "required",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "cleared_poly_zero",
+      "group": "required",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "terms_gcd_zero",
+      "group": "required",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "primitive_zero",
+      "group": "required",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "nonzero_identity",
+      "group": "preservation",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "unknown_identity",
+      "group": "preservation",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "rational_identity",
+      "group": "preservation",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "plain_zero",
+      "group": "preservation",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    }
+  ]
+}

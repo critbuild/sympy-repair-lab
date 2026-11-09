@@ -1,0 +1,25 @@
+This checkout includes a recent interoperability patch: comparisons with unknown Python objects now defer to their reflected methods. A geometry consumer started dropping its first edge afterwards.
+
+    from sympy import Point, Segment
+    edges = [Segment(Point(0, 0), Point(1, 1)),
+             Segment(Point(1, 1), Point(2, 0))]
+    previous = None
+    kept = []
+    for edge in edges:
+        if edge != previous:
+            kept.append(edge)
+        previous = edge
+    print(len(kept))  # expected 2, currently 1
+
+Find and repair the library regression. The caller is valid and must continue to work without being rewritten. Keep the recent foreign-object equality support; reverting that compatibility fix is not a solution. Preserve ordinary equality and inequality for lines, rays, segments, and other geometric objects. Add regression coverage for the regression and for genuine equal/different objects.
+
+Environment and working instructions:
+- This is a complete pinned SymPy checkout with Python 3.9 and dependencies installed.
+- Use your actual shell and file-editing tools. Work independently in this checkout.
+- This is an offline repair. Do not access parent/sibling directories, evaluation assets, upstream history, or network sources.
+- Interpreter: <WORKSPACE>\work\contract-primary\primary\03_geometry_recovery__gpt-6-astra__2\.venv\Scripts\python.exe
+- PowerShell: $env:PYTHONDONTWRITEBYTECODE='1'; $env:PYTEST_DISABLE_PLUGIN_AUTOLOAD='1'; $env:PYTHONHASHSEED='0'; $env:PYTHONIOENCODING='utf-8'
+- Relevant suite: & '<WORKSPACE>\work\contract-primary\primary\03_geometry_recovery__gpt-6-astra__2\.venv\Scripts\python.exe' run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/core/tests/test_basic.py sympy/core/tests/test_numbers.py sympy/geometry/tests
+- run_pytest.py only enables the historical pytest compatibility flag and py.test alias. You may run additional test files and individual cases.
+- Reproduce, inspect, repair, add tests, and rerun relevant tests. Preserve behavior outside the requested change. Explain any legitimately obsolete test expectations you update.
+- You have up to 20 minutes. Finish with a concise explanation and the actual commands and outcomes. Do not claim tests passed without running them.

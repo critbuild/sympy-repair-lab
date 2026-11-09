@@ -1,0 +1,36 @@
+{
+  "case": "06_symbolic_determinant",
+  "complete_pass": true,
+  "required_pass": true,
+  "preservation_pass": true,
+  "oracle_execution": {
+    "exit_code": 0,
+    "seconds": 3.0,
+    "command": [
+      "<WORKSPACE>\\work\\contract-clean-uv-cache\\builds-v0\\.tmp8Ix2ty\\Scripts\\python.exe",
+      "<WORKSPACE>\\work\\contract-package-validation\\entry\\checks.py",
+      "06_symbolic_determinant"
+    ],
+    "summary": ""
+  },
+  "regression": {
+    "exit_code": 0,
+    "seconds": 20.94,
+    "command": [
+      "<WORKSPACE>\\work\\contract-clean-uv-cache\\builds-v0\\.tmp8Ix2ty\\Scripts\\python.exe",
+      "-c",
+      "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+      "-p",
+      "pytest_timeout",
+      "--timeout=60",
+      "-q",
+      "--tb=short",
+      "--disable-warnings",
+      "sympy/matrices/tests/test_matrices.py"
+    ],
+    "summary": "152 passed, 1 skipped, 4 xfailed, 7 warnings in 19.31s"
+  },
+  "failed_checks": [],
+  "check_count": 8,
+  "passed_checks": 8
+}

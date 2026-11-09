@@ -1,0 +1,19 @@
+Fixed by removing `GeometryEntity.__ne__`, allowing inheritance of `Basic.__ne__`, which correctly propagates `NotImplemented`. Foreign-object reflected comparisons remain supported. Your example now keeps **2 edges**.
+
+Added coverage for the caller, reflected comparisons, and equal/different geometry objects, including 2D/3D lines, rays, and segments. No existing expectations changed.
+
+Commands run with the specified environment variables:
+
+```powershell
+& '.\.venv\Scripts\python.exe' run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/geometry/tests/test_entity.py
+```
+
+Before repair: **3 failed, 3 passed**.
+
+```powershell
+& '.\.venv\Scripts\python.exe' run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/core/tests/test_basic.py sympy/core/tests/test_numbers.py sympy/geometry/tests
+```
+
+After repair: **168 passed, 1 xfailed**, 12 warnings.
+
+`git diff --check` passed.

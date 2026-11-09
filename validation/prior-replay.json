@@ -1,0 +1,62 @@
+{
+  "trials": 8,
+  "all_match": true,
+  "results": [
+    {
+      "trial": "confirmation__13091-gpt-6-astra-1",
+      "geometry_failed_checks": 13,
+      "issue_tests_exit_code": 0,
+      "original_core_exit_code": 0,
+      "matches_saved_result": true
+    },
+    {
+      "trial": "confirmation__13091-gpt-6-astra-2",
+      "geometry_failed_checks": 13,
+      "issue_tests_exit_code": 0,
+      "original_core_exit_code": 0,
+      "matches_saved_result": true
+    },
+    {
+      "trial": "confirmation__13091-gpt-6-astra-3",
+      "geometry_failed_checks": 13,
+      "issue_tests_exit_code": 0,
+      "original_core_exit_code": 0,
+      "matches_saved_result": true
+    },
+    {
+      "trial": "confirmation__13091-gpt-6.1-sol-1",
+      "geometry_failed_checks": 13,
+      "issue_tests_exit_code": 0,
+      "original_core_exit_code": 0,
+      "matches_saved_result": true
+    },
+    {
+      "trial": "confirmation__13091-gpt-6.1-sol-2",
+      "geometry_failed_checks": 13,
+      "issue_tests_exit_code": 0,
+      "original_core_exit_code": 0,
+      "matches_saved_result": true
+    },
+    {
+      "trial": "confirmation__13091-gpt-6.1-sol-3",
+      "geometry_failed_checks": 13,
+      "issue_tests_exit_code": 0,
+      "original_core_exit_code": 0,
+      "matches_saved_result": true
+    },
+    {
+      "trial": "screen-b__13091-gpt-6-astra-1",
+      "geometry_failed_checks": 13,
+      "issue_tests_exit_code": 0,
+      "original_core_exit_code": 0,
+      "matches_saved_result": true
+    },
+    {
+      "trial": "screen-b__13091-gpt-6.1-sol-1",
+      "geometry_failed_checks": 13,
+      "issue_tests_exit_code": 0,
+      "original_core_exit_code": 0,
+      "matches_saved_result": true
+    }
+  ]
+}

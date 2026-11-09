@@ -1,0 +1,107 @@
+diff --git a/sympy/polys/densearith.py b/sympy/polys/densearith.py
+index bce08bb..1c3f961 100644
+--- a/sympy/polys/densearith.py
++++ b/sympy/polys/densearith.py
+@@ -269,7 +269,8 @@ def dup_mul_ground(f, c, K):
+     if not c or not f:
+         return []
+     else:
+-        return [ cf * c for cf in f ]
++        # Multiplication can expose zero coefficients in symbolic domains.
++        return dup_strip([ cf * c for cf in f ])
+ 
+ 
+ def dmp_mul_ground(f, c, u, K):
+@@ -291,7 +292,7 @@ def dmp_mul_ground(f, c, u, K):
+ 
+     v = u - 1
+ 
+-    return [ dmp_mul_ground(cf, c, v, K) for cf in f ]
++    return dmp_strip([ dmp_mul_ground(cf, c, v, K) for cf in f ], u)
+ 
+ 
+ def dup_quo_ground(f, c, K):
+diff --git a/sympy/polys/tests/test_densearith.py b/sympy/polys/tests/test_densearith.py
+index 55b2f47..53b08f9 100644
+--- a/sympy/polys/tests/test_densearith.py
++++ b/sympy/polys/tests/test_densearith.py
+@@ -39,7 +39,9 @@
+ )
+ 
+ from sympy.polys.specialpolys import f_polys
+-from sympy.polys.domains import FF, ZZ, QQ
++from sympy.polys.domains import FF, ZZ, QQ, EX
++
++from sympy.abc import a, b
+ 
+ from sympy.testing.pytest import raises
+ 
+@@ -195,6 +197,24 @@ def test_dmp_mul_ground():
+              QQ(1, 14)], [QQ(1, 14)]]
+     ]
+ 
++    assert dmp_mul_ground([[ZZ(1)], [ZZ(2)]], ZZ.zero, 1, ZZ) == [[]]
++    assert dmp_mul_ground([[[ZZ(1)]], [[ZZ(2)]]], ZZ.zero, 2, ZZ) == [[[]]]
++
++
++def test_mul_ground_symbolic_cancellation():
++    zero = EX(((a + 1)**2 - a**2 - 2*a - 1)/(a + 2))
++    factor = EX(a + 2)
++    nonzero = EX(2/(a + 2))
++    unknown = EX(b/(a + 2))
++
++    assert dup_mul_ground([zero], factor, EX) == []
++    assert dup_mul_ground([zero, nonzero, zero, unknown], factor, EX) == [
++        EX(2), EX.zero, EX(b)]
++    assert dmp_mul_ground([[zero], [zero]], factor, 1, EX) == [[]]
++    assert dmp_mul_ground([[[zero]], [[zero]]], factor, 2, EX) == [[[]]]
++    assert dmp_mul_ground([[zero], [zero, nonzero], [unknown, zero]],
++                          factor, 1, EX) == [[EX(2)], [EX(b), EX.zero]]
++
+ 
+ def test_dup_quo_ground():
+     raises(ZeroDivisionError, lambda: dup_quo_ground(dup_normal([1, 2,
+diff --git a/sympy/polys/tests/test_polytools.py b/sympy/polys/tests/test_polytools.py
+index c774fc4..660af3d 100644
+--- a/sympy/polys/tests/test_polytools.py
++++ b/sympy/polys/tests/test_polytools.py
+@@ -1445,6 +1445,39 @@ def test_Poly_clear_denoms():
+         x + 3*sqrt(2), x, domain='EX') and poly.get_domain() == EX
+ 
+ 
++def test_Poly_clear_denoms_cancellation():
++    # Keep an unexpanded coefficient: multiplication by its denominator
++    # exposes the zero, which must then be removed from the dense polynomial.
++    for shift in (1, 2):
++        zero = ((a + shift)**2 - a**2 - 2*a*shift - shift**2)/(a + 3)
++        for gens in ((x,), (x, y), (x, y, z)):
++            n = len(gens)
++            for convert in (False, True):
++                f = Poly.from_dict({(0,)*n: zero}, *gens, domain=EX)
++                denominator, cleared = f.clear_denoms(convert=convert)
++                expected = Poly(0, *gens, domain=EX)
++                assert cleared == expected
++                assert cleared.is_zero
++                assert cleared.terms_gcd() == ((0,)*n, expected)
++                assert cleared.primitive() == (0, expected)
++                assert cancel(denominator*f.as_expr() - cleared.as_expr()) == 0
++
++                # Leading and interior cancellations must preserve the other
++                # coefficients and their monomials, including symbolic ones.
++                f = Poly.from_dict({(3,)*n: zero, (2,)*n: 2/(a + 3),
++                                   (1,)*n: zero, (0,)*n: b/(a + 3)},
++                                  *gens, domain=EX)
++                denominator, cleared = f.clear_denoms(convert=convert)
++                expected = Poly.from_dict({(2,)*n: 2, (0,)*n: b},
++                                          *gens, domain=EX)
++                assert denominator == a + 3
++                assert cleared == expected
++                assert not cleared.is_zero
++                assert cleared.terms_gcd() == ((0,)*n, expected)
++                assert cleared.primitive() == (1, expected)
++                assert cancel(denominator*f.as_expr() - cleared.as_expr()) == 0
++
++
+ def test_Poly_rat_clear_denoms():
+     f = Poly(x**2/y + 1, x)
+     g = Poly(x**3 + y, x)

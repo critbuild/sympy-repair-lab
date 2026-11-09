@@ -1,0 +1,42 @@
+{
+  "events": [
+    {
+      "recorded_utc": "2026-11-09T02:59:06.227491+00:00",
+      "request": "Draft a participant opinion after confirmation that the demo and video make sense.",
+      "previous_archive_sha256": "ceff7c95b20c7380904d611676cc157287fdd6fe6545a7854b345813ee4f019f",
+      "changed_existing_files": [
+        "README.md",
+        "REVIEW.md",
+        "participant_review.json",
+        "PACKAGE_STATUS.json",
+        "validation/final-seal.json"
+      ],
+      "unchanged_existing_files_verified": 1476,
+      "code_tasks_candidates_and_scores_unchanged": true,
+      "full_review_or_expertise_not_certified": true,
+      "opinion_status": "draft_for_approval"
+    },
+    {
+      "recorded_utc": "2026-11-09T03:07:13.651710+00:00",
+      "request": "Use the approved opinion, confirm video coverage, and provide Desktop copies.",
+      "previous_archive_sha256": "289193380a0c96d5bd37eb5597bd17e566b5719089190fbbcc7a503f3212139a",
+      "changed_existing_files": [
+        "README.md",
+        "REVIEW.md",
+        "participant_review.json",
+        "PACKAGE_STATUS.json",
+        "VIDEO_SCRIPT.md",
+        "validation/video.json",
+        "validation/documentation-amendments.json"
+      ],
+      "added_files": [
+        "validation/video-requirements.json"
+      ],
+      "unchanged_existing_files_verified": 1475,
+      "code_tasks_candidates_and_scores_unchanged": true,
+      "opinion_status": "approved",
+      "full_review_or_expertise_not_certified": true,
+      "video_change": "Narration explicitly states practical maintenance impact and the all-checks-required pass rule; re-encoded and decoded successfully."
+    }
+  ]
+}

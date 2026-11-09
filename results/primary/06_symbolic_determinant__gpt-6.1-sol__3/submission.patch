@@ -1,0 +1,81 @@
+diff --git a/sympy/matrices/matrices.py b/sympy/matrices/matrices.py
+index 97cde62..cce1aa9 100644
+--- a/sympy/matrices/matrices.py
++++ b/sympy/matrices/matrices.py
+@@ -174,14 +174,6 @@ def _eval_det_bareiss(self):
+         http://www.eecis.udel.edu/~saunders/papers/sffge/it5.ps.
+         """
+ 
+-        # XXX included as a workaround for issue #12362.  Should use `_find_reasonable_pivot` instead
+-        def _find_pivot(l):
+-            for pos,val in enumerate(l):
+-                if val:
+-                    return (pos, val, None, None)
+-            return (None, None, None, None)
+-
+-
+         # Recursively implemented Bareiss' algorithm as per Deanna Richelle Leggett's
+         # thesis http://www.math.usm.edu/perry/Research/Thesis_DRL.pdf
+         def bareiss(mat, cumm=1):
+@@ -191,8 +183,8 @@ def bareiss(mat, cumm=1):
+                 return mat[0, 0]
+ 
+             # find a pivot and extract the remaining matrix
+-            # XXX should use `_find_reasonable_pivot`.  Blocked by issue #12362
+-            pivot_pos, pivot_val, _, _ = _find_pivot(mat[:, 0])
++            # Symbolic zeros must be recognized before dividing by a pivot.
++            pivot_pos, pivot_val, _, _ = _find_reasonable_pivot(mat[:, 0])
+             if pivot_pos == None:
+                 return S.Zero
+ 
+diff --git a/sympy/matrices/tests/test_matrices.py b/sympy/matrices/tests/test_matrices.py
+index f4bc60c..56ce112 100644
+--- a/sympy/matrices/tests/test_matrices.py
++++ b/sympy/matrices/tests/test_matrices.py
+@@ -403,6 +403,46 @@ def test_determinant():
+     assert M.det(method="berkowitz") == z**2 - x*y
+ 
+ 
++def test_det_bareiss_symbolic_zero():
++    # Elimination produces unsimplified zero pivots in these rank-two matrices.
++    for n in range(4, 8):
++        M = Matrix(n, n, lambda i, j: j + a*i)
++        assert M.det() == 0
++        assert M.det(method="bareiss") == 0
++
++    # Zero detection must also work for expressions other than polynomials.
++    for zero in [(x + 1)**2 - x**2 - 2*x - 1,
++                 (x**2 - 1)/(x - 1) - x - 1,
++                 sin(x)**2 + cos(x)**2 - 1]:
++        assert zero != 0
++        for cls in classes:
++            M = cls.diag(zero, 1, 1, 1)
++            assert M.det() == 0
++
++
++def test_det_bareiss_symbolic_pivot():
++    zero = sin(x)**2 + cos(x)**2 - 1
++    # Skip a symbolic zero and use an undecidable pivot, preserving swap signs.
++    for M, expected in [
++            (Matrix([[zero, 1, 0, 0], [a, 0, 0, 0],
++                     [0, 0, 1, 0], [0, 0, 0, 1]]), -a),
++            (Matrix([[zero, 1, 0, 0], [0, 0, 1, 0],
++                     [a, 0, 0, 0], [0, 0, 0, 1]]), a)]:
++        original = M.copy()
++        assert M.det() == expected
++        for method in ["bareiss", "berkowitz"]:
++            assert (M.det(method=method) - expected).expand() == 0
++        assert M == original
++
++    # Undecidable symbolic pivots must still be usable for nonsingular matrices.
++    M = Matrix([[a, 1, 0, 0], [0, a + 1, 1, 0],
++                [0, 0, a + 2, 1], [1, 0, 0, a + 3]])
++    expected = a**4 + 6*a**3 + 11*a**2 + 6*a - 1
++    assert M.det() == expected
++    for method in ["bareiss", "berkowitz", "lu"]:
++        assert (M.det(method=method) - expected).expand() == 0
++
++
+ def test_det_LU_decomposition():
+ 
+     for M in [Matrix(), Matrix([[1]])]:

@@ -1,0 +1,19 @@
+A symbolic linear-algebra workflow evaluates determinants of matrices with entries M[j,i] = i + a*j:
+    from sympy import Matrix, symbols
+    a = symbols('a')
+    matrix = lambda n: Matrix([[i + a*j for i in range(n)] for j in range(n)])
+    print(matrix(5).det())  # currently nan; expected 0
+    print(matrix(6).det())  # currently raises; expected 0
+
+For n >= 3 the rows span at most two vectors, so the determinant is identically zero. Repair the default determinant algorithm's handling of these symbolic zero pivots. Preserve correct results for nonsingular matrices and existing determinant methods. Do not special-case the displayed matrix family or replace all determinants with zero. Add regression coverage.
+
+Environment and working instructions:
+- This is a complete pinned SymPy checkout with Python 3.9 and dependencies installed.
+- Use your actual shell and file-editing tools. Work independently in this checkout.
+- This is an offline repair. Do not access parent/sibling directories, evaluation assets, upstream history, or network sources.
+- Interpreter: <WORKSPACE>\work\contract-primary\primary\06_symbolic_determinant__gpt-6-astra__1\.venv\Scripts\python.exe
+- PowerShell: $env:PYTHONDONTWRITEBYTECODE='1'; $env:PYTEST_DISABLE_PLUGIN_AUTOLOAD='1'; $env:PYTHONHASHSEED='0'; $env:PYTHONIOENCODING='utf-8'
+- Relevant suite: & '<WORKSPACE>\work\contract-primary\primary\06_symbolic_determinant__gpt-6-astra__1\.venv\Scripts\python.exe' run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/matrices/tests/test_matrices.py
+- run_pytest.py only enables the historical pytest compatibility flag and py.test alias. You may run additional test files and individual cases.
+- Reproduce, inspect, repair, add tests, and rerun relevant tests. Preserve behavior outside the requested change. Explain any legitimately obsolete test expectations you update.
+- You have up to 20 minutes. Finish with a concise explanation and the actual commands and outcomes. Do not claim tests passed without running them.

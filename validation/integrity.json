@@ -1,0 +1,1211 @@
+{
+  "all_pass": true,
+  "trial_count": 42,
+  "check_count": 301,
+  "checks": [
+    {
+      "name": "evaluators_match_frozen_protocol",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:assets/02-ordering-reference.patch",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:assets/13091-baseline.zip",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:assets/13091-reference.patch",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:assets/13091-tests.patch",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:assets/13877-baseline.zip",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:assets/13877-reference.patch",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:assets/13877-tests.patch",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:assets/19040-baseline.zip",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:assets/19040-reference.patch",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:assets/19040-tests.patch",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:assets/20428-baseline.zip",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:assets/20428-reference.patch",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:assets/20428-tests.patch",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:assets/20438-baseline.zip",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:assets/20438-reference.patch",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:assets/20438-tests.patch",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:assets/geometry-reference.patch",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:assets/geometry-seed/sympy/core/basic.py",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:assets/geometry-seed/sympy/core/expr.py",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:assets/geometry-seed/sympy/core/numbers.py",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:assets/SymPy-LICENSE.txt",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:assets/zero-polynomial-incident.py",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:tasks/01_foreign_equality/prompt.txt",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:tasks/01_foreign_equality/task.json",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:tasks/02_precise_ordering/prompt.txt",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:tasks/02_precise_ordering/task.json",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:tasks/03_geometry_recovery/prompt.txt",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:tasks/03_geometry_recovery/task.json",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:tasks/04_zero_polynomial/prompt.txt",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:tasks/04_zero_polynomial/task.json",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:tasks/05_set_equivalence/prompt.txt",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:tasks/05_set_equivalence/task.json",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:tasks/06_symbolic_determinant/prompt.txt",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:tasks/06_symbolic_determinant/task.json",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:tasks/07_algebraic_factorization/prompt.txt",
+      "passed": true
+    },
+    {
+      "name": "preflight_asset:tasks/07_algebraic_factorization/task.json",
+      "passed": true
+    },
+    {
+      "name": "recorded_seed:sympy/core/basic.py",
+      "passed": true
+    },
+    {
+      "name": "recorded_seed:sympy/core/expr.py",
+      "passed": true
+    },
+    {
+      "name": "recorded_seed:sympy/core/numbers.py",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6-astra__1:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6-astra__1:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6-astra__1:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6-astra__1:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6-astra__1:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6-astra__1:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6-astra__2:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6-astra__2:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6-astra__2:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6-astra__2:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6-astra__2:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6-astra__2:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6-astra__3:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6-astra__3:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6-astra__3:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6-astra__3:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6-astra__3:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6-astra__3:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6.1-sol__1:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6.1-sol__1:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6.1-sol__1:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6.1-sol__1:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6.1-sol__1:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6.1-sol__1:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6.1-sol__2:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6.1-sol__2:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6.1-sol__2:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6.1-sol__2:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6.1-sol__2:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6.1-sol__2:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6.1-sol__3:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6.1-sol__3:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6.1-sol__3:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6.1-sol__3:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6.1-sol__3:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "01_foreign_equality__gpt-6.1-sol__3:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6-astra__1:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6-astra__1:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6-astra__1:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6-astra__1:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6-astra__1:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6-astra__1:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6-astra__2:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6-astra__2:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6-astra__2:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6-astra__2:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6-astra__2:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6-astra__2:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6-astra__3:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6-astra__3:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6-astra__3:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6-astra__3:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6-astra__3:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6-astra__3:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6.1-sol__1:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6.1-sol__1:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6.1-sol__1:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6.1-sol__1:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6.1-sol__1:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6.1-sol__1:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6.1-sol__2:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6.1-sol__2:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6.1-sol__2:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6.1-sol__2:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6.1-sol__2:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6.1-sol__2:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6.1-sol__3:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6.1-sol__3:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6.1-sol__3:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6.1-sol__3:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6.1-sol__3:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "02_precise_ordering__gpt-6.1-sol__3:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6-astra__1:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6-astra__1:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6-astra__1:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6-astra__1:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6-astra__1:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6-astra__1:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6-astra__2:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6-astra__2:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6-astra__2:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6-astra__2:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6-astra__2:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6-astra__2:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6-astra__3:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6-astra__3:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6-astra__3:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6-astra__3:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6-astra__3:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6-astra__3:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6.1-sol__1:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6.1-sol__1:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6.1-sol__1:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6.1-sol__1:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6.1-sol__1:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6.1-sol__1:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6.1-sol__2:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6.1-sol__2:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6.1-sol__2:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6.1-sol__2:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6.1-sol__2:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6.1-sol__2:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6.1-sol__3:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6.1-sol__3:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6.1-sol__3:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6.1-sol__3:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6.1-sol__3:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "03_geometry_recovery__gpt-6.1-sol__3:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6-astra__1:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6-astra__1:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6-astra__1:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6-astra__1:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6-astra__1:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6-astra__1:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6-astra__2:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6-astra__2:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6-astra__2:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6-astra__2:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6-astra__2:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6-astra__2:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6-astra__3:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6-astra__3:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6-astra__3:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6-astra__3:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6-astra__3:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6-astra__3:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6.1-sol__1:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6.1-sol__1:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6.1-sol__1:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6.1-sol__1:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6.1-sol__1:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6.1-sol__1:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6.1-sol__2:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6.1-sol__2:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6.1-sol__2:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6.1-sol__2:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6.1-sol__2:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6.1-sol__2:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6.1-sol__3:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6.1-sol__3:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6.1-sol__3:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6.1-sol__3:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6.1-sol__3:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "04_zero_polynomial__gpt-6.1-sol__3:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6-astra__1:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6-astra__1:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6-astra__1:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6-astra__1:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6-astra__1:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6-astra__1:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6-astra__2:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6-astra__2:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6-astra__2:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6-astra__2:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6-astra__2:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6-astra__2:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6-astra__3:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6-astra__3:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6-astra__3:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6-astra__3:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6-astra__3:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6-astra__3:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6.1-sol__1:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6.1-sol__1:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6.1-sol__1:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6.1-sol__1:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6.1-sol__1:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6.1-sol__1:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6.1-sol__2:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6.1-sol__2:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6.1-sol__2:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6.1-sol__2:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6.1-sol__2:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6.1-sol__2:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6.1-sol__3:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6.1-sol__3:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6.1-sol__3:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6.1-sol__3:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6.1-sol__3:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "05_set_equivalence__gpt-6.1-sol__3:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6-astra__1:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6-astra__1:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6-astra__1:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6-astra__1:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6-astra__1:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6-astra__1:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6-astra__2:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6-astra__2:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6-astra__2:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6-astra__2:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6-astra__2:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6-astra__2:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6-astra__3:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6-astra__3:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6-astra__3:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6-astra__3:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6-astra__3:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6-astra__3:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6.1-sol__1:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6.1-sol__1:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6.1-sol__1:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6.1-sol__1:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6.1-sol__1:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6.1-sol__1:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6.1-sol__2:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6.1-sol__2:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6.1-sol__2:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6.1-sol__2:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6.1-sol__2:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6.1-sol__2:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6.1-sol__3:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6.1-sol__3:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6.1-sol__3:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6.1-sol__3:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6.1-sol__3:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "06_symbolic_determinant__gpt-6.1-sol__3:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6-astra__1:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6-astra__1:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6-astra__1:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6-astra__1:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6-astra__1:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6-astra__1:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6-astra__2:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6-astra__2:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6-astra__2:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6-astra__2:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6-astra__2:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6-astra__2:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6-astra__3:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6-astra__3:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6-astra__3:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6-astra__3:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6-astra__3:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6-astra__3:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6.1-sol__1:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6.1-sol__1:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6.1-sol__1:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6.1-sol__1:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6.1-sol__1:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6.1-sol__1:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6.1-sol__2:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6.1-sol__2:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6.1-sol__2:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6.1-sol__2:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6.1-sol__2:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6.1-sol__2:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6.1-sol__3:unique_session_recorded",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6.1-sol__3:prompt_digest",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6.1-sol__3:frozen_source",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6.1-sol__3:actual_tools",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6.1-sol__3:final_from_transcript",
+      "passed": true
+    },
+    {
+      "name": "07_algebraic_factorization__gpt-6.1-sol__3:grade_matches",
+      "passed": true
+    },
+    {
+      "name": "all_planned_trials_present_once",
+      "passed": true
+    },
+    {
+      "name": "all_session_ids_distinct",
+      "passed": true
+    },
+    {
+      "name": "same_prompt_except_checkout:01_foreign_equality",
+      "passed": true
+    },
+    {
+      "name": "same_prompt_except_checkout:02_precise_ordering",
+      "passed": true
+    },
+    {
+      "name": "same_prompt_except_checkout:03_geometry_recovery",
+      "passed": true
+    },
+    {
+      "name": "same_prompt_except_checkout:04_zero_polynomial",
+      "passed": true
+    },
+    {
+      "name": "same_prompt_except_checkout:05_set_equivalence",
+      "passed": true
+    },
+    {
+      "name": "same_prompt_except_checkout:06_symbolic_determinant",
+      "passed": true
+    },
+    {
+      "name": "same_prompt_except_checkout:07_algebraic_factorization",
+      "passed": true
+    }
+  ]
+}

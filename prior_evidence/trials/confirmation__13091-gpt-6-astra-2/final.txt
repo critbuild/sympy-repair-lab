@@ -1,0 +1,9 @@
+Fixed failed-conversion comparisons in `Basic`, `Expr`, and numeric classes to return `NotImplemented`, allowing reflected comparisons. `__ne__` now propagates that sentinel instead of negating it.
+
+Added regression coverage for all six comparisons, conversion hooks, unsupported objects, and symbolic/undecidable cases. Existing infinity and NaN behavior is preserved; no old test expectations changed.
+
+Using the supplied interpreter and environment:
+
+- `run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/core/tests/test_basic.py sympy/core/tests/test_numbers.py` — **98 passed, 1 xfailed**.
+- Same command targeting `sympy/core/tests` — **1,429 passed, 60 skipped, 42 xfailed, 1 failed**. The failure, `test_sympify.py::test_evaluate_false`, also fails with unmodified production files: Python rejects a generated AST containing a `False` name node.
+- `git diff --check` — clean.

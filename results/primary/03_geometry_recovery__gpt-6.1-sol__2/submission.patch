@@ -1,0 +1,94 @@
+diff --git a/sympy/geometry/entity.py b/sympy/geometry/entity.py
+index a9ce2f3..88dfc63 100644
+--- a/sympy/geometry/entity.py
++++ b/sympy/geometry/entity.py
+@@ -102,10 +102,6 @@ def __contains__(self, other):
+     def __getnewargs__(self):
+         return tuple(self.args)
+ 
+-    def __ne__(self, o):
+-        """Test inequality of two geometrical entities."""
+-        return not self.__eq__(o)
+-
+     def __new__(cls, *args, **kwargs):
+         # Points are sequences, but they should not
+         # be converted to Tuples, so use this detection function instead.
+diff --git a/sympy/geometry/tests/test_entity.py b/sympy/geometry/tests/test_entity.py
+index 088d2f5..abd92da 100644
+--- a/sympy/geometry/tests/test_entity.py
++++ b/sympy/geometry/tests/test_entity.py
+@@ -6,6 +6,74 @@
+ from sympy.utilities.pytest import raises
+ 
+ 
++def test_segment_none_sentinel():
++    edges = [Segment(Point(0, 0), Point(1, 1)),
++             Segment(Point(1, 1), Point(2, 0))]
++    previous = None
++    kept = []
++    for edge in edges:
++        if edge != previous:
++            kept.append(edge)
++        previous = edge
++    assert kept == edges
++
++
++def test_geometry_comparisons():
++    entities = [Point(0, 0), Circle((0, 0), 1), Ellipse((0, 0), 1, 2),
++                Polygon((0, 0), (1, 0), (1, 1), (0, 1)),
++                Triangle((0, 0), (1, 0), (0, 1)),
++                RegularPolygon((0, 0), 1, 5)]
++    for cls in (Line, Ray, Segment):
++        entities.extend([cls((0, 0), (1, 1)),
++                         cls((0, 0, 0), (1, 1, 1))])
++    for entity in entities:
++        equal = entity.func(*entity.args)
++        different = entity.translate(2, 3)
++        assert (entity == equal) is True
++        assert (equal == entity) is True
++        assert (entity != equal) is False
++        assert (equal != entity) is False
++        assert (entity == different) is False
++        assert (different == entity) is False
++        assert (entity != different) is True
++        assert (different != entity) is True
++        for other in (None, object()):
++            assert (entity == other) is False
++            assert (other == entity) is False
++            assert (entity != other) is True
++            assert (other != entity) is True
++
++    # Inequality must also respect geometry-specific equality overrides.
++    polygon = Polygon((0, 0), (1, 0), (1, 1), (0, 1))
++    reversed_polygon = Polygon(*reversed(polygon.vertices))
++    assert polygon == reversed_polygon
++    assert not (polygon != reversed_polygon)
++
++
++def test_geometry_reflected_comparisons():
++    class Foreign:
++        def __init__(self, equal):
++            self.equal = equal
++
++        def __eq__(self, other):
++            return self.equal
++
++        def __ne__(self, other):
++            return not self.equal
++
++    for cls in (Line, Ray, Segment):
++        for coordinates in (((0, 0), (1, 1)), ((0, 0, 0), (1, 1, 1))):
++            entity = cls(*coordinates)
++            for equal in (True, False):
++                other = Foreign(equal)
++                assert entity.__eq__(other) is NotImplemented
++                assert entity.__ne__(other) is NotImplemented
++                assert (entity == other) is equal
++                assert (other == entity) is equal
++                assert (entity != other) is (not equal)
++                assert (other != entity) is (not equal)
++
++
+ def test_subs():
+     x = Symbol('x', real=True)
+     y = Symbol('y', real=True)

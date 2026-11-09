@@ -1,0 +1,10 @@
+<WORKSPACE>\work\real-debug-env39\lib\site-packages\mpmath\ctx_mp_python.py:892: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if other is 0:
+<WORKSPACE>\work\real-debug-env39\lib\site-packages\mpmath\ctx_mp_python.py:986: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if other is 0:
+<WORKSPACE>\work\contract-control-v2\02_precise_ordering-broken\sympy\core\basic.py:3: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working
+  from collections import Mapping, defaultdict
+<WORKSPACE>\work\contract-control-v2\02_precise_ordering-broken\sympy\solvers\diophantine.py:3188: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if feasible is 1:  # it's prime and k == 2
+<WORKSPACE>\work\contract-control-v2\02_precise_ordering-broken\sympy\plotting\plot.py:28: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working
+  from collections import Callable

@@ -1,0 +1,49 @@
+{
+  "case": "06_symbolic_determinant",
+  "complete_pass": false,
+  "required_pass": true,
+  "preservation_pass": false,
+  "oracle_execution": {
+    "exit_code": 1,
+    "seconds": 3.75,
+    "command": [
+      "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+      "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+      "06_symbolic_determinant"
+    ],
+    "summary": ""
+  },
+  "regression": null,
+  "failed_checks": [
+    {
+      "name": "diagonal_preserved",
+      "group": "preservation",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "name": "permutation_preserved",
+      "group": "preservation",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "name": "symbolic_preserved",
+      "group": "preservation",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "name": "independent_method_agreement",
+      "group": "preservation",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    }
+  ],
+  "check_count": 8,
+  "passed_checks": 4
+}

@@ -1,0 +1,131 @@
+{
+  "trial_count": 8,
+  "unique_session_count": 8,
+  "one_shared_normalized_prompt": true,
+  "all_prompt_digests_match": true,
+  "all_completed_normally": true,
+  "all_used_frozen_probe": true,
+  "outside_access_command_flags": [],
+  "trials": [
+    {
+      "trial": "confirmation\\13091-gpt-6-astra-1",
+      "thread_ids": [
+        "01a1bc94-e4ce-7a22-a6db-36c5699d6592"
+      ],
+      "normalized_prompt_sha256": "d3f0e292c451d47c0047257b8e5bf5880103ae91f9bfd840ff09f1e9e30ee4e5",
+      "prompt_digest_matches": true,
+      "model": "gpt-6-astra",
+      "all_events_valid_json": true,
+      "events": 32,
+      "cli_exit_code": 0,
+      "base_commit": "d1320814eda6549996190618a21eaf212cfd4d1e",
+      "oracle_sha256": "0b45400387e6c74b101b39b107f35f82485fd77b70597caa8df1a30e429cad38",
+      "manual_outside_access_flags": []
+    },
+    {
+      "trial": "confirmation\\13091-gpt-6-astra-2",
+      "thread_ids": [
+        "01a1bc94-e4e0-73c3-8fac-6f5c6a13cd1e"
+      ],
+      "normalized_prompt_sha256": "d3f0e292c451d47c0047257b8e5bf5880103ae91f9bfd840ff09f1e9e30ee4e5",
+      "prompt_digest_matches": true,
+      "model": "gpt-6-astra",
+      "all_events_valid_json": true,
+      "events": 38,
+      "cli_exit_code": 0,
+      "base_commit": "d1320814eda6549996190618a21eaf212cfd4d1e",
+      "oracle_sha256": "0b45400387e6c74b101b39b107f35f82485fd77b70597caa8df1a30e429cad38",
+      "manual_outside_access_flags": []
+    },
+    {
+      "trial": "confirmation\\13091-gpt-6-astra-3",
+      "thread_ids": [
+        "01a1bc98-b9e5-7863-bc7a-d4e643a623f0"
+      ],
+      "normalized_prompt_sha256": "d3f0e292c451d47c0047257b8e5bf5880103ae91f9bfd840ff09f1e9e30ee4e5",
+      "prompt_digest_matches": true,
+      "model": "gpt-6-astra",
+      "all_events_valid_json": true,
+      "events": 40,
+      "cli_exit_code": 0,
+      "base_commit": "d1320814eda6549996190618a21eaf212cfd4d1e",
+      "oracle_sha256": "0b45400387e6c74b101b39b107f35f82485fd77b70597caa8df1a30e429cad38",
+      "manual_outside_access_flags": []
+    },
+    {
+      "trial": "confirmation\\13091-gpt-6.1-sol-1",
+      "thread_ids": [
+        "01a1bc98-c28f-77d0-a619-4f85eb162407"
+      ],
+      "normalized_prompt_sha256": "d3f0e292c451d47c0047257b8e5bf5880103ae91f9bfd840ff09f1e9e30ee4e5",
+      "prompt_digest_matches": true,
+      "model": "gpt-6.1-sol",
+      "all_events_valid_json": true,
+      "events": 32,
+      "cli_exit_code": 0,
+      "base_commit": "d1320814eda6549996190618a21eaf212cfd4d1e",
+      "oracle_sha256": "0b45400387e6c74b101b39b107f35f82485fd77b70597caa8df1a30e429cad38",
+      "manual_outside_access_flags": []
+    },
+    {
+      "trial": "confirmation\\13091-gpt-6.1-sol-2",
+      "thread_ids": [
+        "01a1bc9c-5742-7983-a81d-cd3539d5de33"
+      ],
+      "normalized_prompt_sha256": "d3f0e292c451d47c0047257b8e5bf5880103ae91f9bfd840ff09f1e9e30ee4e5",
+      "prompt_digest_matches": true,
+      "model": "gpt-6.1-sol",
+      "all_events_valid_json": true,
+      "events": 42,
+      "cli_exit_code": 0,
+      "base_commit": "d1320814eda6549996190618a21eaf212cfd4d1e",
+      "oracle_sha256": "0b45400387e6c74b101b39b107f35f82485fd77b70597caa8df1a30e429cad38",
+      "manual_outside_access_flags": []
+    },
+    {
+      "trial": "confirmation\\13091-gpt-6.1-sol-3",
+      "thread_ids": [
+        "01a1bc9d-5560-7ca0-bf09-af6e6228fc07"
+      ],
+      "normalized_prompt_sha256": "d3f0e292c451d47c0047257b8e5bf5880103ae91f9bfd840ff09f1e9e30ee4e5",
+      "prompt_digest_matches": true,
+      "model": "gpt-6.1-sol",
+      "all_events_valid_json": true,
+      "events": 51,
+      "cli_exit_code": 0,
+      "base_commit": "d1320814eda6549996190618a21eaf212cfd4d1e",
+      "oracle_sha256": "0b45400387e6c74b101b39b107f35f82485fd77b70597caa8df1a30e429cad38",
+      "manual_outside_access_flags": []
+    },
+    {
+      "trial": "screen-b\\13091-gpt-6-astra-1",
+      "thread_ids": [
+        "01a1bc8f-6ad1-7421-b692-2aee46e2ba0c"
+      ],
+      "normalized_prompt_sha256": "d3f0e292c451d47c0047257b8e5bf5880103ae91f9bfd840ff09f1e9e30ee4e5",
+      "prompt_digest_matches": true,
+      "model": "gpt-6-astra",
+      "all_events_valid_json": true,
+      "events": 36,
+      "cli_exit_code": 0,
+      "base_commit": "d1320814eda6549996190618a21eaf212cfd4d1e",
+      "oracle_sha256": "0b45400387e6c74b101b39b107f35f82485fd77b70597caa8df1a30e429cad38",
+      "manual_outside_access_flags": []
+    },
+    {
+      "trial": "screen-b\\13091-gpt-6.1-sol-1",
+      "thread_ids": [
+        "01a1bc8f-6ada-7863-a563-f918d266d86e"
+      ],
+      "normalized_prompt_sha256": "d3f0e292c451d47c0047257b8e5bf5880103ae91f9bfd840ff09f1e9e30ee4e5",
+      "prompt_digest_matches": true,
+      "model": "gpt-6.1-sol",
+      "all_events_valid_json": true,
+      "events": 54,
+      "cli_exit_code": 0,
+      "base_commit": "d1320814eda6549996190618a21eaf212cfd4d1e",
+      "oracle_sha256": "0b45400387e6c74b101b39b107f35f82485fd77b70597caa8df1a30e429cad38",
+      "manual_outside_access_flags": []
+    }
+  ]
+}

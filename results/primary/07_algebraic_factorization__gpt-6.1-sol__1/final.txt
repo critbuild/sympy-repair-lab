@@ -1,0 +1,12 @@
+Fixed extension factorization by recursively factoring polynomial content before square-free reduction. The example now returns `(x - 1)*(y - 1)`.
+
+Added regressions for complex factors, non-unit coefficients, reconstruction, univariate repeated factors, and rational factorization. Removed `XFAIL` from `test_issue_5786` because the repair makes it pass.
+
+Validation, using the supplied environment variables:
+
+```powershell
+& '.\.venv\Scripts\python.exe' run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/polys/tests/test_polytools.py sympy/polys/tests/test_factortools.py
+git diff --check
+```
+
+Results: **172 passed, 1 xfailed**; diff check clean.

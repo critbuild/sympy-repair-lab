@@ -1,0 +1,5 @@
+2026-11-08T23:31:10.518209Z  WARN codex_core::shell_snapshot: Failed to create shell snapshot for powershell: Shell snapshot not supported yet for PowerShell
+2026-11-08T23:32:29.882385Z ERROR codex_core::tools::router: error=apply_patch verification failed: Failed to find expected lines in <WORKSPACE>\work\contract-primary\primary\04_zero_polynomial__gpt-6.1-sol__3\sympy\polys\tests\test_densetools.py:
+    assert dmp_clear_denoms([[EX(sin(x)/x), EX(0)]], 1, EX) == (EX(x), [[EX(sin(x)), EX(0)]])
+
+

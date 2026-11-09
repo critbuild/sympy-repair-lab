@@ -1,0 +1,16 @@
+{
+  "created_utc": "2026-11-08T23:43:22.046207+00:00",
+  "status": "technical_review_package",
+  "human_review_complete": false,
+  "public_video_url_complete": false,
+  "participant_agreement_accepted": false,
+  "excluded_media": true,
+  "credential_pattern_scan_passed": true,
+  "local_account_path_scan_passed": true,
+  "notes": "The participant approved the assessment. Video content, duration, and audio are verified. Detailed review, background statement, public video URL/access, and agreement confirmation remain pending.",
+  "demo_and_video_understanding_confirmed": true,
+  "participant_opinion_status": "approved",
+  "video_coverage_verified": true,
+  "video_duration_seconds": 273.05,
+  "intended_video_host": "Google Drive"
+}

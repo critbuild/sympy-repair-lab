@@ -1,0 +1,43 @@
+{
+  "trial": "05_set_equivalence__gpt-6-astra__3",
+  "frozen_complete_pass": true,
+  "adjudicated_complete_pass": true,
+  "grade": {
+    "case": "05_set_equivalence",
+    "complete_pass": true,
+    "required_pass": true,
+    "preservation_pass": true,
+    "oracle_execution": {
+      "exit_code": 0,
+      "seconds": 3.3,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+        "05_set_equivalence"
+      ],
+      "summary": ""
+    },
+    "regression": {
+      "exit_code": 0,
+      "seconds": 7.89,
+      "command": [
+        "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+        "-c",
+        "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+        "-p",
+        "pytest_timeout",
+        "--timeout=60",
+        "-q",
+        "--tb=short",
+        "--disable-warnings",
+        "sympy/sets/tests/test_sets.py",
+        "sympy/core/tests/test_relational.py"
+      ],
+      "summary": "157 passed, 6 xfailed, 3 warnings in 6.19s"
+    },
+    "failed_checks": [],
+    "check_count": 10,
+    "passed_checks": 10,
+    "adjudication": "case05-permitted-behavior-v1"
+  }
+}

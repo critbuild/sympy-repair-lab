@@ -1,0 +1,12 @@
+Fixed scalar multiplication to strip zero coefficients recursively, so `clear_denoms()` produces canonical zero. Regression tests cover cancellation, surviving nonzero and unresolved symbolic coefficients, both conversion modes, and the denominator identity.
+
+The supplied reproducer now reports `is_zero=True`; `terms_gcd()` and `primitive()` succeed.
+
+Commands run with the specified environment:
+
+- `& '.\.venv\Scripts\python.exe' incident.py` — reproduced the original failure.
+- `& '.\.venv\Scripts\python.exe' run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/polys/tests/test_polytools.py sympy/polys/tests/test_densearith.py sympy/polys/tests/test_densetools.py` — **243 passed**.
+- Same pytest command targeting `sympy/polys/tests` — **890 passed, 3 xfailed, 1 xpassed**.
+- `git diff --check` — clean.
+
+No existing test expectations changed.

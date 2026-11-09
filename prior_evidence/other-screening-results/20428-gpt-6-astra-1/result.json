@@ -1,0 +1,44 @@
+{
+  "case": "20428",
+  "model": "gpt-6-astra",
+  "repeat": 1,
+  "cli_exit_code": 0,
+  "agent_seconds": 187.94,
+  "thread_ids": [
+    "01a1bc8b-650c-7ca1-95ec-e15df5014117"
+  ],
+  "command_count": 10,
+  "changed_files": [
+    "sympy/polys/densearith.py",
+    "sympy/polys/tests/test_densearith.py",
+    "sympy/polys/tests/test_polytools.py"
+  ],
+  "usage": [
+    {
+      "input_tokens": 314037,
+      "cached_input_tokens": 291328,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 3720,
+      "reasoning_output_tokens": 371
+    }
+  ],
+  "checks": {
+    "exit_code": 1,
+    "summary": "1 failed, 155 passed, 3 warnings in 6.88s",
+    "seconds": 10.88,
+    "command": [
+      "$WORKSPACE\\work\\real-debug-env39\\Scripts\\python.exe",
+      "-c",
+      "import sys; sys._running_pytest = True; import pytest; sys.exit(pytest.main(sys.argv[1:]))",
+      "-p",
+      "pytest_timeout",
+      "--timeout=60",
+      "-q",
+      "--tb=short",
+      "--disable-warnings",
+      "sympy/polys/tests/test_polytools.py"
+    ],
+    "grader_root": "$WORKSPACE\\work\\real-repo-debug-sessions\\grade-20428-2ee512c5"
+  },
+  "category": "failure_requires_semantic_review"
+}

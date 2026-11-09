@@ -1,0 +1,171 @@
+{
+  "case": "01_foreign_equality",
+  "complete_pass": false,
+  "required_pass": false,
+  "preservation_pass": true,
+  "oracle_execution": {
+    "exit_code": 1,
+    "seconds": 4.56,
+    "command": [
+      "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+      "<WORKSPACE>\\outputs\\sympy-contract-eval\\checks.py",
+      "01_foreign_equality"
+    ],
+    "summary": ""
+  },
+  "regression": {
+    "exit_code": 0,
+    "seconds": 5.22,
+    "command": [
+      "<WORKSPACE>\\work\\real-debug-env39\\Scripts\\python.exe",
+      "-c",
+      "import sys; sys._running_pytest=True; import pytest, py; py.test=pytest; sys.modules[\"py.test\"]=pytest; sys.exit(pytest.main(sys.argv[1:]))",
+      "-p",
+      "pytest_timeout",
+      "--timeout=60",
+      "-q",
+      "--tb=short",
+      "--disable-warnings",
+      "sympy/core/tests/test_basic.py",
+      "sympy/core/tests/test_numbers.py"
+    ],
+    "summary": "95 passed, 1 xfailed, 5 warnings in 2.57s"
+  },
+  "failed_checks": [
+    {
+      "name": "Basic_reflected_equality",
+      "group": "required",
+      "expected": [
+        true,
+        true
+      ],
+      "actual": [
+        false,
+        true
+      ],
+      "passed": false
+    },
+    {
+      "name": "Basic_reflected_inequality",
+      "group": "required",
+      "expected": [
+        false,
+        false
+      ],
+      "actual": [
+        true,
+        false
+      ],
+      "passed": false
+    },
+    {
+      "name": "Symbol_reflected_equality",
+      "group": "required",
+      "expected": [
+        true,
+        true
+      ],
+      "actual": [
+        false,
+        true
+      ],
+      "passed": false
+    },
+    {
+      "name": "Symbol_reflected_inequality",
+      "group": "required",
+      "expected": [
+        false,
+        false
+      ],
+      "actual": [
+        true,
+        false
+      ],
+      "passed": false
+    },
+    {
+      "name": "Integer_reflected_equality",
+      "group": "required",
+      "expected": [
+        true,
+        true
+      ],
+      "actual": [
+        false,
+        true
+      ],
+      "passed": false
+    },
+    {
+      "name": "Integer_reflected_inequality",
+      "group": "required",
+      "expected": [
+        false,
+        false
+      ],
+      "actual": [
+        true,
+        false
+      ],
+      "passed": false
+    },
+    {
+      "name": "Rational_reflected_equality",
+      "group": "required",
+      "expected": [
+        true,
+        true
+      ],
+      "actual": [
+        false,
+        true
+      ],
+      "passed": false
+    },
+    {
+      "name": "Rational_reflected_inequality",
+      "group": "required",
+      "expected": [
+        false,
+        false
+      ],
+      "actual": [
+        true,
+        false
+      ],
+      "passed": false
+    },
+    {
+      "name": "Float_reflected_equality",
+      "group": "required",
+      "expected": [
+        true,
+        true
+      ],
+      "actual": [
+        false,
+        true
+      ],
+      "passed": false
+    },
+    {
+      "name": "Float_reflected_inequality",
+      "group": "required",
+      "expected": [
+        false,
+        false
+      ],
+      "actual": [
+        true,
+        false
+      ],
+      "passed": false
+    }
+  ],
+  "check_count": 34,
+  "passed_checks": 24,
+  "reference": false,
+  "expected_complete_pass": false,
+  "control_matches": true
+}

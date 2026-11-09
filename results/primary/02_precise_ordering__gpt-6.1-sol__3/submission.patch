@@ -1,0 +1,197 @@
+diff --git a/sympy/core/numbers.py b/sympy/core/numbers.py
+index 864d055..cf90f64 100644
+--- a/sympy/core/numbers.py
++++ b/sympy/core/numbers.py
+@@ -1284,7 +1284,7 @@ def __gt__(self, other):
+         except SympifyError:
+             raise TypeError("Invalid comparison %s > %s" % (self, other))
+         if isinstance(other, NumberSymbol):
+-            return other.__le__(self)
++            return other.__lt__(self)
+         if other.is_comparable:
+             other = other.evalf()
+         if isinstance(other, Number) and other is not S.NaN:
+@@ -1298,7 +1298,7 @@ def __ge__(self, other):
+         except SympifyError:
+             raise TypeError("Invalid comparison %s >= %s" % (self, other))
+         if isinstance(other, NumberSymbol):
+-            return other.__lt__(self)
++            return other.__le__(self)
+         if other.is_comparable:
+             other = other.evalf()
+         if isinstance(other, Number) and other is not S.NaN:
+@@ -1312,7 +1312,7 @@ def __lt__(self, other):
+         except SympifyError:
+             raise TypeError("Invalid comparison %s < %s" % (self, other))
+         if isinstance(other, NumberSymbol):
+-            return other.__ge__(self)
++            return other.__gt__(self)
+         if other.is_real and other.is_number:
+             other = other.evalf()
+         if isinstance(other, Number) and other is not S.NaN:
+@@ -1326,7 +1326,7 @@ def __le__(self, other):
+         except SympifyError:
+             raise TypeError("Invalid comparison %s <= %s" % (self, other))
+         if isinstance(other, NumberSymbol):
+-            return other.__gt__(self)
++            return other.__ge__(self)
+         if other.is_real and other.is_number:
+             other = other.evalf()
+         if isinstance(other, Number) and other is not S.NaN:
+@@ -1742,7 +1742,7 @@ def __gt__(self, other):
+         except SympifyError:
+             raise TypeError("Invalid comparison %s > %s" % (self, other))
+         if isinstance(other, NumberSymbol):
+-            return other.__le__(self)
++            return other.__lt__(self)
+         expr = self
+         if isinstance(other, Number):
+             if isinstance(other, Rational):
+@@ -1760,7 +1760,7 @@ def __ge__(self, other):
+         except SympifyError:
+             raise TypeError("Invalid comparison %s >= %s" % (self, other))
+         if isinstance(other, NumberSymbol):
+-            return other.__lt__(self)
++            return other.__le__(self)
+         expr = self
+         if isinstance(other, Number):
+             if isinstance(other, Rational):
+@@ -1778,7 +1778,7 @@ def __lt__(self, other):
+         except SympifyError:
+             raise TypeError("Invalid comparison %s < %s" % (self, other))
+         if isinstance(other, NumberSymbol):
+-            return other.__ge__(self)
++            return other.__gt__(self)
+         expr = self
+         if isinstance(other, Number):
+             if isinstance(other, Rational):
+@@ -1797,7 +1797,7 @@ def __le__(self, other):
+             raise TypeError("Invalid comparison %s <= %s" % (self, other))
+         expr = self
+         if isinstance(other, NumberSymbol):
+-            return other.__gt__(self)
++            return other.__ge__(self)
+         elif isinstance(other, Number):
+             if isinstance(other, Rational):
+                 return _sympify(bool(self.p*other.q <= self.q*other.p))
+@@ -3357,6 +3357,9 @@ def __lt__(self, other):
+             raise TypeError("Invalid comparison %s < %s" % (self, other))
+         if self is other:
+             return S.false
++        if isinstance(other, (Rational, Float)):
++            # Compare the difference without rounding either operand first.
++            return Expr.__lt__(self, other)
+         if isinstance(other, Number):
+             approx = self.approximation_interval(other.__class__)
+             if approx is not None:
+@@ -3378,6 +3381,8 @@ def __le__(self, other):
+             raise TypeError("Invalid comparison %s <= %s" % (self, other))
+         if self is other:
+             return S.true
++        if isinstance(other, (Rational, Float)):
++            return Expr.__le__(self, other)
+         if other.is_real and other.is_number:
+             other = other.evalf()
+         if isinstance(other, Number):
+@@ -3389,6 +3394,8 @@ def __gt__(self, other):
+             other = _sympify(other)
+         except SympifyError:
+             raise TypeError("Invalid comparison %s > %s" % (self, other))
++        if isinstance(other, (Rational, Float)):
++            return Expr.__gt__(self, other)
+         r = _sympify((-self) < (-other))
+         if r in (S.true, S.false):
+             return r
+@@ -3400,6 +3407,8 @@ def __ge__(self, other):
+             other = _sympify(other)
+         except SympifyError:
+             raise TypeError("Invalid comparison %s >= %s" % (self, other))
++        if isinstance(other, (Rational, Float)):
++            return Expr.__ge__(self, other)
+         r = _sympify((-self) <= (-other))
+         if r in (S.true, S.false):
+             return r
+diff --git a/sympy/core/tests/test_numbers.py b/sympy/core/tests/test_numbers.py
+index a09ff11..d4cf71d 100644
+--- a/sympy/core/tests/test_numbers.py
++++ b/sympy/core/tests/test_numbers.py
+@@ -7,7 +7,7 @@
+ from sympy.core.power import integer_nthroot, isqrt
+ from sympy.core.logic import fuzzy_not
+ from sympy.core.numbers import (igcd, ilcm, igcdex, seterr, _intcache,
+-    igcd2, igcd_lehmer, mpf_norm, comp, mod_inverse)
++    igcd2, igcd_lehmer, mpf_norm, comp, mod_inverse, NumberSymbol)
+ from sympy.utilities.decorator import conserve_mpmath_dps
+ from sympy.utilities.iterables import permutations
+ from sympy.utilities.pytest import XFAIL, raises
+@@ -1372,6 +1372,70 @@ def test_relational():
+     assert (x == cos) is False
+ 
+ 
++def test_numbersymbol_scalar_ordering():
++    above_pi = Rational('905502432259640373/288230376151711744')
++    below_pi = above_pi - Rational(1, 2**52)
++    # These dyadic rationals are represented exactly by the Floats as well.
++    pairs = [(below_pi, pi), (pi, above_pi),
++             (Float(below_pi, 30), pi), (pi, Float(above_pi, 30)),
++             (pi.evalf(), pi)]
++    for constant, lower in [
++            (pi, '3.141592653589793238462643383279'),
++            (E, '2.718281828459045235360287471352'),
++            (GoldenRatio, '1.618033988749894848204586834365'),
++            (EulerGamma, '0.577215664901532860606512090082'),
++            (Catalan, '0.915965594177219015054603514932')]:
++        lower = Rational(lower)
++        pairs.extend([(lower, constant),
++                      (constant, lower + Rational(1, 10**30)),
++                      (S.Zero, constant), (constant, S(4)),
++                      (-oo, constant), (constant, oo),
++                      (Float('-inf'), constant), (constant, Float('inf'))])
++
++    for lower, upper in pairs:
++        assert (lower < upper) is S.true
++        assert (lower <= upper) is S.true
++        assert (lower > upper) is S.false
++        assert (lower >= upper) is S.false
++        assert (upper > lower) is S.true
++        assert (upper >= lower) is S.true
++        assert (upper < lower) is S.false
++        assert (upper <= lower) is S.false
++
++    assert above_pi != pi
++    for constant in (pi, E, GoldenRatio, EulerGamma, Catalan):
++        assert (constant < constant) is S.false
++        assert (constant > constant) is S.false
++        assert (constant <= constant) is S.true
++        assert (constant >= constant) is S.true
++
++
++def test_numbersymbol_scalar_ordering_equal_boundary():
++    # A rational-valued NumberSymbol distinguishes strict from inclusive
++    # comparisons at equality, independently of irrational approximations.
++    class ZeroSymbol(NumberSymbol):
++        is_real = True
++        is_zero = True
++
++        def _as_mpf_val(self, prec):
++            return S.Zero._as_mpf_val(prec)
++
++    constant = ZeroSymbol()
++    for scalar in (S.Zero, Float(0)):
++        for lhs, rhs in ((scalar, constant), (constant, scalar)):
++            assert (lhs < rhs) is S.false
++            assert (lhs > rhs) is S.false
++            assert (lhs <= rhs) is S.true
++            assert (lhs >= rhs) is S.true
++
++
++def test_numbersymbol_symbolic_ordering():
++    x = Symbol('x', real=True)
++    for lhs, rhs in ((pi, x), (x, pi)):
++        for relation in (Lt, Le, Gt, Ge):
++            assert relation(lhs, rhs) == relation(lhs, rhs, evaluate=False)
++
++
+ def test_Integer_as_index():
+     assert 'hello'[Integer(2):] == 'llo'
+ 

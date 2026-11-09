@@ -1,0 +1,436 @@
+{
+  "case": "01_foreign_equality",
+  "complete_pass": true,
+  "required_pass": true,
+  "preservation_pass": true,
+  "check_count": 34,
+  "passed_checks": 34,
+  "checks": [
+    {
+      "name": "Basic_reflected_equality",
+      "group": "required",
+      "expected": [
+        true,
+        true
+      ],
+      "actual": [
+        true,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "Basic_reflected_inequality",
+      "group": "required",
+      "expected": [
+        false,
+        false
+      ],
+      "actual": [
+        false,
+        false
+      ],
+      "passed": true
+    },
+    {
+      "name": "Basic_unrelated_fallback",
+      "group": "preservation",
+      "expected": [
+        false,
+        true
+      ],
+      "actual": [
+        false,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "Symbol_reflected_equality",
+      "group": "required",
+      "expected": [
+        true,
+        true
+      ],
+      "actual": [
+        true,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "Symbol_reflected_inequality",
+      "group": "required",
+      "expected": [
+        false,
+        false
+      ],
+      "actual": [
+        false,
+        false
+      ],
+      "passed": true
+    },
+    {
+      "name": "Symbol_unrelated_fallback",
+      "group": "preservation",
+      "expected": [
+        false,
+        true
+      ],
+      "actual": [
+        false,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "Integer_reflected_equality",
+      "group": "required",
+      "expected": [
+        true,
+        true
+      ],
+      "actual": [
+        true,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "Integer_reflected_inequality",
+      "group": "required",
+      "expected": [
+        false,
+        false
+      ],
+      "actual": [
+        false,
+        false
+      ],
+      "passed": true
+    },
+    {
+      "name": "Integer_unrelated_fallback",
+      "group": "preservation",
+      "expected": [
+        false,
+        true
+      ],
+      "actual": [
+        false,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "Rational_reflected_equality",
+      "group": "required",
+      "expected": [
+        true,
+        true
+      ],
+      "actual": [
+        true,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "Rational_reflected_inequality",
+      "group": "required",
+      "expected": [
+        false,
+        false
+      ],
+      "actual": [
+        false,
+        false
+      ],
+      "passed": true
+    },
+    {
+      "name": "Rational_unrelated_fallback",
+      "group": "preservation",
+      "expected": [
+        false,
+        true
+      ],
+      "actual": [
+        false,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "Float_reflected_equality",
+      "group": "required",
+      "expected": [
+        true,
+        true
+      ],
+      "actual": [
+        true,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "Float_reflected_inequality",
+      "group": "required",
+      "expected": [
+        false,
+        false
+      ],
+      "actual": [
+        false,
+        false
+      ],
+      "passed": true
+    },
+    {
+      "name": "Float_unrelated_fallback",
+      "group": "preservation",
+      "expected": [
+        false,
+        true
+      ],
+      "actual": [
+        false,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "Line_None",
+      "group": "preservation",
+      "expected": [
+        false,
+        true,
+        true
+      ],
+      "actual": [
+        false,
+        true,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "Line_unrelated",
+      "group": "preservation",
+      "expected": [
+        false,
+        true,
+        true
+      ],
+      "actual": [
+        false,
+        true,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "Line_equal_values",
+      "group": "preservation",
+      "expected": [
+        true,
+        false
+      ],
+      "actual": [
+        true,
+        false
+      ],
+      "passed": true
+    },
+    {
+      "name": "Line_different_values",
+      "group": "preservation",
+      "expected": [
+        false,
+        true
+      ],
+      "actual": [
+        false,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "Ray_None",
+      "group": "preservation",
+      "expected": [
+        false,
+        true,
+        true
+      ],
+      "actual": [
+        false,
+        true,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "Ray_unrelated",
+      "group": "preservation",
+      "expected": [
+        false,
+        true,
+        true
+      ],
+      "actual": [
+        false,
+        true,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "Ray_equal_values",
+      "group": "preservation",
+      "expected": [
+        true,
+        false
+      ],
+      "actual": [
+        true,
+        false
+      ],
+      "passed": true
+    },
+    {
+      "name": "Ray_different_values",
+      "group": "preservation",
+      "expected": [
+        false,
+        true
+      ],
+      "actual": [
+        false,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "Segment_None",
+      "group": "preservation",
+      "expected": [
+        false,
+        true,
+        true
+      ],
+      "actual": [
+        false,
+        true,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "Segment_unrelated",
+      "group": "preservation",
+      "expected": [
+        false,
+        true,
+        true
+      ],
+      "actual": [
+        false,
+        true,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "Segment_equal_values",
+      "group": "preservation",
+      "expected": [
+        true,
+        false
+      ],
+      "actual": [
+        true,
+        false
+      ],
+      "passed": true
+    },
+    {
+      "name": "Segment_different_values",
+      "group": "preservation",
+      "expected": [
+        false,
+        true
+      ],
+      "actual": [
+        false,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "consumer_two_edges",
+      "group": "preservation",
+      "expected": 2,
+      "actual": 2,
+      "passed": true
+    },
+    {
+      "name": "consumer_duplicate_edges",
+      "group": "preservation",
+      "expected": 2,
+      "actual": 2,
+      "passed": true
+    },
+    {
+      "name": "consumer_empty",
+      "group": "preservation",
+      "expected": 0,
+      "actual": 0,
+      "passed": true
+    },
+    {
+      "name": "consumer_single",
+      "group": "preservation",
+      "expected": 1,
+      "actual": 1,
+      "passed": true
+    },
+    {
+      "name": "ordinary_numeric_equality",
+      "group": "preservation",
+      "expected": [
+        true,
+        true,
+        false
+      ],
+      "actual": [
+        true,
+        true,
+        false
+      ],
+      "passed": true
+    },
+    {
+      "name": "numeric_infinities",
+      "group": "preservation",
+      "expected": [
+        true,
+        true
+      ],
+      "actual": [
+        true,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "symbolic_order_remains_undecided",
+      "group": "preservation",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    }
+  ]
+}

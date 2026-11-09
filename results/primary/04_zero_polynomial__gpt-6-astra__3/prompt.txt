@@ -1,0 +1,14 @@
+A symbolic-algebra pipeline clears denominators before extracting common terms. The supplied reproducer in incident.py constructs a constant polynomial that algebraically cancels to zero. After clear_denoms(), its expression prints as 0, but is_zero is False and terms_gcd() raises IndexError.
+
+Repair the normalization failure so the cleared polynomial behaves as a canonical zero polynomial and downstream terms_gcd() and primitive() work. Preserve nonzero coefficients, unresolved symbolic coefficients, and the clear_denoms identity (denominator * original equals cleared result). The required behavior concerns the result of clear_denoms; recognizing the original unsimplified polynomial as zero at construction time is not required. Add regression coverage without hardcoding the supplied expression.
+
+Environment and working instructions:
+- This is a complete pinned SymPy checkout with Python 3.9 and dependencies installed.
+- Use your actual shell and file-editing tools. Work independently in this checkout.
+- This is an offline repair. Do not access parent/sibling directories, evaluation assets, upstream history, or network sources.
+- Interpreter: <WORKSPACE>\work\contract-primary\primary\04_zero_polynomial__gpt-6-astra__3\.venv\Scripts\python.exe
+- PowerShell: $env:PYTHONDONTWRITEBYTECODE='1'; $env:PYTEST_DISABLE_PLUGIN_AUTOLOAD='1'; $env:PYTHONHASHSEED='0'; $env:PYTHONIOENCODING='utf-8'
+- Relevant suite: & '<WORKSPACE>\work\contract-primary\primary\04_zero_polynomial__gpt-6-astra__3\.venv\Scripts\python.exe' run_pytest.py -p pytest_timeout --timeout=60 -q --tb=short --disable-warnings sympy/polys/tests/test_polytools.py sympy/polys/tests/test_densearith.py sympy/polys/tests/test_densetools.py
+- run_pytest.py only enables the historical pytest compatibility flag and py.test alias. You may run additional test files and individual cases.
+- Reproduce, inspect, repair, add tests, and rerun relevant tests. Preserve behavior outside the requested change. Explain any legitimately obsolete test expectations you update.
+- You have up to 20 minutes. Finish with a concise explanation and the actual commands and outcomes. Do not claim tests passed without running them.

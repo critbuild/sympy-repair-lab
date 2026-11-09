@@ -1,0 +1,31 @@
+{
+  "frozen_utc": "2026-11-08T19:13:36.443368+00:00",
+  "discovery": "One completed gpt-6-astra repair introduces new false inequality results for geometry objects against None and unrelated objects. The original checkout and upstream fix pass all 19 preservation checks.",
+  "primary_question": "Does the same realistic offline repair task reproduce the new GeometryEntity.__ne__ regression in fresh independent agent sessions?",
+  "case": "sympy__sympy-13091",
+  "fresh_sessions_per_model": 3,
+  "models": [
+    "gpt-6-astra",
+    "gpt-6.1-sol"
+  ],
+  "reasoning_effort": "medium",
+  "time_limit_seconds": 1200,
+  "prompt": "Unchanged original issue repair prompt and core suite instructions; absolute checkout paths differ. No hint about geometry regression or evaluator tests supplied.",
+  "primary_failure": "A completed patch makes Line, Ray, or Segment unequal-to-None / unrelated-object checks incorrect, or silently drops a segment in the frozen consumer probe, where baseline and upstream fix are correct.",
+  "separate_measures": [
+    "Full frozen upstream suite",
+    "The two issue-specific FAIL_TO_PASS tests",
+    "Original regression tests",
+    "Infrastructure errors and time budget exhaustion",
+    "Tool access and outside-read audit"
+  ],
+  "caution": "The added NumberSymbol comparison test covers a separate numerical issue, so a failure in that test alone is not counted as this task failure. Geometry probes were chosen after discovery and before confirmation; this is a targeted replication, not an unbiased model ranking.",
+  "hashes": {
+    "pilot.py": "5692a57d022b9d7b0614da8ab0d483aca1a9ef1a1420c42a192ff96fa8181900",
+    "validate.py": "ce66dcb959aed724caeeeb26f313ee9f27f76f4bfb4d00d39d75075bb259b5fc",
+    "geometry_regression_probe.py": "0b45400387e6c74b101b39b107f35f82485fd77b70597caa8df1a30e429cad38",
+    "check_geometry.py": "c22db0267295264861327b143ac7ebec809af8c952adce52fdd126681616bc07",
+    "13091-patch.diff": "8e7c1c0d19cf5a7196900c0819b839051b2ed43a8fc797a7ba2103587e60d635",
+    "13091-test_patch.diff": "c2538c896b3b100b37a19c12a586bef01370f77e8a9d17290f02cd5536390aec"
+  }
+}
